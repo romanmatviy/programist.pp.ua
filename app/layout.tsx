@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://romandev.com'),
+  metadataBase: new URL('https://programist.pp.ua'),
   title: 'RomanDev - Web Development',
   description: 'Професійна розробка сайтів в Україні',
 };
