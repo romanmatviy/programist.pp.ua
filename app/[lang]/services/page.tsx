@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
     title: t.services.title,
     description: t.services.subtitle,
     keywords: 'послуги веб-розробки, розробка сайтів, Laravel, PHP, WordPress, PrestaShop, Next.js',
-    canonical: `https://romandev.com/${lang}/services`,
+    canonical: `https://programist.pp.ua/${lang}/services`,
     lang,
   });
 }

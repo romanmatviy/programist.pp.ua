@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: { lang: Language; s
     title: `${tech.name} - ${tech.category}`,
     description: tech.description[lang],
     keywords: `${tech.name}, ${tech.category}, ${tech.relatedTechnologies.join(', ')}`,
-    canonical: `https://romandev.com/${lang}/tech/${params.slug}`,
+    canonical: `https://programist.pp.ua/${lang}/tech/${params.slug}`,
     lang,
   });
 }

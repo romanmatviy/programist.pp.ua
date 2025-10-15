@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
     title: t.portfolio.title,
     description: t.portfolio.subtitle,
     keywords: 'портфоліо, проекти, роботи, веб-розробка',
-    canonical: `https://romandev.com/${lang}/portfolio`,
+    canonical: `https://programist.pp.ua/${lang}/portfolio`,
     lang,
   });
 }

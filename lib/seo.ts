@@ -83,10 +83,10 @@ export function generateLocalBusinessSchema(city?: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    '@id': 'https://romandev.com',
+    '@id': 'https://programist.pp.ua',
     name: 'RomanDev',
     description: 'Професійна розробка сайтів в Україні',
-    url: 'https://romandev.com',
+    url: 'https://programist.pp.ua',
     telephone: '+380938800822',
     email: 'info@programist.pp.ua',
     address: city ? {
@@ -112,8 +112,8 @@ export function generateOrganizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'RomanDev',
-    url: 'https://romandev.com',
-    logo: 'https://romandev.com/logo.png',
+    url: 'https://programist.pp.ua',
+    logo: 'https://programist.pp.ua/logo.png',
     description: 'Професійна розробка сайтів в Україні. Laravel, Next.js, WordPress, PrestaShop.',
     telephone: '+380938800822',
     email: 'info@programist.pp.ua',

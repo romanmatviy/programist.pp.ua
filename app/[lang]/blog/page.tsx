@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
     title: t.blog.title,
     description: t.blog.subtitle,
     keywords: 'блог, статті, веб-розробка, SEO, технології',
-    canonical: `https://romandev.com/${lang}/blog`,
+    canonical: `https://programist.pp.ua/${lang}/blog`,
     lang,
   });
 }

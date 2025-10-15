@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
   return generateSEO({
     title: 'Terms of Service',
     description: 'Умови надання послуг RomanDev',
-    canonical: `https://romandev.com/${lang}/terms`,
+    canonical: `https://programist.pp.ua/${lang}/terms`,
     lang,
   });
 }

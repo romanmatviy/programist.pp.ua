@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
     title: t.contact.title,
     description: t.contact.subtitle,
     keywords: 'контакти, зв\'язатися, консультація, розробка сайтів',
-    canonical: `https://romandev.com/${lang}/contact`,
+    canonical: `https://programist.pp.ua/${lang}/contact`,
     lang,
   });
 }

@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
     title: t.about.title,
     description: t.about.description,
     keywords: 'про нас, команда, веб-розробка, досвід',
-    canonical: `https://romandev.com/${lang}/about`,
+    canonical: `https://programist.pp.ua/${lang}/about`,
     lang,
   });
 }

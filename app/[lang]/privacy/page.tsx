@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
   return generateSEO({
     title: 'Privacy Policy',
     description: 'Політика конфіденційності RomanDev',
-    canonical: `https://romandev.com/${lang}/privacy`,
+    canonical: `https://programist.pp.ua/${lang}/privacy`,
     lang,
   });
 }

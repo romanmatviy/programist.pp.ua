@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: { lang: Language; c
     title,
     description,
     keywords: `розробка сайтів ${city.name}, веб-розробка ${city.name}, Laravel ${city.name}, WordPress ${city.name}`,
-    canonical: `https://romandev.com/${lang}/service/geo/${params.city}`,
+    canonical: `https://programist.pp.ua/${lang}/service/geo/${params.city}`,
     lang,
   });
 }
