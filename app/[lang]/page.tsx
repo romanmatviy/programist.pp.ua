@@ -14,11 +14,11 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
     title: t.hero.title,
     description: t.hero.description,
     keywords: 'розробка сайтів, веб-розробка, Laravel, Next.js, WordPress, PrestaShop, PHP, React, Vue, Nuxt, Filament',
-    canonical: `https://romandev.com/${lang}`,
+    canonical: `https://programist.pp.ua/${lang}`,
     lang,
     alternateUrls: {
-      ua: 'https://romandev.com/ua',
-      ru: 'https://romandev.com/ru',
+      ua: 'https://programist.pp.ua/ua',
+      ru: 'https://programist.pp.ua/ru',
     },
   });
 }
