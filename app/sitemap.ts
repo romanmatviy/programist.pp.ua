@@ -4,6 +4,7 @@ import { ukrainianCities } from '@/data/cities';
 import { technologies } from '@/data/technologies';
 import { ukrainianRegions } from '@/data/regions';
 import { getCitySlug, getRegionSlug } from '@/data/slug';
+import { hireIntents } from '@/data/hireIntents';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://programist.pp.ua';
@@ -19,6 +20,47 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily',
       priority: 1,
     });
+
+  // Hire pages
+  languages.forEach(lang => {
+    // Hire index
+    routes.push({
+      url: `${baseUrl}/${lang}/hire`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    });
+
+    // Per-intent regions index
+    hireIntents.forEach(intent => {
+      routes.push({
+        url: `${baseUrl}/${lang}/hire/${intent.slug[lang as 'ua' | 'ru']}/regions`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      });
+
+      // Per-intent per-region
+      ukrainianRegions.forEach(region => {
+        routes.push({
+          url: `${baseUrl}/${lang}/hire/${intent.slug[lang as 'ua' | 'ru']}/region/${getRegionSlug(region, lang as 'ua' | 'ru')}`,
+          lastModified: new Date(),
+          changeFrequency: 'monthly',
+          priority: 0.6,
+        });
+      });
+
+      // Per-intent per-city
+      ukrainianCities.forEach(city => {
+        routes.push({
+          url: `${baseUrl}/${lang}/hire/${intent.slug[lang as 'ua' | 'ru']}/city/${getCitySlug(city.name, lang as 'ua' | 'ru')}`,
+          lastModified: new Date(),
+          changeFrequency: 'monthly',
+          priority: 0.6,
+        });
+      });
+    });
+  });
   });
 
   // Static pages

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Language } from '@/data/translations';
 import { getCitySlug, resolveCityBySlug, getRegionSlug, resolveRegionUaBySlug } from '@/data/slug';
+import { getHireIntentSlug, resolveHireIntentBySlug } from '@/data/hireIntents';
 
 interface HeaderProps {
   lang: Language;
@@ -41,6 +42,31 @@ export default function Header({ lang, translations }: HeaderProps) {
         const regionUa = resolveRegionUaBySlug(currentRegionSlug, currentLang);
         if (regionUa) {
           parts[5] = getRegionSlug(regionUa, newLang);
+        }
+      }
+
+      // Handle hire pages: /[lang]/hire/[intent]/...
+      if (parts[2] === 'hire') {
+        // Update intent slug
+        if (parts[3]) {
+          const intent = resolveHireIntentBySlug(parts[3], currentLang);
+          if (intent) {
+            parts[3] = getHireIntentSlug(intent.key, newLang);
+          }
+        }
+        // /[lang]/hire/[intent]/region/[region]
+        if (parts[4] === 'region' && parts[5]) {
+          const regionUa = resolveRegionUaBySlug(parts[5], currentLang);
+          if (regionUa) {
+            parts[5] = getRegionSlug(regionUa, newLang);
+          }
+        }
+        // /[lang]/hire/[intent]/city/[city]
+        if (parts[4] === 'city' && parts[5]) {
+          const city = resolveCityBySlug(parts[5], currentLang);
+          if (city) {
+            parts[5] = getCitySlug(city.name, newLang);
+          }
         }
       }
 
