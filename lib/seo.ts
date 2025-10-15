@@ -101,7 +101,7 @@ export function generateLocalBusinessSchema(city?: string) {
     priceRange: '$$',
     openingHours: 'Mo-Su 00:00-23:59',
     sameAs: [
-      'https://github.com/romandev',
+      'https://github.com/MatviyRoman',
       'https://t.me/RomanMatviy',
     ],
   };
@@ -122,7 +122,7 @@ export function generateOrganizationSchema() {
       addressCountry: 'UA',
     },
     sameAs: [
-      'https://github.com/romandev',
+      'https://github.com/MatviyRoman',
       'https://t.me/RomanMatviy',
     ],
   };
