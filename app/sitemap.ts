@@ -2,6 +2,8 @@ import { MetadataRoute } from 'next';
 import { services } from '@/data/services';
 import { ukrainianCities } from '@/data/cities';
 import { technologies } from '@/data/technologies';
+import { ukrainianRegions } from '@/data/regions';
+import { getCitySlug, getRegionSlug } from '@/data/slug';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://programist.pp.ua';
@@ -46,9 +48,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Geo pages
   languages.forEach(lang => {
+    // Geo index and regions index
+    routes.push({
+      url: `${baseUrl}/${lang}/service/geo`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    });
+    routes.push({
+      url: `${baseUrl}/${lang}/service/geo/regions`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    });
+
+    // Region pages (path-based, no query params)
+    ukrainianRegions.forEach(region => {
+      routes.push({
+        url: `${baseUrl}/${lang}/service/geo/region/${getRegionSlug(region, lang as 'ua' | 'ru')}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      });
+    });
+
     ukrainianCities.forEach(city => {
       routes.push({
-        url: `${baseUrl}/${lang}/service/geo/${city.slug}`,
+        url: `${baseUrl}/${lang}/service/geo/${getCitySlug(city.name, lang as 'ua' | 'ru')}`,
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.7,

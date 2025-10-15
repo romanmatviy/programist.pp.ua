@@ -75,7 +75,17 @@ export const ukrainianCities = [
   { name: "Світловодськ", slug: "svitlovodsk", region: "Кіровоградська область" },
   { name: "Мукачево", slug: "mukachevo", region: "Закарпатська область" },
   { name: "Хуст", slug: "khust", region: "Закарпатська область" },
-  { name: "Звенигородка", slug: "zvenyhorodka", region: "Черкаська область" }
+  { name: "Звенигородка", slug: "zvenyhorodka", region: "Черкаська область" },
+  { name: "Сімферополь", slug: "simferopol", region: "Автономна Республіка Крим" },
+  { name: "Севастополь", slug: "sevastopol", region: "м. Севастополь" },
+  { name: "Євпаторія", slug: "yevpatoria", region: "Автономна Республіка Крим" },
+  { name: "Керч", slug: "kerch", region: "Автономна Республіка Крим" },
+  { name: "Ялта", slug: "yalta", region: "Автономна Республіка Крим" },
+  { name: "Бахмут", slug: "bakhmut", region: "Донецька область" },
+  { name: "Ізюм", slug: "izium", region: "Харківська область" },
+  { name: "Лубни", slug: "lubny", region: "Полтавська область" },
+  { name: "Прилуки", slug: "pryluky", region: "Чернігівська область" },
+  { name: "Обухів", slug: "obukhiv", region: "Київська область" }
 ];
 
 export type City = typeof ukrainianCities[number];

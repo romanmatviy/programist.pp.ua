@@ -68,6 +68,16 @@ export default function Footer({ lang, translations }: FooterProps) {
                   {translations.nav.contact}
                 </Link>
               </li>
+              <li>
+                <Link href={`/${lang}/service/geo`} className="text-gray-400 hover:text-white transition-colors">
+                  {lang === 'ua' ? 'Міста' : 'Города'}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${lang}/service/geo/regions`} className="text-gray-400 hover:text-white transition-colors">
+                  {lang === 'ua' ? 'Області' : 'Области'}
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -129,7 +139,7 @@ export default function Footer({ lang, translations }: FooterProps) {
                 </svg>
               </a>
               <a 
-                href="https://github.com/romandev" 
+                href="https://github.com/MatviyRoman" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"

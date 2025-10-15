@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Language } from '@/data/translations';
+import { getCitySlug, resolveCityBySlug, getRegionSlug, resolveRegionUaBySlug } from '@/data/slug';
 
 interface HeaderProps {
   lang: Language;
@@ -16,12 +17,40 @@ export default function Header({ lang, translations }: HeaderProps) {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const switchLanguage = () => {
-    const newLang = currentLang === 'ua' ? 'ru' : 'ua';
+    const newLang: Language = currentLang === 'ua' ? 'ru' : 'ua';
     setCurrentLang(newLang);
     const { pathname, search, hash } = window.location;
+
     // Expecting routes like /ua/... or /ru/...
-    const newPath = pathname.replace(/^\/(ua|ru)(?=\/|$)/, `/${newLang}`);
-    window.location.href = `${newPath}${search}${hash}`;
+    const parts = pathname.split('/');
+    if (parts.length >= 2 && (parts[1] === 'ua' || parts[1] === 'ru')) {
+      parts[1] = newLang; // swap language segment
+
+      // Handle city page: /[lang]/service/geo/[city]
+      if (parts[2] === 'service' && parts[3] === 'geo' && parts.length >= 5 && parts[4] && parts[4] !== 'regions' && parts[4] !== 'region') {
+        const currentCitySlug = parts[4];
+        const city = resolveCityBySlug(currentCitySlug, currentLang);
+        if (city) {
+          parts[4] = getCitySlug(city.name, newLang);
+        }
+      }
+
+      // Handle region page: /[lang]/service/geo/region/[region]
+      if (parts[2] === 'service' && parts[3] === 'geo' && parts[4] === 'region' && parts.length >= 6 && parts[5]) {
+        const currentRegionSlug = parts[5];
+        const regionUa = resolveRegionUaBySlug(currentRegionSlug, currentLang);
+        if (regionUa) {
+          parts[5] = getRegionSlug(regionUa, newLang);
+        }
+      }
+
+      const newPath = parts.join('/');
+      window.location.href = `${newPath}${search}${hash}`;
+    } else {
+      // Fallback: just prefix with new language
+      const newPath = `/${newLang}${pathname.startsWith('/') ? '' : '/'}${pathname}`;
+      window.location.href = `${newPath}${search}${hash}`;
+    }
   };
 
   return (

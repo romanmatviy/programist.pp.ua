@@ -7,12 +7,14 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import ContactForm from '@/components/ContactForm';
 import { generateSEO, generateLocalBusinessSchema, generateFAQSchema } from '@/lib/seo';
 import { t } from '@/lib/i18n';
+import { displayCityName, displayRegionName } from '@/data/geoTranslations';
+import { getCitySlug, resolveCityBySlug } from '@/data/slug';
 
 export async function generateStaticParams() {
   const params = [];
   for (const lang of ['ua', 'ru']) {
     for (const city of ukrainianCities) {
-      params.push({ lang, city: city.slug });
+      params.push({ lang, city: getCitySlug(city.name, lang as 'ua' | 'ru') });
     }
   }
   return params;
@@ -20,19 +22,20 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { lang: Language; city: string } }) {
   const lang = params.lang || 'ua';
-  const city = ukrainianCities.find(c => c.slug === params.city);
+  const city = resolveCityBySlug(params.city, lang as 'ua' | 'ru');
 
   if (!city) {
     return {};
   }
 
-  const title = t(lang, 'geo.metaTitle', { city: city.name });
-  const description = t(lang, 'geo.metaDescription', { city: city.name });
+  const cityDisplay = displayCityName(city.name, lang);
+  const title = t(lang, 'geo.metaTitle', { city: cityDisplay });
+  const description = t(lang, 'geo.metaDescription', { city: cityDisplay });
 
   return generateSEO({
     title,
     description,
-    keywords: `розробка сайтів ${city.name}, веб-розробка ${city.name}, Laravel ${city.name}, WordPress ${city.name}`,
+    keywords: `розробка сайтів ${cityDisplay}, веб-розробка ${cityDisplay}, Laravel ${cityDisplay}, WordPress ${cityDisplay}`,
     canonical: `https://programist.pp.ua/${lang}/service/geo/${params.city}`,
     lang,
   });
@@ -41,30 +44,31 @@ export async function generateMetadata({ params }: { params: { lang: Language; c
 export default function GeoPage({ params }: { params: { lang: Language; city: string } }) {
   const lang = params.lang || 'ua';
   const trans = translations[lang];
-  const city = ukrainianCities.find(c => c.slug === params.city);
+  const city = resolveCityBySlug(params.city, lang as 'ua' | 'ru');
 
   if (!city) {
     return <div>City not found</div>;
   }
 
-  const localBusinessSchema = generateLocalBusinessSchema(city.name);
+  const cityDisplay = displayCityName(city.name, lang);
+  const localBusinessSchema = generateLocalBusinessSchema(cityDisplay);
   
   const faqs = [
     {
-      question: t(lang, 'geo.faq1Q', { city: city.name }),
-      answer: t(lang, 'geo.faq1A', { city: city.name }),
+      question: t(lang, 'geo.faq1Q', { city: cityDisplay }),
+      answer: t(lang, 'geo.faq1A', { city: cityDisplay }),
     },
     {
-      question: t(lang, 'geo.faq2Q', { city: city.name }),
-      answer: t(lang, 'geo.faq2A', { city: city.name }),
+      question: t(lang, 'geo.faq2Q', { city: cityDisplay }),
+      answer: t(lang, 'geo.faq2A', { city: cityDisplay }),
     },
     {
-      question: t(lang, 'geo.faq3Q', { city: city.name }),
-      answer: t(lang, 'geo.faq3A', { city: city.name }),
+      question: t(lang, 'geo.faq3Q', { city: cityDisplay }),
+      answer: t(lang, 'geo.faq3A', { city: cityDisplay }),
     },
     {
-      question: t(lang, 'geo.faq4Q', { city: city.name }),
-      answer: t(lang, 'geo.faq4A', { city: city.name }),
+      question: t(lang, 'geo.faq4Q', { city: cityDisplay }),
+      answer: t(lang, 'geo.faq4A', { city: cityDisplay }),
     },
   ];
 
@@ -72,7 +76,7 @@ export default function GeoPage({ params }: { params: { lang: Language; city: st
 
   const breadcrumbs = [
     { name: trans.nav.services, url: `/${lang}/services` },
-    { name: city.name, url: `/${lang}/service/geo/${params.city}` },
+    { name: cityDisplay, url: `/${lang}/service/geo/${params.city}` },
   ];
 
   return (
@@ -94,10 +98,10 @@ export default function GeoPage({ params }: { params: { lang: Language; city: st
           {/* Hero Section */}
           <div className="bg-gradient-to-br from-primary-50 via-secondary-50 to-accent-50 rounded-2xl p-8 md:p-12 mb-12">
             <h1 className="text-3xl md:text-5xl font-bold mb-4 gradient-text">
-              {t(lang, 'geo.h1', { city: city.name })}
+              {t(lang, 'geo.h1', { city: cityDisplay })}
             </h1>
             <p className="text-lg text-gray-700 mb-6 max-w-3xl">
-              {t(lang, 'geo.intro', { city: city.name })}
+              {t(lang, 'geo.intro', { city: cityDisplay })}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href={`/${lang}/contact`} className="btn-primary">
@@ -229,7 +233,7 @@ export default function GeoPage({ params }: { params: { lang: Language; city: st
                     <div className="text-sm opacity-80">
                       {lang === 'ua' ? 'Місто' : 'Город'}
                     </div>
-                    <div className="text-lg font-semibold">{city.name}</div>
+                    <div className="text-lg font-semibold">{cityDisplay}</div>
                   </div>
                 </div>
               </div>
