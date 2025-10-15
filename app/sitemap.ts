@@ -4,7 +4,7 @@ import { ukrainianCities } from '@/data/cities';
 import { technologies } from '@/data/technologies';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://romandev.com';
+  const baseUrl = 'https://programist.pp.ua';
   const languages = ['ua', 'ru'];
   
   const routes: MetadataRoute.Sitemap = [];
