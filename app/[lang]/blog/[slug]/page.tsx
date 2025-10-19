@@ -55,7 +55,7 @@ export async function generateMetadata({
     canonical: `https://programist.pp.ua/${lang}/blog/${post.slug}`,
     lang,
     ogImage: post.image,
-    type: 'article',
+    ogType: 'article',
     publishedTime: post.date,
     modifiedTime: post.updatedAt,
     authors: [post.author],

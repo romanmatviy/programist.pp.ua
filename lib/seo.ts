@@ -8,6 +8,11 @@ interface SEOProps {
   ogImage?: string;
   ogType?: string;
   lang?: 'ua' | 'ru';
+  publishedTime?: string;
+  modifiedTime?: string;
+  authors?: string[];
+  section?: string;
+  tags?: string[];
   alternateUrls?: {
     ua?: string;
     ru?: string;
