@@ -85,7 +85,7 @@ export default function ContactPage({ params }: { params: { lang: Language } }) 
                   <div>
                     <div className="text-sm opacity-80 mb-1">Telegram</div>
                     <a href="https://t.me/RomanMatviy" target="_blank" rel="noopener noreferrer" className="text-lg font-semibold hover:underline">
-                      @romandev
+                      @RomanMatviy
                     </a>
                   </div>
                 </div>
@@ -95,8 +95,8 @@ export default function ContactPage({ params }: { params: { lang: Language } }) 
                   </div>
                   <div>
                     <div className="text-sm opacity-80 mb-1">GitHub</div>
-                    <a href="https://github.com/romandev" target="_blank" rel="noopener noreferrer" className="text-lg font-semibold hover:underline">
-                      github.com/romandev
+                    <a href="https://github.com/matviyroman" target="_blank" rel="noopener noreferrer" className="text-lg font-semibold hover:underline">
+                      github.com/matviyroman
                     </a>
                   </div>
                 </div>

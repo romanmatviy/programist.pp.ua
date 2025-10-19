@@ -122,6 +122,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.7,
       });
     });
+
+    // Geo city + service pages
+    ukrainianCities.forEach(city => {
+      services.forEach(service => {
+        routes.push({
+          url: `${baseUrl}/${lang}/service/geo/${getCitySlug(city.name, lang as 'ua' | 'ru')}/${service.slug}`,
+          lastModified: new Date(),
+          changeFrequency: 'monthly',
+          priority: 0.7,
+        });
+      });
+    });
   });
 
   // Technology pages

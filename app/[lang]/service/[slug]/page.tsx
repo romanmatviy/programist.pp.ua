@@ -5,6 +5,9 @@ import ServiceCard from '@/components/ServiceCard';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { generateSEO, generateServiceSchema } from '@/lib/seo';
 import { notFound } from 'next/navigation';
+import { ukrainianCities } from '@/data/cities';
+import { getCitySlug } from '@/data/slug';
+import { displayCityName } from '@/data/geoTranslations';
 
 export async function generateStaticParams() {
   const params = [];
@@ -24,12 +27,17 @@ export async function generateMetadata({ params }: { params: { lang: Language; s
     return {};
   }
 
+  const base = 'https://programist.pp.ua';
+  const uaUrl = `${base}/ua/service/${params.slug}`;
+  const ruUrl = `${base}/ru/service/${params.slug}`;
+
   return generateSEO({
     title: service.title[lang],
     description: service.description[lang],
     keywords: `${service.title[lang]}, ${service.technologies.join(', ')}`,
     canonical: `https://programist.pp.ua/${lang}/service/${params.slug}`,
     lang,
+    alternateUrls: { ua: uaUrl, ru: ruUrl },
   });
 }
 
@@ -128,6 +136,22 @@ export default function ServicePage({ params }: { params: { lang: Language; slug
               </div>
             </div>
           )}
+
+          {/* Top Cities Interlinking for this Service */}
+          <div className="mt-12 bg-white rounded-2xl shadow p-6">
+            <h3 className="text-xl font-semibold mb-4">{lang === 'ua' ? 'Популярні міста' : 'Популярные города'}</h3>
+            <div className="flex flex-wrap gap-3">
+              {ukrainianCities.slice(0,5).map((c) => (
+                <Link
+                  key={c.slug}
+                  href={`/${lang}/service/geo/${getCitySlug(c.name, lang as 'ua' | 'ru')}/${params.slug}`}
+                  className="btn-secondary"
+                >
+                  {displayCityName(c.name, lang)}
+                </Link>
+              ))}
+            </div>
+          </div>
 
           {/* CTA */}
           <div className="mt-12 bg-gradient-primary text-white rounded-2xl p-8 md:p-12 text-center">

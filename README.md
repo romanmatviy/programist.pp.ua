@@ -97,8 +97,8 @@ romandev-website/
 
 - **Телефон:** +38 (093) 880-08-22
 - **Email:** info@programist.pp.ua
-- **Telegram:** @romandev
-- **GitHub:** github.com/romandev
+- **Telegram:** @RomanMatviy
+- **GitHub:** github.com/matviyroman
 
 ## 📄 Ліцензія
 

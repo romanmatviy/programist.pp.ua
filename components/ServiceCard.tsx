@@ -5,9 +5,10 @@ import { Language } from '@/data/translations';
 interface ServiceCardProps {
   service: Service;
   lang: Language;
+  href?: string;
 }
 
-export default function ServiceCard({ service, lang }: ServiceCardProps) {
+export default function ServiceCard({ service, lang, href }: ServiceCardProps) {
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 card-hover border border-gray-100">
       <div className="text-4xl mb-4">{service.icon}</div>
@@ -37,7 +38,7 @@ export default function ServiceCard({ service, lang }: ServiceCardProps) {
           {service.price[lang]}
         </span>
         <Link
-          href={`/${lang}/service/${service.slug}`}
+          href={href || `/${lang}/service/${service.slug}`}
           className="text-primary-600 hover:text-primary-700 font-medium flex items-center space-x-1 transition-colors"
         >
           <span>{lang === 'ua' ? 'Детальніше' : 'Подробнее'}</span>

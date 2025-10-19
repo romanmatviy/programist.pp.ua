@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import LangSetter from '@/components/LangSetter';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://programist.pp.ua'),
@@ -22,7 +23,10 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Programist" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body>{children}</body>
+      <body>
+        <LangSetter />
+        {children}
+      </body>
     </html>
   );
 }

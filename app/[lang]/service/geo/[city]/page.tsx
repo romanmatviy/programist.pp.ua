@@ -32,12 +32,17 @@ export async function generateMetadata({ params }: { params: { lang: Language; c
   const title = t(lang, 'geo.metaTitle', { city: cityDisplay });
   const description = t(lang, 'geo.metaDescription', { city: cityDisplay });
 
+  const base = 'https://programist.pp.ua';
+  const uaUrl = `${base}/ua/service/geo/${getCitySlug(city.name, 'ua')}`;
+  const ruUrl = `${base}/ru/service/geo/${getCitySlug(city.name, 'ru')}`;
+
   return generateSEO({
     title,
     description,
     keywords: `розробка сайтів ${cityDisplay}, веб-розробка ${cityDisplay}, Laravel ${cityDisplay}, WordPress ${cityDisplay}`,
     canonical: `https://programist.pp.ua/${lang}/service/geo/${params.city}`,
     lang,
+    alternateUrls: { ua: uaUrl, ru: ruUrl },
   });
 }
 
@@ -165,8 +170,25 @@ export default function GeoPage({ params }: { params: { lang: Language; city: st
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {services.slice(0, 6).map((service) => (
-                <ServiceCard key={service.id} service={service} lang={lang} />
+                <ServiceCard
+                  key={service.id}
+                  service={service}
+                  lang={lang}
+                  href={`/${lang}/service/geo/${params.city}/${service.slug}`}
+                />
               ))}
+            </div>
+            <div className="mt-8 bg-white rounded-2xl shadow p-6">
+              <h3 className="text-xl font-semibold mb-4">{lang === 'ua' ? `Усі послуги у ${cityDisplay}` : `Все услуги в ${cityDisplay}`}</h3>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {services.map((s) => (
+                  <li key={s.id}>
+                    <Link className="text-primary-600 hover:underline" href={`/${lang}/service/geo/${params.city}/${s.slug}`}>
+                      {s.title[lang]}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
@@ -237,6 +259,18 @@ export default function GeoPage({ params }: { params: { lang: Language; city: st
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Top Cities Interlinking */}
+          <div className="mt-12 bg-white rounded-2xl shadow p-6">
+            <h3 className="text-xl font-semibold mb-4">{lang === 'ua' ? 'Популярні міста' : 'Популярные города'}</h3>
+            <div className="flex flex-wrap gap-3">
+              {ukrainianCities.slice(0,5).map((c) => (
+                <Link key={c.slug} href={`/${lang}/service/geo/${getCitySlug(c.name, lang as 'ua' | 'ru')}`} className="btn-secondary">
+                  {displayCityName(c.name, lang)}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

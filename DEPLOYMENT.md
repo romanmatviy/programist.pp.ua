@@ -182,7 +182,7 @@ colors: {
 
 - Email: info@programist.pp.ua
 - Телефон: +38 (093) 880-08-22
-- Telegram: @romandev
+- Telegram: @RomanMatviy
 
 ## 📄 Ліцензія
 
