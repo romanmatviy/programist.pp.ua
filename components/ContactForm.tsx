@@ -22,15 +22,18 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
     setStatus('sending');
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // In production, send to API endpoint
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // });
+      const response = await fetch('https://bot.programist.top/api/contact.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          ...formData,
+          source: window.location.href
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
       setStatus('success');
       setFormData({ name: '', email: '', phone: '', message: '' });
