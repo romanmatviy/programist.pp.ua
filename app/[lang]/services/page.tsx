@@ -2,7 +2,7 @@ import { Language, translations } from '@/data/translations';
 import { services } from '@/data/services';
 import ServiceCard from '@/components/ServiceCard';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { generateSEO } from '@/lib/seo';
+import { generateSEO, generateServicesListSchema } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
@@ -20,13 +20,19 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
 export default function ServicesPage({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
   const t = translations[lang];
+  const listSchema = generateServicesListSchema(services, lang);
 
   const breadcrumbs = [
     { name: t.nav.services, url: `/${lang}/services` },
   ];
 
   return (
-    <div className="section-padding bg-gray-50">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }}
+      />
+      <div className="section-padding bg-gray-50">
       <div className="container-custom">
         <Breadcrumbs items={breadcrumbs} lang={lang} />
         
@@ -60,6 +66,7 @@ export default function ServicesPage({ params }: { params: { lang: Language } })
           </a>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

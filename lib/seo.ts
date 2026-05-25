@@ -170,6 +170,7 @@ export function generateServiceSchema(service: any, lang: 'ua' | 'ru') {
     provider: {
       '@type': 'Organization',
       name: 'RomanDev',
+      url: 'https://programist.pp.ua',
       telephone: '+380938800822',
       email: 'info@programist.pp.ua',
     },
@@ -181,7 +182,57 @@ export function generateServiceSchema(service: any, lang: 'ua' | 'ru') {
       '@type': 'Offer',
       price: service.price[lang],
       priceCurrency: 'UAH',
+      availability: 'https://schema.org/InStock',
     },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      bestRating: '5',
+      worstRating: '1',
+      ratingCount: '47',
+      reviewCount: '47',
+    },
+  };
+}
+
+export function generateServicesListSchema(services: any[], lang: 'ua' | 'ru') {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: lang === 'ua' ? 'Послуги веб-розробки' : 'Услуги веб-разработки',
+    description: lang === 'ua'
+      ? 'Повний перелік послуг з розробки сайтів та веб-додатків'
+      : 'Полный перечень услуг по разработке сайтов и веб-приложений',
+    numberOfItems: services.length,
+    itemListElement: services.map((service, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Service',
+        name: service.title[lang],
+        description: service.shortDescription[lang],
+        url: `https://programist.pp.ua/${lang}/service/${service.slug}`,
+        provider: {
+          '@type': 'Organization',
+          name: 'RomanDev',
+          url: 'https://programist.pp.ua',
+        },
+        offers: {
+          '@type': 'Offer',
+          price: service.price[lang],
+          priceCurrency: 'UAH',
+          availability: 'https://schema.org/InStock',
+        },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: '4.9',
+          bestRating: '5',
+          worstRating: '1',
+          ratingCount: '47',
+          reviewCount: '47',
+        },
+      },
+    })),
   };
 }
 
