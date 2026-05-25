@@ -296,6 +296,7 @@ const specificTechTexts: Record<string, Record<'ua' | 'ru', TechDetail>> = {
         "Разработка серверных приложений и высокопроизводительных REST API (Node.js)",
         "Создание быстрых кроссплатформенных мобильных приложений (React Native)",
         "Приложения реального времени (чаты, онлайн-игры, интерактивные дашборды через WebSockets)"
+      ]
     }
   },
   bootstrap: {
