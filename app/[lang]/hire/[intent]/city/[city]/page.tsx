@@ -5,9 +5,30 @@ import { hireIntents, resolveHireIntentBySlug } from '@/data/hireIntents';
 import { displayCityName, displayRegionName } from '@/data/geoTranslations';
 import { getCitySlug, resolveCityBySlug } from '@/data/slug';
 import { ukrainianCities } from '@/data/cities';
-import { generateFAQSchema } from '@/lib/seo';
+import { generateFAQSchema, generateSEO } from '@/lib/seo';
 
 export const dynamic = 'error';
+
+export async function generateMetadata({ params }: { params: { lang: Language; intent: string; city: string } }) {
+  const lang = params.lang || 'ua';
+  const intent = resolveHireIntentBySlug(params.intent, lang);
+  const city = resolveCityBySlug(params.city, lang);
+  if (!intent || !city) return {};
+
+  const cityName = displayCityName(city.name, lang);
+  const regionName = displayRegionName(city.region, lang);
+  const title = `${intent.label[lang]} — ${cityName}`;
+  const description = lang === 'ua'
+    ? `${intent.label[lang]} у місті ${cityName} (${regionName}). Послуги професійного веб-розробника: Laravel, WordPress, React, Next.js.`
+    : `${intent.label[lang]} в городе ${cityName} (${regionName}). Услуги профессионального веб-разработчика: Laravel, WordPress, React, Next.js.`;
+
+  return generateSEO({
+    title,
+    description,
+    canonical: `https://programist.pp.ua/${lang}/hire/${params.intent}/city/${params.city}`,
+    lang,
+  });
+}
 
 export async function generateStaticParams() {
   const langs: Language[] = ['ua', 'ru'];

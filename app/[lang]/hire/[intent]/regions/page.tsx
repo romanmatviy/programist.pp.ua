@@ -5,8 +5,25 @@ import { hireIntents, resolveHireIntentBySlug } from '@/data/hireIntents';
 import { ukrainianRegions } from '@/data/regions';
 import { displayRegionName } from '@/data/geoTranslations';
 import { getRegionSlug } from '@/data/slug';
+import { generateSEO } from '@/lib/seo';
 
 export const dynamic = 'error';
+
+export async function generateMetadata({ params }: { params: { lang: Language; intent: string } }) {
+  const lang = params.lang || 'ua';
+  const intent = resolveHireIntentBySlug(params.intent, lang);
+  if (!intent) return {};
+
+  const title = intent.label[lang];
+  const description = intent.description[lang];
+
+  return generateSEO({
+    title,
+    description,
+    canonical: `https://programist.pp.ua/${lang}/hire/${params.intent}/regions`,
+    lang,
+  });
+}
 
 export async function generateStaticParams() {
   const langs: Language[] = ['ua', 'ru'];

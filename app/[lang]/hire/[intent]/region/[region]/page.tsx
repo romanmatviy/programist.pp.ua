@@ -6,8 +6,29 @@ import { ukrainianRegions } from '@/data/regions';
 import { displayCityName, displayRegionName } from '@/data/geoTranslations';
 import { getCitySlug, getRegionSlug, resolveRegionUaBySlug } from '@/data/slug';
 import { ukrainianCities } from '@/data/cities';
+import { generateSEO } from '@/lib/seo';
 
 export const dynamic = 'error';
+
+export async function generateMetadata({ params }: { params: { lang: Language; intent: string; region: string } }) {
+  const lang = params.lang || 'ua';
+  const intent = resolveHireIntentBySlug(params.intent, lang);
+  const regionUa = resolveRegionUaBySlug(params.region, lang);
+  if (!intent || !regionUa) return {};
+
+  const regionName = displayRegionName(regionUa, lang);
+  const title = `${intent.label[lang]} — ${regionName}`;
+  const description = lang === 'ua'
+    ? `${intent.label[lang]} у ${regionName}. Оберіть місто для замовлення послуг веб-розробника.`
+    : `${intent.label[lang]} в ${regionName}. Выберите город для заказа услуг веб-разработчика.`;
+
+  return generateSEO({
+    title,
+    description,
+    canonical: `https://programist.pp.ua/${lang}/hire/${params.intent}/region/${params.region}`,
+    lang,
+  });
+}
 
 export async function generateStaticParams() {
   const langs: Language[] = ['ua', 'ru'];

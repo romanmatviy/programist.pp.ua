@@ -2,8 +2,24 @@ import Link from 'next/link';
 import { Language, translations } from '@/data/translations';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { hireIntents, getHireIntentSlug } from '@/data/hireIntents';
+import { generateSEO } from '@/lib/seo';
 
 export const dynamic = 'error';
+
+export async function generateMetadata({ params }: { params: { lang: Language } }) {
+  const lang = params.lang || 'ua';
+  const title = lang === 'ua' ? 'Найняти програміста' : 'Нанять программиста';
+  const description = lang === 'ua' 
+    ? 'Оберіть формат співпраці: програміст на годину або найм розробника під проект.'
+    : 'Выберите формат сотрудничества: программист на час или наем разработчика под проект.';
+
+  return generateSEO({
+    title,
+    description,
+    canonical: `https://programist.pp.ua/${lang}/hire`,
+    lang,
+  });
+}
 
 export default function HireIndexPage({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
