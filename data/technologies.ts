@@ -251,6 +251,18 @@ export const technologies: Technology[] = [
     },
     icon: "🍃",
     relatedTechnologies: ["Node.js", "Express", "Mongoose", "JavaScript", "Docker"]
+  },
+  {
+    id: "21",
+    name: "JavaScript",
+    slug: "javascript",
+    category: "Language",
+    description: {
+      ua: "Головна мова програмування для створення інтерактивних та динамічних інтерфейсів веб-сайтів.",
+      ru: "Основной язык программирования для создания интерактивных и динамических интерфейсов веб-сайтов."
+    },
+    icon: "🟨",
+    relatedTechnologies: ["TypeScript", "React", "Vue", "Next.js", "Node.js"]
   }
 ];
 
