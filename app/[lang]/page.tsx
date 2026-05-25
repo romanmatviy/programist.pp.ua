@@ -154,6 +154,61 @@ export default function HomePage({ params }: { params: { lang: Language } }) {
           </div>
         </div>
       </section>
+
+      {/* Useful Projects & Services Section */}
+      <section className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3 gradient-text">
+              {lang === 'ua' ? 'Корисні сервіси та проєкти' : 'Полезные сервисы и проекты'}
+            </h2>
+            <p className="text-gray-500 max-w-xl mx-auto">
+              {lang === 'ua'
+                ? 'Інструменти та ресурси, які ми розробили для спрощення вашої роботи'
+                : 'Инструменты и ресурсы, которые мы разработали для упрощения вашей работы'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {[
+              { href: 'https://monitortest.pp.ua', icon: '🖥️', name: 'Monitor Test', desc: lang === 'ua' ? 'Тестування монітора онлайн' : 'Тестирование монитора онлайн' },
+              { href: 'https://keytest.pp.ua', icon: '⌨️', name: 'Key Test', desc: lang === 'ua' ? 'Тестування клавіатури онлайн' : 'Тестирование клавиатуры онлайн' },
+              { href: 'https://pctest.pp.ua', icon: '💻', name: 'PC Test', desc: lang === 'ua' ? 'Тестування комп\'ютера онлайн' : 'Тестирование компьютера онлайн' },
+              { href: 'https://php.apartner.pro', icon: '🐘', name: 'PHP Course', desc: lang === 'ua' ? 'Безкоштовний курс PHP програмування' : 'Бесплатный курс PHP программирования' },
+              { href: 'https://invoicemaker.me', icon: '🧾', name: 'Invoice Maker', desc: lang === 'ua' ? 'Створення інвойсів онлайн' : 'Создание инвойсов онлайн' },
+              { href: 'https://indexfast.pp.ua', icon: '🚀', name: 'IndexFast', desc: lang === 'ua' ? 'Швидка індексація сторінок у Google' : 'Быстрая индексация страниц в Google' },
+              { href: 'https://hostings.pp.ua', icon: '🌐', name: 'Hostings.pp.ua', desc: lang === 'ua' ? 'Огляди та порівняння хостингів' : 'Обзоры и сравнения хостингов' },
+              { href: 'https://hostpro.apartner.pro/', icon: '🛡️', name: 'HostPro', desc: lang === 'ua' ? 'Надійний хостинг для сайтів' : 'Надёжный хостинг для сайтов' },
+              { href: 'https://apartner.pro', icon: '🏢', name: 'Apartner.pro', desc: lang === 'ua' ? 'Студія розробки сайтів' : 'Студия разработки сайтов' },
+              { href: 'https://hire-web-developer.com', icon: '👨‍💻', name: 'Hire Web Developer', desc: lang === 'ua' ? 'Найняти веб-розробника' : 'Нанять веб-разработчика' },
+              { href: 'https://hirewebdeveloper.pp.ua', icon: '💼', name: 'HireWebDeveloper.pp.ua', desc: lang === 'ua' ? 'Послуги веб-розробника' : 'Услуги веб-разработчика' },
+              { href: 'https://programist.pp.ua', icon: '⚡', name: 'Programist.pp.ua', desc: lang === 'ua' ? 'Послуги програміста в Україні' : 'Услуги программиста в Украине' },
+            ].map((project) => (
+              <a
+                key={project.href}
+                href={project.href}
+                target="_blank"
+                rel="noopener"
+                className="group flex flex-col gap-2 bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">{project.icon}</span>
+                  <span className="font-semibold text-gray-800 group-hover:text-primary-600 transition-colors duration-200 text-sm leading-tight">
+                    {project.name}
+                  </span>
+                </div>
+                <p className="text-xs text-gray-500 leading-relaxed">{project.desc}</p>
+                <div className="mt-auto pt-2 border-t border-gray-100 flex items-center gap-1 text-primary-500 text-xs font-medium">
+                  <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                  {lang === 'ua' ? 'Перейти' : 'Перейти'}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }
