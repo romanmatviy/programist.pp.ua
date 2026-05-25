@@ -121,14 +121,34 @@ export default function TechnologyPage({ params }: { params: { lang: Language; s
             {lang === 'ua' ? 'Пов\'язані технології' : 'Связанные технологии'}
           </h2>
           <div className="flex flex-wrap gap-3">
-            {tech.relatedTechnologies.map((relatedTech, index) => (
-              <span
-                key={index}
-                className="px-4 py-2 bg-primary-50 text-primary-700 rounded-full text-sm font-medium"
-              >
-                {relatedTech}
-              </span>
-            ))}
+            {tech.relatedTechnologies.map((relatedTech, index) => {
+              const matchedTech = technologies.find(t => 
+                t.name.toLowerCase() === relatedTech.toLowerCase() ||
+                t.name.toLowerCase().replace(' css', '') === relatedTech.toLowerCase().replace(' css', '') ||
+                t.slug === relatedTech.toLowerCase().replace(' ', '').replace('.', '')
+              );
+
+              if (matchedTech) {
+                return (
+                  <Link
+                    key={index}
+                    href={`/${lang}/tech/${matchedTech.slug}`}
+                    className="px-4 py-2 bg-primary-50 text-primary-700 hover:bg-primary-100 hover:text-primary-800 rounded-full text-sm font-medium transition duration-300"
+                  >
+                    {relatedTech}
+                  </Link>
+                );
+              }
+
+              return (
+                <span
+                  key={index}
+                  className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
+                >
+                  {relatedTech}
+                </span>
+              );
+            })}
           </div>
         </div>
 
