@@ -171,18 +171,22 @@ export default function HomePage({ params }: { params: { lang: Language } }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {[
-              { href: 'https://monitortest.pp.ua', icon: '🖥️', name: 'Monitor Test', desc: lang === 'ua' ? 'Тестування монітора онлайн' : 'Тестирование монитора онлайн' },
-              { href: 'https://keytest.pp.ua', icon: '⌨️', name: 'Key Test', desc: lang === 'ua' ? 'Тестування клавіатури онлайн' : 'Тестирование клавиатуры онлайн' },
-              { href: 'https://pctest.pp.ua', icon: '💻', name: 'PC Test', desc: lang === 'ua' ? 'Тестування комп\'ютера онлайн' : 'Тестирование компьютера онлайн' },
-              { href: 'https://php.apartner.pro', icon: '🐘', name: 'PHP Course', desc: lang === 'ua' ? 'Безкоштовний курс PHP програмування' : 'Бесплатный курс PHP программирования' },
-              { href: 'https://invoicemaker.me', icon: '🧾', name: 'Invoice Maker', desc: lang === 'ua' ? 'Створення інвойсів онлайн' : 'Создание инвойсов онлайн' },
-              { href: 'https://indexfast.pp.ua', icon: '🚀', name: 'IndexFast', desc: lang === 'ua' ? 'Швидка індексація сторінок у Google' : 'Быстрая индексация страниц в Google' },
-              { href: 'https://hostings.pp.ua', icon: '🌐', name: 'Hostings.pp.ua', desc: lang === 'ua' ? 'Огляди та порівняння хостингів' : 'Обзоры и сравнения хостингов' },
-              { href: 'https://hostpro.apartner.pro/', icon: '🛡️', name: 'HostPro', desc: lang === 'ua' ? 'Надійний хостинг для сайтів' : 'Надёжный хостинг для сайтов' },
-              { href: 'https://apartner.pro', icon: '🏢', name: 'Apartner.pro', desc: lang === 'ua' ? 'Студія розробки сайтів' : 'Студия разработки сайтов' },
-              { href: 'https://hire-web-developer.com', icon: '👨‍💻', name: 'Hire Web Developer', desc: lang === 'ua' ? 'Найняти веб-розробника' : 'Нанять веб-разработчика' },
-              { href: 'https://hirewebdeveloper.pp.ua', icon: '💼', name: 'HireWebDeveloper.pp.ua', desc: lang === 'ua' ? 'Послуги веб-розробника' : 'Услуги веб-разработчика' },
-              { href: 'https://programist.pp.ua', icon: '⚡', name: 'Programist.pp.ua', desc: lang === 'ua' ? 'Послуги програміста в Україні' : 'Услуги программиста в Украине' },
+              { href: 'https://monitortest.pp.ua', icon: '🖥️', name: 'Monitor Test', desc: lang === 'ua' ? 'Тестування монітора онлайн' : 'Тестирование монитора онлайн', linkText: lang === 'ua' ? 'Тест монітора онлайн' : 'Тест монитора онлайн' },
+              { href: 'https://keytest.pp.ua', icon: '⌨️', name: 'Key Test', desc: lang === 'ua' ? 'Тестування клавіатури онлайн' : 'Тестирование клавиатуры онлайн', linkText: lang === 'ua' ? 'Тест клавіатури онлайн' : 'Тест клавиатуры онлайн' },
+              { href: 'https://pctest.pp.ua', icon: '💻', name: 'PC Test', desc: lang === 'ua' ? 'Тестування комп\'ютера онлайн' : 'Тестирование компьютера онлайн', linkText: lang === 'ua' ? 'Тест комп\'ютера онлайн' : 'Тест компьютера онлайн' },
+              { href: 'https://php.apartner.pro', icon: '🐘', name: 'PHP Course', desc: lang === 'ua' ? 'Безкоштовний курс PHP програмування' : 'Бесплатный курс PHP программирования', linkText: lang === 'ua' ? 'Курс PHP програмування' : 'Курс PHP программирования' },
+              { href: 'https://invoicemaker.me', icon: '🧾', name: 'Invoice Maker', desc: lang === 'ua' ? 'Створення інвойсів онлайн' : 'Создание инвойсов онлайн', linkText: lang === 'ua' ? 'Створити інвойс онлайн' : 'Создать инвойс онлайн' },
+              { href: 'https://indexfast.pp.ua', icon: '🚀', name: 'IndexFast', desc: lang === 'ua' ? 'Швидка індексація сторінок у Google' : 'Быстрая индексация страниц в Google', linkText: lang === 'ua' ? 'Індексація сайту в Google' : 'Индексация сайта в Google' },
+              { href: 'https://hostings.pp.ua', icon: '🌐', name: 'Hostings.pp.ua', desc: lang === 'ua' ? 'Огляди та порівняння хостингів' : 'Обзоры и сравнения хостингов', linkText: lang === 'ua' ? 'Порівняння хостингів' : 'Сравнение хостингов' },
+              { href: 'https://hostpro.apartner.pro/', icon: '🛡️', name: 'HostPro', desc: lang === 'ua' ? 'Надійний хостинг для сайтів' : 'Надёжный хостинг для сайтов', linkText: lang === 'ua' ? 'Надійний хостинг для сайту' : 'Надёжный хостинг для сайта' },
+              { href: 'https://apartner.pro', icon: '🏢', name: 'Apartner.pro', desc: lang === 'ua' ? 'Студія розробки сайтів' : 'Студия разработки сайтов', linkText: lang === 'ua' ? 'Розробка сайтів під ключ' : 'Разработка сайтов под ключ' },
+              { href: 'https://hire-web-developer.com', icon: '👨‍💻', name: 'Hire Web Developer', desc: lang === 'ua' ? 'Найняти веб-розробника' : 'Нанять веб-разработчика', linkText: lang === 'ua' ? 'Найняти веб-розробника' : 'Нанять веб-разработчика' },
+              { href: 'https://hirewebdeveloper.pp.ua', icon: '💼', name: 'HireWebDeveloper.pp.ua', desc: lang === 'ua' ? 'Послуги веб-розробника' : 'Услуги веб-разработчика', linkText: lang === 'ua' ? 'Послуги веб-розробника' : 'Услуги веб-разработчика' },
+              { href: 'https://programist.pp.ua', icon: '⚡', name: 'Programist.pp.ua', desc: lang === 'ua' ? 'Послуги програміста в Україні' : 'Услуги программиста в Украине', linkText: lang === 'ua' ? 'Програміст на замовлення' : 'Программист на заказ' },
+              { href: 'https://bookmark.apartner.pro/', icon: '🔖', name: 'Bookmark Manager', desc: lang === 'ua' ? 'Менеджер закладок для розробників' : 'Менеджер закладок для разработчиков', linkText: lang === 'ua' ? 'Менеджер закладок онлайн' : 'Менеджер закладок онлайн' },
+              { href: 'https://devroman.pl', icon: '🇵🇱', name: 'DevRoman.pl', desc: lang === 'ua' ? 'Веб-розробка для Польщі' : 'Веб-разработка для Польши', linkText: lang === 'ua' ? 'Веб-розробник у Польщі' : 'Веб-разработчик в Польше' },
+              { href: 'https://programista.devroman.pl', icon: '👨‍💻', name: 'Programista DevRoman', desc: lang === 'ua' ? 'Програміст для польського ринку' : 'Программист для польского рынка', linkText: lang === 'ua' ? 'Programista na zamówienie' : 'Programista na zamówienie' },
+              { href: 'https://programist.matviy.pp.ua', icon: '🧑‍💻', name: 'Programist Matviy', desc: lang === 'ua' ? 'Особистий сайт програміста' : 'Личный сайт программиста', linkText: lang === 'ua' ? 'Програміст Матвій — портфоліо' : 'Программист Матвий — портфолио' },
             ].map((project) => (
               <a
                 key={project.href}
