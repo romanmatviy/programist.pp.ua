@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation';
 import { ukrainianCities } from '@/data/cities';
 import { getCitySlug } from '@/data/slug';
 import { displayCityName } from '@/data/geoTranslations';
+import { technologies } from '@/data/technologies';
 
 export async function generateStaticParams() {
   const params = [];
@@ -82,14 +83,34 @@ export default function ServicePage({ params }: { params: { lang: Language; slug
                   {service.description[lang]}
                 </p>
                 <div className="flex flex-wrap gap-3 mb-6">
-                  {service.technologies.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-4 py-2 bg-primary-50 text-primary-700 rounded-full text-sm font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  {service.technologies.map((tech, index) => {
+                    const matchedTech = technologies.find(t => 
+                      t.name.toLowerCase() === tech.toLowerCase() ||
+                      t.name.toLowerCase().replace(' css', '') === tech.toLowerCase().replace(' css', '') ||
+                      t.slug === tech.toLowerCase().replace(' ', '').replace('.', '')
+                    );
+
+                    if (matchedTech) {
+                      return (
+                        <Link
+                          key={index}
+                          href={`/${lang}/tech/${matchedTech.slug}`}
+                          className="px-4 py-2 bg-primary-50 text-primary-700 hover:bg-primary-100 hover:text-primary-800 rounded-full text-sm font-medium transition duration-300"
+                        >
+                          {tech}
+                        </Link>
+                      );
+                    }
+
+                    return (
+                      <span
+                        key={index}
+                        className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
+                      >
+                        {tech}
+                      </span>
+                    );
+                  })}
                 </div>
                 <div className="flex items-center gap-6">
                   <div>
