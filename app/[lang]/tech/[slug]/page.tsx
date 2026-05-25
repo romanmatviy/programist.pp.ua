@@ -5,6 +5,7 @@ import TechnologyCard from '@/components/TechnologyCard';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { generateSEO } from '@/lib/seo';
 import { notFound } from 'next/navigation';
+import { getTechSEOData } from '@/lib/techSEO';
 
 export async function generateStaticParams() {
   const params = [];
@@ -43,6 +44,7 @@ export default function TechnologyPage({ params }: { params: { lang: Language; s
   }
 
   const relatedTechs = getRandomTechnologies(5, tech.slug);
+  const seoData = getTechSEOData(tech.slug, tech.category, lang, tech.name);
 
   const breadcrumbs = [
     { name: t.technologies.title, url: `/${lang}/#technologies` },
@@ -71,6 +73,46 @@ export default function TechnologyPage({ params }: { params: { lang: Language; s
               </Link>
             </div>
           </div>
+        </div>
+
+        {/* Rich SEO Description */}
+        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6 gradient-text">
+            {lang === 'ua' ? `Професійна веб-розробка на базі ${tech.name}` : `Профессиональная веб-разработка на базе ${tech.name}`}
+          </h2>
+          <p className="text-gray-700 leading-relaxed text-lg">
+            {seoData.intro}
+          </p>
+        </div>
+
+        {/* Key Advantages */}
+        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 gradient-text">
+            {seoData.advantagesTitle}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {seoData.advantages.map((adv, idx) => (
+              <div key={idx} className="border border-gray-100 rounded-xl p-6 hover:shadow-md transition bg-gray-50/50">
+                <h3 className="text-xl font-bold mb-3 text-gray-900">{adv.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{adv.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Use Cases */}
+        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6 gradient-text">
+            {seoData.useCasesTitle}
+          </h2>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {seoData.useCases.map((useCase, idx) => (
+              <li key={idx} className="flex items-start gap-3 text-gray-700 text-lg">
+                <span className="text-primary-500 font-bold">✓</span>
+                <span>{useCase}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Related Technologies */}
