@@ -263,6 +263,54 @@ export const technologies: Technology[] = [
     },
     icon: "🟨",
     relatedTechnologies: ["TypeScript", "React", "Vue", "Next.js", "Node.js"]
+  },
+  {
+    id: "22",
+    name: "Bootstrap",
+    slug: "bootstrap",
+    category: "Frontend",
+    description: {
+      ua: "Популярний HTML, CSS та JS фреймворк для розробки адаптивних та мобільних веб-проектів.",
+      ru: "Популярный HTML, CSS и JS фреймворк для разработки адаптивных и мобильных веб-проектов."
+    },
+    icon: "💜",
+    relatedTechnologies: ["HTML", "CSS", "JavaScript", "jQuery", "Tailwind CSS"]
+  },
+  {
+    id: "23",
+    name: "jQuery",
+    slug: "jquery",
+    category: "Frontend",
+    description: {
+      ua: "Швидка, компактна JavaScript-бібліотека, яка спрощує обробку HTML-документів, AJAX та анімацію.",
+      ru: "Быстрая, компактная JavaScript-библиотека, упрощающая обработку HTML-документов, AJAX и анимацию."
+    },
+    icon: "🔵",
+    relatedTechnologies: ["JavaScript", "Bootstrap", "AJAX", "PHP", "WordPress"]
+  },
+  {
+    id: "24",
+    name: "Docker",
+    slug: "docker",
+    category: "DevOps",
+    description: {
+      ua: "Платформа для контейнеризації додатків. Спрощує розгортання, масштабування та ізоляцію оточень.",
+      ru: "Платформа для контейнеризации приложений. Упрощает развертывание, масштабирование и изоляцию окружений."
+    },
+    icon: "🐳",
+    relatedTechnologies: ["Linux", "Nginx", "PostgreSQL", "Redis", "GitHub Actions"]
+  },
+  {
+    id: "25",
+    name: "Git",
+    slug: "git",
+    category: "DevOps",
+    description: {
+      ua: "Система контролю версій для відстеження змін у коді. Основа сучасної командної розробки.",
+      ru: "Система контроля версий для отслеживания изменений в коде. Основа современной командной разработки."
+    },
+    icon: "🌿",
+    relatedTechnologies: ["GitHub", "GitLab", "Docker", "CI/CD", "Linux"]
   }
 ];
 
