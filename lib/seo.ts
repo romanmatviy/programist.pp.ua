@@ -236,6 +236,68 @@ export function generateServicesListSchema(services: any[], lang: 'ua' | 'ru') {
   };
 }
 
+export function generateWebSiteSchema(lang: 'ua' | 'ru' = 'ua') {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'RomanDev',
+    url: 'https://programist.pp.ua',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `https://programist.pp.ua/${lang}/services?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  };
+}
+
+export function generatePersonSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Roman Matviy',
+    url: 'https://programist.pp.ua',
+    jobTitle: 'Full-stack Web Developer',
+    sameAs: [
+      'https://github.com/MatviyRoman',
+      'https://t.me/RomanMatviy',
+    ],
+  };
+}
+
+export function generateTechSchema(tech: any, lang: 'ua' | 'ru') {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: tech.name,
+    applicationCategory: tech.category,
+    operatingSystem: 'Cross-platform',
+    description: tech.description[lang],
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+  };
+}
+
+export function generatePortfolioSchema(items: any[], lang: 'ua' | 'ru') {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: lang === 'ua' ? 'Портфоліо проектів' : 'Портфолио проектов',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'CreativeWork',
+        name: item.title,
+        description: item.description,
+        image: item.image,
+      },
+    })),
+  };
+}
+
 export function generateFAQSchema(faqs: Array<{ question: string; answer: string }>) {
   return {
     '@context': 'https://schema.org',

@@ -3,9 +3,11 @@ import { Language, translations } from '@/data/translations';
 import { technologies, getTechnologyBySlug, getRandomTechnologies } from '@/data/technologies';
 import TechnologyCard from '@/components/TechnologyCard';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { generateSEO } from '@/lib/seo';
+import { generateSEO, generateTechSchema } from '@/lib/seo';
 import { notFound } from 'next/navigation';
 import { getTechSEOData } from '@/lib/techSEO';
+import { services } from '@/data/services';
+import ServiceCard from '@/components/ServiceCard';
 
 export async function generateStaticParams() {
   const params = [];
@@ -45,6 +47,15 @@ export default function TechnologyPage({ params }: { params: { lang: Language; s
 
   const relatedTechs = getRandomTechnologies(5, tech.slug);
   const seoData = getTechSEOData(tech.slug, tech.category, lang, tech.name);
+  const techSchema = generateTechSchema(tech, lang);
+
+  // Find services that use this technology
+  const relevantServices = services.filter(s =>
+    s.technologies.some(t =>
+      t.toLowerCase() === tech.name.toLowerCase() ||
+      t.toLowerCase() === tech.slug.toLowerCase()
+    )
+  );
 
   const breadcrumbs = [
     { name: t.technologies.title, url: `/${lang}/#technologies` },
@@ -53,6 +64,10 @@ export default function TechnologyPage({ params }: { params: { lang: Language; s
 
   return (
     <div className="section-padding bg-gray-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(techSchema) }}
+      />
       <div className="container-custom">
         <Breadcrumbs items={breadcrumbs} lang={lang} />
 
@@ -151,6 +166,20 @@ export default function TechnologyPage({ params }: { params: { lang: Language; s
             })}
           </div>
         </div>
+
+        {/* Relevant Services */}
+        {relevantServices.length > 0 && (
+          <div className="mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 gradient-text">
+              {t.common.relevantServices.replace('{tech}', tech.name)}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {relevantServices.map((service) => (
+                <ServiceCard key={service.id} service={service} lang={lang} />
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Similar Technologies */}
         {relatedTechs.length > 0 && (
