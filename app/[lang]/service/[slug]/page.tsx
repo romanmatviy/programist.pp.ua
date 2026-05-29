@@ -3,7 +3,7 @@ import { Language, translations } from '@/data/translations';
 import { services, getServiceBySlug, getRandomServices } from '@/data/services';
 import ServiceCard from '@/components/ServiceCard';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { generateSEO, generateServiceSchema } from '@/lib/seo';
+import { generateSEO, generateServiceSchema, generateFAQSchema } from '@/lib/seo';
 import { notFound } from 'next/navigation';
 import { ukrainianCities } from '@/data/cities';
 import { getCitySlug } from '@/data/slug';
@@ -53,6 +53,7 @@ export default function ServicePage({ params }: { params: { lang: Language; slug
 
   const relatedServices = getRandomServices(5, service.slug);
   const serviceSchema = generateServiceSchema(service, lang);
+  const faqSchema = service.faqs ? generateFAQSchema(service.faqs[lang]) : null;
 
   const breadcrumbs = [
     { name: t.nav.services, url: `/${lang}/services` },
@@ -61,11 +62,17 @@ export default function ServicePage({ params }: { params: { lang: Language; slug
 
   return (
     <>
-      {/* JSON-LD Schema */}
+      {/* JSON-LD Schemas */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <div className="section-padding bg-gray-50">
         <div className="container-custom">
@@ -143,6 +150,23 @@ export default function ServicePage({ params }: { params: { lang: Language; slug
               ))}
             </div>
           </div>
+
+          {/* FAQ Section */}
+          {service.faqs && (
+            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 gradient-text">
+                {t.common.faqs}
+              </h2>
+              <div className="space-y-6">
+                {service.faqs[lang].map((faq, index) => (
+                  <div key={index} className="border-b border-gray-200 pb-6 last:border-0">
+                    <h3 className="text-lg font-bold mb-2 text-gray-900">{faq.question}</h3>
+                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Related Services */}
           {relatedServices.length > 0 && (
