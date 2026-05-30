@@ -1,6 +1,6 @@
 import { Language, translations } from '@/data/translations';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { generateSEO } from '@/lib/seo';
+import { generateSEO, generatePortfolioSchema } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
@@ -80,8 +80,14 @@ export default function PortfolioPage({ params }: { params: { lang: Language } }
     },
   ];
 
+  const portfolioSchema = generatePortfolioSchema(portfolioItems, lang);
+
   return (
     <div className="section-padding bg-gray-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(portfolioSchema) }}
+      />
       <div className="container-custom">
         <Breadcrumbs items={breadcrumbs} lang={lang} />
 

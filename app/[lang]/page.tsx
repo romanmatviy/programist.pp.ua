@@ -4,7 +4,12 @@ import { services } from '@/data/services';
 import { technologies } from '@/data/technologies';
 import ServiceCard from '@/components/ServiceCard';
 import TechnologyCard from '@/components/TechnologyCard';
-import { generateSEO, generateOrganizationSchema } from '@/lib/seo';
+import {
+  generateSEO,
+  generateOrganizationSchema,
+  generateWebSiteSchema,
+  generatePersonSchema
+} from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
@@ -28,13 +33,23 @@ export default function HomePage({ params }: { params: { lang: Language } }) {
   const t = translations[lang];
 
   const organizationSchema = generateOrganizationSchema();
+  const websiteSchema = generateWebSiteSchema(lang as 'ua' | 'ru');
+  const personSchema = generatePersonSchema();
 
   return (
     <>
-      {/* JSON-LD Schema */}
+      {/* JSON-LD Schemas */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
 
       {/* Hero Section */}

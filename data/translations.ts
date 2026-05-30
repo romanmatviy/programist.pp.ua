@@ -70,6 +70,8 @@ export const translations = {
       loading: "Завантаження...",
       price: "Ціна",
       from: "від",
+      relevantServices: "Послуги з використанням {tech}",
+      faqs: "Часті питання",
     },
     // Geo Pages
     geo: {
@@ -187,6 +189,8 @@ export const translations = {
       loading: "Загрузка...",
       price: "Цена",
       from: "от",
+      relevantServices: "Услуги с использованием {tech}",
+      faqs: "Частые вопросы",
     },
     // Geo Pages
     geo: {
