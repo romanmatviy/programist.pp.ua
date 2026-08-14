@@ -202,6 +202,8 @@ export default function HomePage({ params }: { params: { lang: Language } }) {
               { href: 'https://devroman.pl', icon: '🇵🇱', name: 'DevRoman.pl', desc: lang === 'ua' ? 'Веб-розробка для Польщі' : 'Веб-разработка для Польши', linkText: lang === 'ua' ? 'Веб-розробник у Польщі' : 'Веб-разработчик в Польше' },
               { href: 'https://programista.devroman.pl', icon: '👨‍💻', name: 'Programista DevRoman', desc: lang === 'ua' ? 'Програміст для польського ринку' : 'Программист для польского рынка', linkText: lang === 'ua' ? 'Programista na zamówienie' : 'Programista na zamówienie' },
               { href: 'https://programist.matviy.pp.ua', icon: '🧑‍💻', name: 'Programist Matviy', desc: lang === 'ua' ? 'Особистий сайт програміста' : 'Личный сайт программиста', linkText: lang === 'ua' ? 'Програміст Матвій — портфоліо' : 'Программист Матвий — портфолио' },
+              { href: 'https://studio.apartner.pro', icon: '🎨', name: 'Studio Apartner', desc: lang === 'ua' ? 'Веб-студія повного циклу' : 'Веб-студия полного цикла', linkText: lang === 'ua' ? 'Веб-студія Apartner' : 'Веб-студия Apartner' },
+              { href: 'https://devroman.dev', icon: '🛠️', name: 'DevRoman.dev', desc: lang === 'ua' ? 'Портфоліо та блог розробника' : 'Портфолио и блог разработчика', linkText: lang === 'ua' ? 'DevRoman — веб-розробник' : 'DevRoman — веб-разработчик' },
             ].map((project) => (
               <a
                 key={project.href}
