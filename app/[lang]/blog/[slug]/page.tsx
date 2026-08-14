@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Language, translations } from '@/data/translations';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import TableOfContents from '@/components/TableOfContents';
 import { generateSEO } from '@/lib/seo';
 import { getPostBySlug, getPostSlugs, getAllPosts, Post } from '@/lib/mdx';
 import { MDXRemote } from 'next-mdx-remote/rsc';
@@ -43,7 +44,7 @@ export async function generateMetadata({
   });
 }
 
-function generateStructuredData(post: Post, lang: string, url: string) {
+function generateArticleSchema(post: Post, lang: string, url: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -57,13 +58,14 @@ function generateStructuredData(post: Post, lang: string, url: string) {
       name: post.author,
       jobTitle: post.authorRole,
       description: post.authorBio,
+      url: 'https://roman.matviy.pp.ua',
     },
     publisher: {
       '@type': 'Organization',
       name: 'Programist',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://programist.pp.ua/logo.png',
+        url: 'https://programist.pp.ua/favicon-96x96.png',
       },
     },
     mainEntityOfPage: {
@@ -71,6 +73,35 @@ function generateStructuredData(post: Post, lang: string, url: string) {
       '@id': url,
     },
     keywords: post.tags.join(', '),
+    inLanguage: lang === 'ua' ? 'uk' : 'ru',
+  };
+}
+
+function generateBreadcrumbSchema(lang: string, post: Post) {
+  const t = translations[lang as 'ua' | 'ru'];
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: t.nav.home,
+        item: `https://programist.pp.ua/${lang}/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: t.nav.blog,
+        item: `https://programist.pp.ua/${lang}/blog/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: `https://programist.pp.ua/${lang}/blog/${post.slug}/`,
+      },
+    ],
   };
 }
 
@@ -87,8 +118,9 @@ export default function BlogPostPage({
     notFound();
   }
 
-  const currentUrl = `https://programist.pp.ua/${lang}/blog/${post.slug}`;
-  const structuredData = generateStructuredData(post, lang, currentUrl);
+  const currentUrl = `https://programist.pp.ua/${lang}/blog/${post.slug}/`;
+  const articleSchema = generateArticleSchema(post, lang, currentUrl);
+  const breadcrumbSchema = generateBreadcrumbSchema(lang, post);
 
   const breadcrumbs = [
     { name: t.nav.home, url: `/${lang}` },
@@ -105,7 +137,11 @@ export default function BlogPostPage({
     <div className="bg-white">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 py-16">
@@ -171,6 +207,7 @@ export default function BlogPostPage({
             </div>
           )}
           <div className="prose prose-lg max-w-none">
+            <TableOfContents lang={lang} />
             <MDXRemote source={post.content} />
           </div>
 
