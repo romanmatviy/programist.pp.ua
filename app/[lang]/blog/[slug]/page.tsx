@@ -161,6 +161,15 @@ export default function BlogPostPage({
 
       <div className="container-custom py-12 md:py-16">
         <div className="max-w-4xl mx-auto">
+          {post.image && (
+            <div className="mb-10 rounded-2xl overflow-hidden shadow-lg">
+              <img 
+                src={post.image} 
+                alt={post.title} 
+                className="w-full h-auto max-h-[500px] object-cover"
+              />
+            </div>
+          )}
           <div className="prose prose-lg max-w-none">
             <MDXRemote source={post.content} />
           </div>

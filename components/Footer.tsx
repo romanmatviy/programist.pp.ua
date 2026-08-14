@@ -142,6 +142,11 @@ export default function Footer({ lang, translations }: FooterProps) {
                   DevRoman.dev
                 </a>
               </li>
+              <li>
+                <a href="https://indexfast.pro" target="_blank" rel="noopener" className="text-gray-400 hover:text-white transition-colors">
+                  IndexFast.pro
+                </a>
+              </li>
             </ul>
           </div>
         </div>
