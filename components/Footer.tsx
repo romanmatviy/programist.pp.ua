@@ -12,7 +12,7 @@ export default function Footer({ lang, translations }: FooterProps) {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container-custom py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
             <Link href={`/${lang}`} className="flex items-center space-x-2 mb-4">
@@ -119,6 +119,28 @@ export default function Footer({ lang, translations }: FooterProps) {
                 <Link href={`/${lang}/hire`} className="text-gray-400 hover:text-white transition-colors">
                   {lang === 'ua' ? 'Найняти програміста' : 'Нанять программиста'}
                 </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Partners */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">{lang === 'ua' ? 'Партнери' : 'Партнёры'}</h3>
+            <ul className="space-y-2">
+              <li>
+                <a href="https://apartner.pro" target="_blank" rel="noopener" className="text-gray-400 hover:text-white transition-colors">
+                  Apartner.pro
+                </a>
+              </li>
+              <li>
+                <a href="https://studio.apartner.pro" target="_blank" rel="noopener" className="text-gray-400 hover:text-white transition-colors">
+                  Studio Apartner
+                </a>
+              </li>
+              <li>
+                <a href="https://devroman.dev" target="_blank" rel="noopener" className="text-gray-400 hover:text-white transition-colors">
+                  DevRoman.dev
+                </a>
               </li>
             </ul>
           </div>
