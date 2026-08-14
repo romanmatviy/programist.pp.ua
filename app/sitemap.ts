@@ -79,7 +79,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Blog pages
   languages.forEach(lang => {
-    const posts = getAllPosts(lang);
+    const posts = getAllPosts(lang as 'ua' | 'ru');
     posts.forEach(post => {
       routes.push({
         url: `${baseUrl}/${lang}/blog/${post.slug}`,
