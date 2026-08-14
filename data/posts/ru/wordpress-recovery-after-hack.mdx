@@ -21,7 +21,11 @@ relatedPosts: [1,4,7]
         <h2>Шаг 1: Диагностика и вход в безопасный режим</h2>
         <p>Прежде всего, ограничьте доступ сторонних лиц к сайту на время проведения технических работ. Активируйте режим обслуживания или полностью заблокируйте доступ с помощью конфигурации в файле <code>.htaccess</code>, разрешив вход только для вашего IP-адреса.</p>
         <p>Найдите вредоносный код с помощью терминальной команды <code>grep</code> в каталоге вашего проекта через SSH. Самые популярные места размещения вирусов содержат функции <code>eval</code>, <code>base64_decode</code> или <code>gzinflate</code>:</p>
-        <pre><code class="language-bash">find . -type f -name "*.php" | xargs grep -l "eval(base64_decode"</code></pre>
+        
+```bash
+find . -type f -name "*.php" | xargs grep -l "eval(base64_decode"
+```
+
         <p>Эта команда выведет список всех PHP-файлов, в которых содержится подозрительный зашифрованный код, часто используемый для бэкдоров (backdoors).</p>
 
         <h2>Шаг 2: Полная очистка ядра WordPress</h2>
@@ -39,7 +43,11 @@ relatedPosts: [1,4,7]
           <li><strong>Плагины (Plugins):</strong> Полностью удалите папку <code>wp-content/plugins</code>. Запишите список установленных ранее плагинов и загрузите их заново из официального репозитория WordPress.</li>
           <li><strong>Темы (Themes):</strong> Если вы использовали стандартную или покупную тему, полностью удалите её и загрузите чистую версию от разработчика.</li>
           <li><strong>Загрузки (Uploads):</strong> Проверьте папку <code>wp-content/uploads</code>. В ней должны содержаться ТОЛЬКО изображения, документы и медиа-файлы. Удалите любые файлы с расширением <code>.php</code>, <code>.js</code> или <code>.htaccess</code> в этом каталоге! Для безопасности вы можете запустить терминальную команду для поиска PHP файлов в uploads:
-            <pre><code class="language-bash">find wp-content/uploads/ -type f -name "*.php" -delete</code></pre>
+            
+```bash
+find wp-content/uploads/ -type f -name "*.php" -delete
+```
+
           </li>
         </ul>
 

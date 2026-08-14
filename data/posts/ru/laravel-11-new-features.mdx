@@ -23,17 +23,27 @@ relatedPosts: [1,4,6]
         <ul>
           <li><strong>Один провайдер вместо многих:</strong> Вместо нескольких сервис-провайдеров в папке <code>app/Providers</code> теперь по умолчанию остается только один — <code>AppServiceProvider</code>. Настройки маршрутизации и обработки событий теперь происходят в центральном файле конфигурации приложения.</li>
           <li><strong>Нет папки <code>config</code> по умолчанию:</strong> Да, вы все правильно поняли! В новом проекте папка конфигураций пуста. Все опции настраиваются через файл <code>.env</code>. Если вам все же нужно изменить дефолтные параметры, вы можете опубликовать нужный конфиг с помощью команды:
-            <pre><code class="language-bash">php artisan config:publish --all</code></pre>
+            
+```bash
+php artisan config:publish --all
+```
+
           </li>
           <li><strong>Упрощенный файл маршрутов:</strong> API и WebSockets маршруты теперь не создаются по умолчанию. Для их добавления используются новые лаконичные команды:
-            <pre><code class="language-bash">php artisan install:api
-php artisan install:broadcasting</code></pre>
+            
+```bash
+php artisan install:api
+php artisan install:broadcasting
+```
+
           </li>
         </ul>
 
         <h2>2. Новая точка входа в файле <code>bootstrap/app.php</code></h2>
         <p>Все настройки поведения приложения, посредников (middleware) и исключений (exceptions) теперь сконцентрированы в одном файле <code>bootstrap/app.php</code>. Это значительно упрощает глобальную конфигурацию:</p>
-        <pre><code class="language-php">&lt;?php
+        
+```php
+&lt;?php
 
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -53,7 +63,9 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     -&gt;withExceptions(function (Exceptions $exceptions) {
         // Кастомный рендеринг исключений
-    })-&gt;create();</code></pre>
+    })-&gt;create();
+```
+
 
         <h2>3. SQLite по умолчанию</h2>
         <p>Для новых приложений Laravel 11 теперь использует SQLite в качестве базы данных по умолчанию. Это позволяет разработчикам начать работу над проектом мгновенно после запуска <code>laravel new</code>, без необходимости устанавливать локальные серверы MySQL или PostgreSQL или настраивать Docker-контейнеры на начальных этапах. База данных создается автоматически в виде обычного файла внутри проекта.</p>

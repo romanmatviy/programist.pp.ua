@@ -21,7 +21,11 @@ relatedPosts: [1,4,7]
         <h2>Крок 1: Діагностика та вхід у безпечний режим</h2>
         <p>Перш за все, обмежте доступ сторонніх осіб до сайту на час проведення технічних робіт. Активуйте режим обслуговування або повністю заблокуйте доступ за допомогою конфігурації у файлі <code>.htaccess</code>, дозволивши вхід тільки для вашої IP-адреси.</p>
         <p>Знайдіть шкідливий код за допомогою термінальної команди <code>grep</code> в каталозі вашого проекту через SSH. Найпопулярніші місця розміщення вірусів містять функції <code>eval</code>, <code>base64_decode</code> або <code>gzinflate</code>:</p>
-        <pre><code class="language-bash">find . -type f -name "*.php" | xargs grep -l "eval(base64_decode"</code></pre>
+        
+```bash
+find . -type f -name "*.php" | xargs grep -l "eval(base64_decode"
+```
+
         <p>Ця команда виведе список усіх PHP-файлів, у яких міститься підозрілий зашифрований код, що часто використовується для бекдорів (backdoors).</p>
 
         <h2>Крок 2: Повне очищення ядра WordPress</h2>
@@ -39,7 +43,11 @@ relatedPosts: [1,4,7]
           <li><strong>Плагіни (Plugins):</strong> Повністю видаліть папку <code>wp-content/plugins</code>. Запишіть список встановлених раніше плагінів та завантажте їх заново з офіційного репозиторію WordPress.</li>
           <li><strong>Теми (Themes):</strong> Якщо ви використовували стандартну чи покупну тему, повністю видаліть її та завантажте чисту версію від розробника.</li>
           <li><strong>Завантаження (Uploads):</strong> Перевірте папку <code>wp-content/uploads</code>. У ній повинні міститися ТІЛЬКИ зображення, документи та медіа-файли. Видаліть будь-які файли з розширенням <code>.php</code>, <code>.js</code> чи <code>.htaccess</code> у цьому каталозі! Для безпеки ви можете запустити термінальну команду для пошуку PHP файлів в uploads:
-            <pre><code class="language-bash">find wp-content/uploads/ -type f -name "*.php" -delete</code></pre>
+            
+```bash
+find wp-content/uploads/ -type f -name "*.php" -delete
+```
+
           </li>
         </ul>
 

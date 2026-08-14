@@ -20,7 +20,9 @@ relatedPosts: [2,5,7]
         
         <h2>1. Створення першого Dockerfile для Node.js додатку</h2>
         <p>Файл <code>Dockerfile</code> є текстовою інструкцією, яка описує кроки, необхідні для створення Docker-образу (Docker Image). Давайте напишемо професійний, багатоетапний (multi-stage) Dockerfile для Node.js додатку, який мінімізує вагу фінального образу.</p>
-        <pre><code class="language-dockerfile"># Етап 1: Збірка проекту
+        
+```dockerfile
+# Етап 1: Збірка проекту
 FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
@@ -37,13 +39,17 @@ RUN npm install --only=production
 COPY --from=builder /app/dist ./dist
 
 EXPOSE 3000
-CMD ["node", "dist/index.js"]</code></pre>
+CMD ["node", "dist/index.js"]
+```
+
         <p>Використання базового образу <code>alpine</code> та розподіл на етапи (multi-stage build) дозволяє скоротити розмір образу з 900МБ до всього 120МБ, що значно прискорить розгортання проекту.</p>
 
         <h2>2. Локальна оркестрація з Docker Compose</h2>
         <p>Будь-який сучасний сайт складається з кількох взаємопов'язаних сервісів: безпосередньо веб-додатку, бази даних та, наприклад, кеш-серверу Redis. Замість того, щоб запускати кожен контейнер окремо за допомогою довгих термінальних команд, використовують <strong>Docker Compose</strong>.</p>
         <p>Створіть файл <code>docker-compose.yml</code> у кореневому каталозі проекту для швидкого локального запуску всього стеку однією командою:</p>
-        <pre><code class="language-yaml">version: '3.8'
+        
+```yaml
+version: '3.8'
 
 services:
   web:
@@ -74,7 +80,9 @@ services:
       - "6379:6379"
 
 volumes:
-  pgdata:</code></pre>
+  pgdata:
+```
+
 
         <h2>3. Корисний шпаргалка команд Docker для розробника</h2>
         <p>Ось список основних команд, які ви використовуватимете щодня під час роботи з контейнерами:</p>

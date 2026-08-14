@@ -29,7 +29,9 @@ relatedPosts: [1,2,5]
         <h2>2. Стабильные Server Actions: Мутация данных без лишних API</h2>
         <p>Наиболее революционной функцией Next.js 14 является полная стабилизация **Server Actions** (Серверных действий). Раньше для отправки формы или сохранения комментария разработчику приходилось создавать отдельный маршрут API (API Route), писать обработчик запросов и вызывать его через <code>fetch</code> на клиенте.</p>
         <p>Теперь вы можете определить асинхронную функцию непосредственно во вашем компоненте и добавить директиву <code>"use server"</code>. Браузер автоматически сгенерирует необходимые сетевые запросы под капотом.</p>
-        <pre><code class="language-tsx">// app/components/FeedbackForm.tsx
+        
+```tsx
+// app/components/FeedbackForm.tsx
 export default function FeedbackForm() {
   async function createFeedback(formData: FormData) {
     'use server';
@@ -45,7 +47,9 @@ export default function FeedbackForm() {
       &lt;button type="submit" className="bg-blue-600 text-white p-2 rounded"&gt;Отправить&lt;/button&gt;
     &lt;/form&gt;
   );
-}</code></pre>
+}
+```
+
 
         <h2>3. Частичный рендеринг (Partial Prerendering - PPR)</h2>
         <p>Эта экспериментальная технология решает давнюю дилемму между статическими и динамическими страницами. Раньше страница была либо полностью статической (быстрой, но одинаковой для всех), либо полностью динамической (более медленной, так как генерировалась при каждом запросе).</p>

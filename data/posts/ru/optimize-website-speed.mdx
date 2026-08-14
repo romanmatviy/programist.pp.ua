@@ -25,19 +25,27 @@ relatedPosts: [2,3,5]
           <li><strong>Реализуйте адаптивные изображения (Responsive Images):</strong> Всегда используйте атрибуты <code>srcset</code> и <code>sizes</code> в тегах <code>&lt;img&gt;</code> или современный тег <code>&lt;picture&gt;</code>, чтобы отдавать пользователю изображение соответствующего размера в зависимости от разрешения его экрана.</li>
           <li><strong>Ленивая загрузка (Lazy Loading):</strong> Добавляйте атрибут <code>loading="lazy"</code> ко всем изображениям, которые находятся вне зоны первого экрана (below the fold). Это позволит браузеру не загружать медиа-файлы до того момента, пока пользователь не проскроллит к ним.</li>
         </ul>
-        <pre><code class="language-html">&lt;picture&gt;
+        
+```html
+&lt;picture&gt;
   &lt;source srcset="/images/hero-large.avif 1200w, /images/hero-medium.avif 800w" type="image/avif"&gt;
   &lt;source srcset="/images/hero-large.webp 1200w, /images/hero-medium.webp 800w" type="image/webp"&gt;
   &lt;img src="/images/hero-fallback.jpg" alt="Оптимизированное изображение" width="1200" height="630" loading="lazy"&gt;
-&lt;/picture&gt;</code></pre>
+&lt;/picture&gt;
+```
+
 
         <h2>2. Настройка эффективного кэширования на уровне сервера</h2>
         <p>Кэширование позволяет хранить статические ресурсы сайта (CSS, JS, изображения, шрифты) непосредственно в браузере пользователя. При повторном визите страница загрузится мгновенно, так как браузеру не придется снова делать запросы к серверу.</p>
         <p>Добавьте следующие директивы конфигурации в ваш файл настроек Nginx для установки заголовка <code>Cache-Control</code> сроком на 1 год для статических файлов:</p>
-        <pre><code class="language-nginx">location ~* \.(jpg|jpeg|png|gif|webp|avif|ico|css|js|woff|woff2|ttf|svg)$ {
+        
+```nginx
+location ~* \.(jpg|jpeg|png|gif|webp|avif|ico|css|js|woff|woff2|ttf|svg)$ {
     expires 365d;
     add_header Cache-Control "public, no-transform, immutable";
-}</code></pre>
+}
+```
+
 
         <h2>3. Минимизация и сжатие кода (Gzip и Brotli)</h2>
         <p>Каждый лишний килобайт кода замедляет рендеринг страницы, так как браузер должен загрузить и распарсить все CSS и JS файлы (которые являются ресурсами, блокирующими рендеринг — render-blocking resources).</p>
@@ -48,7 +56,11 @@ relatedPosts: [2,3,5]
         
         <h2>4. Оптимизация шрифтов и критического CSS</h2>
         <p>Для предотвращения эффекта FOIT (Flash of Invisible Text) или FOUT (Flash of Unstyled Text) во время загрузки кастомных веб-шрифтов, всегда используйте директиву <code>font-display: swap;</code> в правиле <code>@font-face</code>. Также используйте предзагрузку (preload) для критических шрифтов:</p>
-        <pre><code class="language-html">&lt;link rel="preload" href="/fonts/inter-bold.woff2" as="font" type="font/woff2" crossorigin&gt;</code></pre>
+        
+```html
+&lt;link rel="preload" href="/fonts/inter-bold.woff2" as="font" type="font/woff2" crossorigin&gt;
+```
+
 
         <h2>Заключение</h2>
         <p>Оптимизация скорости сайта — это непрерывный процесс анализа и улучшения. Используйте бесплатные инструменты вроде Google PageSpeed Insights и Lighthouse для регулярного аудита показателей LCP (Largest Contentful Paint), FID (First Input Delay) и CLS (Cumulative Layout Shift). Начните с оптимизации изображений и настройки кэширования, и ваш сайт станет значительно быстрее, что несомненно оценят как пользователи, так и поисковые системы.</p>
