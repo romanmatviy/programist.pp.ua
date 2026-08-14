@@ -1,0 +1,4 @@
+Contact: mailto:info@programist.pp.ua
+Preferred-Languages: uk, ru, en
+Canonical: https://programist.pp.ua/.well-known/security.txt
+Expires: 2027-12-31T23:59:59.000Z

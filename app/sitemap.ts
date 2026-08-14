@@ -5,6 +5,7 @@ import { technologies } from '@/data/technologies';
 import { ukrainianRegions } from '@/data/regions';
 import { getCitySlug, getRegionSlug } from '@/data/slug';
 import { hireIntents } from '@/data/hireIntents';
+import { getAllPosts } from '@/lib/mdx';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://programist.pp.ua';
@@ -71,6 +72,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: `${baseUrl}/${lang}/${page}`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
+        priority: 0.8,
+      });
+    });
+  });
+
+  // Blog pages
+  languages.forEach(lang => {
+    const posts = getAllPosts(lang);
+    posts.forEach(post => {
+      routes.push({
+        url: `${baseUrl}/${lang}/blog/${post.slug}`,
+        lastModified: post.updatedAt ? new Date(post.updatedAt) : new Date(post.date),
+        changeFrequency: 'monthly',
         priority: 0.8,
       });
     });

@@ -1,0 +1,14 @@
+/* TEAM */
+  Developer: Roman Matviy
+  Role: Senior Web Developer, Software Engineer
+  Location: Ukraine
+  Email: info@programist.pp.ua
+  Site: https://programist.pp.ua
+  GitHub: https://github.com/MatviyRoman
+  Telegram: https://t.me/RomanMatviy
+
+/* SITE */
+  Last update: 2026/08/14
+  Standards: HTML5, CSS3, JavaScript
+  Components: Next.js, React, Tailwind CSS, TypeScript
+  Software: VS Code
