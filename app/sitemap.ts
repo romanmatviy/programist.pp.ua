@@ -162,5 +162,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  return routes;
+  return routes.map(route => ({
+    ...route,
+    url: route.url.endsWith('/') ? route.url : `${route.url}/`
+  }));
 }
