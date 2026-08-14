@@ -1,0 +1,73 @@
+---
+id: 5
+title: "Оптимізація продуктивності React додатків: Практичні техніки розробки"
+excerpt: "Практичні техніки оптимізації продуктивності React додатків. Дізнайтеся, як працювати з useMemo, useCallback, React.memo та розділенням бандлів через динамічні імпорти."
+date: "2025-03-01"
+updatedAt: "2025-03-05"
+author: "Роман Матвій"
+authorRole: "Senior Frontend Developer"
+authorBio: "Фронтенд разработчица с 5-летним опытом работы с React. Специализируется на оптимизации производительности сложных интерфейсов."
+image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&h=630&fit=crop"
+tags: ["React","Performance","Frontend","JavaScript"]
+readTime: "9"
+relatedPosts: [1,3,6]
+---
+
+
+        <h2>Вступ: Проблема зайвих рендерів у React</h2>
+        <p>React — неймовірно потужна бібліотека для створення динамічних інтерфейсів, але за замовчуванням її поведінка може призводити до зайвого навантаження на процесор клієнта. При зміні стану (state) будь-якого компонента, React автоматично запускає процес ререндерингу для всієї гілки дочірніх елементів.</p>
+        <p>У невеликих додатках це не створює жодних проблем. Проте, коли ваш веб-сайт зростає, містить сотні інтерактивних елементів, великі списки чи динамічні форми, користувач починає помічати мікро-затримки (lagging). У цій статті ми розберемо практичні методи оптимізації продуктивності, які дозволять зберегти високу швидкість відгуку інтерфейсу.</p>
+        
+        <h2>1. Мемоізація обчислень за допомогою <code>useMemo</code></h2>
+        <p>Хук <code>useMemo</code> дозволяє закешувати складні математичні обчислення або операції фільтрації масивів, щоб не виконувати їх при кожному рендері компонента.</p>
+        <p><strong>Поганий приклад (виконується при будь-якому ререндері батька):</strong></p>
+        <pre><code class="language-typescript">const sortedProducts = products.filter(p =&gt; p.price &gt; minPrice).sort((a, b) =&gt; a.name.localeCompare(b.name));</code></pre>
+        <p><strong>Оптимізований приклад (обчислюється лише при зміні <code>products</code> або <code>minPrice</code>):</strong></p>
+        <pre><code class="language-typescript">const sortedProducts = useMemo(() =&gt; {
+  return products.filter(p =&gt; p.price &gt; minPrice).sort((a, b) =&gt; a.name.localeCompare(b.name));
+}, [products, minPrice]);</code></pre>
+
+        <h2>2. Запобігання перестворенню функцій з <code>useCallback</code></h2>
+        <p>Кожного разу, коли компонент рендериться, всі оголошені в ньому функції створюються заново з новою адресою в пам'яті. Якщо ви передаєте ці функції як props у дочірні оптимізовані компоненти, це змусить їх оновлюватися.</p>
+        <p>Використовуйте <code>useCallback</code> для збереження посилання на функцію:</p>
+        <pre><code class="language-tsx">const handleItemSelect = useCallback((id: string) =&gt; {
+  setSelectedId(id);
+}, []); // Функція створиться лише 1 раз при ініціалізації компонента</code></pre>
+
+        <h2>3. Оптимізація рендерингу компонентів через <code>React.memo</code></h2>
+        <p>Загорніть ваші дочірні компоненти в <code>React.memo</code>, щоб вони рендерилися знову тільки в тому випадку, якщо їх власні пропси (props) дійсно змінилися.</p>
+        <pre><code class="language-tsx">import React from 'react';
+
+const ProductRow = React.memo(({ title, price }: { title: string; price: number }) =&gt; {
+  console.log('Компонент ProductRow відрендерився!');
+  return (
+    &lt;div className="flex justify-between border-b py-2"&gt;
+      &lt;span&gt;{title}&lt;/span&gt;
+      &lt;strong&gt;{price} грн&lt;/strong&gt;
+    &lt;/div&gt;
+  );
+});
+
+ProductRow.displayName = 'ProductRow';
+export default ProductRow;</code></pre>
+
+        <h2>4. Ліниве завантаження компонентів (React.lazy + Suspense)</h2>
+        <p>Якщо ваш сайт містить «важкі» модальні вікна, графіки чи адмін-панелі, немає потреби завантажувати їх код у браузер користувача відразу під час першого запиту. Розділіть бандл за допомогою динамічного імпорту:</p>
+        <pre><code class="language-tsx">import React, { Suspense, lazy } from 'react';
+
+const HeavyDashboard = lazy(() =&gt; import('./HeavyDashboard'));
+
+export default function App() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Мій сайт&lt;/h1&gt;
+      &lt;Suspense fallback={&lt;p&gt;Завантаження графіків...&lt;/p&gt;}&gt;
+        &lt;HeavyDashboard /&gt;
+      &lt;/Suspense&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+        <h2>Висновок</h2>
+        <p>Оптимізація React додатків не повинна бути передчасною. Не загортайте кожну функцію в <code>useCallback</code>, оскільки це також несе невеликі накладні витрати на порівняння залежностей. Використовуйте React Developer Tools (профайлер) для пошуку дійсно «вузьких» місць вашого додатку та усувайте їх точково за допомогою описаних вище технік.</p>
+      

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Language, translations } from '@/data/translations';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { generateSEO } from '@/lib/seo';
-import { blogPosts } from '@/data/blogPosts';
+import { getAllPosts } from '@/lib/mdx';
 
 export async function generateMetadata({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
@@ -29,6 +29,8 @@ export default function BlogPage({ params }: { params: { lang: Language } }) {
     { name: t.nav.blog, url: `/${lang}/blog` },
   ];
 
+  const posts = getAllPosts(lang);
+
   return (
     <div className="section-padding bg-gray-50">
       <div className="container-custom">
@@ -39,7 +41,7 @@ export default function BlogPage({ params }: { params: { lang: Language } }) {
           <p className="text-xl text-gray-600 mb-12">{t.blog.subtitle}</p>
           
           <div className="space-y-8">
-            {blogPosts.map((post) => (
+            {posts.map((post) => (
               <Link 
                 key={post.id} 
                 href={`/${lang}/blog/${post.slug}`}
@@ -51,7 +53,7 @@ export default function BlogPage({ params }: { params: { lang: Language } }) {
                       <img 
                         className="h-48 w-full object-cover md:w-48" 
                         src={post.image} 
-                        alt={post.title[lang]}
+                        alt={post.title}
                       />
                     </div>
                     <div className="p-8">
@@ -66,10 +68,10 @@ export default function BlogPage({ params }: { params: { lang: Language } }) {
                         ))}
                       </div>
                       <h2 className="mt-2 text-2xl font-semibold text-gray-900 hover:text-blue-600 transition-colors">
-                        {post.title[lang]}
+                        {post.title}
                       </h2>
                       <p className="mt-3 text-gray-600">
-                        {post.excerpt[lang]}
+                        {post.excerpt}
                       </p>
                       <div className="mt-4">
                         <div className="flex items-center">
@@ -84,7 +86,7 @@ export default function BlogPage({ params }: { params: { lang: Language } }) {
                                 })}
                               </time>
                               <span>•</span>
-                              <span>{Math.floor(Math.random() * 10) + 5} {lang === 'ua' ? 'хв' : 'мин'}</span>
+                              <span>{post.readTime} {lang === 'ua' ? 'хв' : 'мин'}</span>
                             </div>
                           </div>
                         </div>
