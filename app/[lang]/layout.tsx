@@ -1,6 +1,7 @@
 import { Language, translations } from '@/data/translations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import CookieBanner from '@/components/CookieBanner';
 
 export async function generateStaticParams() {
   return [
@@ -26,6 +27,7 @@ export default function LangLayout({
         {children}
       </main>
       <Footer lang={lang} translations={t} />
+      <CookieBanner lang={lang} />
     </>
   );
 }
