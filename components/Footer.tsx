@@ -147,6 +147,11 @@ export default function Footer({ lang, translations }: FooterProps) {
                   IndexFast.pro
                 </a>
               </li>
+              <li>
+                <a href="https://hire-web-developer.com" target="_blank" rel="noopener" className="text-gray-400 hover:text-white transition-colors">
+                  Hire Web Developer
+                </a>
+              </li>
             </ul>
           </div>
         </div>
