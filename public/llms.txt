@@ -1,0 +1,34 @@
+# Roman Matviy - Senior Web Developer Portfolio & Blog
+
+> Professional web development services, technical blog, and portfolio of Roman Matviy. Specializing in PHP, Laravel, Next.js, React, WordPress, and E-commerce solutions.
+
+This website serves as the central hub for my professional services, technical articles, and portfolio. It is available in both Ukrainian and Russian languages.
+
+## About the Author
+Roman Matviy is a Senior Web Developer with over 7 years of experience in building robust backend systems, high-converting e-commerce platforms, and modern frontend applications.
+
+## Services Offered
+- Custom Web Development (Laravel, Next.js)
+- E-Commerce Development (PrestaShop, WooCommerce, Custom)
+- PHP & Backend Development
+- WordPress Development & Optimization
+- SEO Optimization Services
+
+## Key Links & Resources
+- [Home Page UA](https://programist.pp.ua/ua): Ukrainian Home
+- [Home Page RU](https://programist.pp.ua/ru): Russian Home
+- [Blog UA](https://programist.pp.ua/ua/blog): Technical articles, tutorials, and guides (Ukrainian)
+- [Blog RU](https://programist.pp.ua/ru/blog): Technical articles, tutorials, and guides (Russian)
+- [Contact UA](https://programist.pp.ua/ua/contact): Contact information
+- [Contact RU](https://programist.pp.ua/ru/contact): Contact information
+
+## Partner Projects
+- [Studio Apartner](https://studio.apartner.pro): Full-cycle web development studio
+- [Apartner](https://apartner.pro): Web studio
+- [DevRoman](https://devroman.dev): Developer portfolio and blog
+- [IndexFast](https://indexfast.pro): Fast Google indexing service
+
+## Contact Information
+- Email: info@programist.pp.ua
+- Telegram: https://t.me/RomanMatviy
+- GitHub: https://github.com/MatviyRoman
