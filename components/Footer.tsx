@@ -106,8 +106,23 @@ export default function Footer({ lang, translations }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link href={`/${lang}/tech/php`} className="text-gray-400 hover:text-white transition-colors">
-                  PHP
+                <Link href={`/${lang}/service/hire-prestashop-developer`} className="text-gray-400 hover:text-white transition-colors">
+                  {lang === 'ua' ? 'Найняти програміста PrestaShop' : 'Нанять программиста PrestaShop'}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${lang}/service/hire-opencart-developer`} className="text-gray-400 hover:text-white transition-colors">
+                  {lang === 'ua' ? 'Найняти програміста OpenCart' : 'Нанять программиста OpenCart'}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${lang}/service/hire-wordpress-developer`} className="text-gray-400 hover:text-white transition-colors">
+                  {lang === 'ua' ? 'Найняти програміста WordPress' : 'Нанять программиста WordPress'}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${lang}/service/hire-laravel-developer`} className="text-gray-400 hover:text-white transition-colors">
+                  {lang === 'ua' ? 'Найняти програміста Laravel' : 'Нанять программиста Laravel'}
                 </Link>
               </li>
               <li>
