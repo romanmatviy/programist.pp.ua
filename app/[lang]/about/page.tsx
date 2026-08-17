@@ -159,29 +159,131 @@ export default function AboutPage({ params }: { params: { lang: Language } }) {
               ? 'Ми співпрацюємо з провідними експертами у суміжних сферах, щоб забезпечити нашим клієнтам комплексний результат.'
               : 'Мы сотрудничаем с ведущими экспертами в смежных сферах, чтобы обеспечить нашим клиентам комплексный результат.'}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <a
               href="https://seo.pp.ua"
               target="_blank"
               rel="noopener"
-              className="group flex items-center gap-6 bg-gray-50 hover:bg-primary-50 rounded-xl p-6 border border-gray-100 hover:border-primary-200 transition-all duration-300"
+              className="group flex items-center gap-5 bg-gray-50 hover:bg-primary-50 rounded-xl p-5 border border-gray-100 hover:border-primary-200 transition-all duration-300"
             >
-              <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-600 rounded-xl flex items-center justify-center text-white text-2xl font-bold flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
+              <div className="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-600 rounded-xl flex items-center justify-center text-white text-lg font-bold flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
                 SEO
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors mb-1">
+              <div className="min-w-0">
+                <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary-600 transition-colors mb-1">
                   seo.pp.ua
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   {lang === 'ua'
-                    ? 'Професійне SEO-просування та аудит сайтів. Наш партнер забезпечує технічну оптимізацію, аналіз конкурентів та стратегію органічного зростання для проектів, які ми розробляємо.'
-                    : 'Профессиональное SEO-продвижение и аудит сайтов. Наш партнер обеспечивает техническую оптимизацию, анализ конкурентов и стратегию органического роста для проектов, которые мы разрабатываем.'}
+                    ? 'SEO-просування, аудит сайтів та стратегія органічного зростання.'
+                    : 'SEO-продвижение, аудит сайтов и стратегия органического роста.'}
                 </p>
               </div>
-              <svg className="w-5 h-5 text-gray-400 group-hover:text-primary-600 flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
+            </a>
+
+            <a
+              href="https://apartner.pro"
+              target="_blank"
+              rel="noopener"
+              className="group flex items-center gap-5 bg-gray-50 hover:bg-primary-50 rounded-xl p-5 border border-gray-100 hover:border-primary-200 transition-all duration-300"
+            >
+              <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center text-white text-lg font-bold flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
+                AP
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary-600 transition-colors mb-1">
+                  Apartner.pro
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {lang === 'ua'
+                    ? 'Комплексні digital-рішення для бізнесу: маркетинг, автоматизація та консалтинг.'
+                    : 'Комплексные digital-решения для бизнеса: маркетинг, автоматизация и консалтинг.'}
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="https://studio.apartner.pro"
+              target="_blank"
+              rel="noopener"
+              className="group flex items-center gap-5 bg-gray-50 hover:bg-primary-50 rounded-xl p-5 border border-gray-100 hover:border-primary-200 transition-all duration-300"
+            >
+              <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white text-lg font-bold flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
+                SA
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary-600 transition-colors mb-1">
+                  Studio Apartner
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {lang === 'ua'
+                    ? 'Креативна студія дизайну: UI/UX, брендинг та створення візуальної ідентичності.'
+                    : 'Креативная студия дизайна: UI/UX, брендинг и создание визуальной идентичности.'}
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="https://devroman.dev"
+              target="_blank"
+              rel="noopener"
+              className="group flex items-center gap-5 bg-gray-50 hover:bg-primary-50 rounded-xl p-5 border border-gray-100 hover:border-primary-200 transition-all duration-300"
+            >
+              <div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center text-white text-lg font-bold flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
+                DR
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary-600 transition-colors mb-1">
+                  DevRoman.dev
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {lang === 'ua'
+                    ? 'Персональний портал розробника: open-source проекти, технічний блог та експертиза.'
+                    : 'Персональный портал разработчика: open-source проекты, технический блог и экспертиза.'}
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="https://indexfast.pro"
+              target="_blank"
+              rel="noopener"
+              className="group flex items-center gap-5 bg-gray-50 hover:bg-primary-50 rounded-xl p-5 border border-gray-100 hover:border-primary-200 transition-all duration-300"
+            >
+              <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl flex items-center justify-center text-white text-lg font-bold flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
+                IF
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary-600 transition-colors mb-1">
+                  IndexFast.pro
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {lang === 'ua'
+                    ? 'Швидка індексація сайтів у Google. Інструмент для миттєвого потрапляння сторінок у пошукову видачу.'
+                    : 'Быстрая индексация сайтов в Google. Инструмент для мгновенного попадания страниц в поисковую выдачу.'}
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="https://hire-web-developer.com"
+              target="_blank"
+              rel="noopener"
+              className="group flex items-center gap-5 bg-gray-50 hover:bg-primary-50 rounded-xl p-5 border border-gray-100 hover:border-primary-200 transition-all duration-300"
+            >
+              <div className="w-14 h-14 bg-gradient-to-br from-teal-400 to-emerald-500 rounded-xl flex items-center justify-center text-white text-lg font-bold flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
+                HW
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary-600 transition-colors mb-1">
+                  Hire Web Developer
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {lang === 'ua'
+                    ? 'Платформа для пошуку та найму кваліфікованих веб-розробників для проектів будь-якої складності.'
+                    : 'Платформа для поиска и найма квалифицированных веб-разработчиков для проектов любой сложности.'}
+                </p>
+              </div>
             </a>
           </div>
         </div>
