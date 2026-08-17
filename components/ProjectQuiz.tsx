@@ -26,6 +26,10 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
   // Branch B & C: Maintenance / SEO / Audit / PageSpeed
   const [websiteUrl, setWebsiteUrl] = useState('');
 
+  // Branch D: Hire Developer
+  const [hours, setHours] = useState('');
+  const [projectDesc, setProjectDesc] = useState('');
+
   // Universal ending
   const [budget, setBudget] = useState('');
   const [name, setName] = useState('');
@@ -44,19 +48,23 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
       qFeatures: 'Який додатковий функціонал потрібен?',
       qCms: 'На якій системі (CMS) працює ваш сайт?',
       qUrl: 'Вкажіть посилання на ваш сайт',
+      qHours: 'Скільки приблизно годин вам потрібно?',
+      qProject: 'Коротко опишіть ваш проєкт/завдання',
       qBudget: 'Який орієнтовний бюджет ви розглядаєте?',
       qContact: 'Куди надіслати розрахунок?',
 
       // Options
-      categories: ['Розробка сайту', 'Підтримка сайту', 'SEO оптимізація', 'PageSpeed оптимізація', 'Аудит сайту', 'Інше'],
+      categories: ['Розробка сайту', 'Підтримка сайту', 'Найняти програміста', 'SEO оптимізація', 'PageSpeed оптимізація', 'Аудит сайту', 'Інше'],
       types: ['Landing Page', 'Корпоративний сайт', 'Інтернет-магазин', 'Кастомний веб-додаток', 'Ще не знаю'],
       designs: ['Так, є макети', 'Є логотип/фірмовий стиль', 'Ні, потрібен дизайн з нуля', 'Потрібен редизайн існуючого'],
       featureOptions: ['Багатомовність', 'Інтеграція з CRM', 'Оплата онлайн', 'Складна фільтрація', 'Особистий кабінет', 'Адмін-панель'],
       cmsOptions: ['WordPress', 'OpenCart', 'PrestaShop', 'Laravel', 'Кастомна / Інше', 'Не знаю'],
       budgets: ['до $500', '$500 - $1000', '$1000 - $3000', '$3000+', 'Не визначився (потрібна оцінка)'],
+      hoursOptions: ['до 10 годин', '10 - 40 годин (тиждень)', '40 - 80 годин (2 тижні)', '80+ годин (місяць і більше)', 'Не знаю, потрібна оцінка'],
       
       // Placeholders
       urlPlaceholder: 'https://example.com',
+      projectPlaceholder: 'Наприклад: Потрібно доробити функціонал кошика на Laravel...',
       namePlaceholder: "Ваше ім'я",
       contactPlaceholder: 'Телефон або Telegram (@username)',
       emailPlaceholder: 'Ваш Email',
@@ -81,19 +89,23 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
       qFeatures: 'Какой дополнительный функционал нужен?',
       qCms: 'На какой системе (CMS) работает ваш сайт?',
       qUrl: 'Укажите ссылку на ваш сайт',
+      qHours: 'Сколько примерно часов вам нужно?',
+      qProject: 'Кратко опишите ваш проект/задачу',
       qBudget: 'Какой ориентировочный бюджет вы рассматриваете?',
       qContact: 'Куда отправить расчет?',
 
       // Options
-      categories: ['Разработка сайта', 'Поддержка сайта', 'SEO оптимизация', 'PageSpeed оптимизация', 'Аудит сайта', 'Другое'],
+      categories: ['Разработка сайта', 'Поддержка сайта', 'Нанять программиста', 'SEO оптимизация', 'PageSpeed оптимизация', 'Аудит сайта', 'Другое'],
       types: ['Landing Page', 'Корпоративный сайт', 'Интернет-магазин', 'Кастомное веб-приложение', 'Еще не знаю'],
       designs: ['Да, есть макеты', 'Есть логотип/фирменный стиль', 'Нет, нужен дизайн с нуля', 'Нужен редизайн существующего'],
       featureOptions: ['Мультиязычность', 'Интеграция с CRM', 'Оплата онлайн', 'Сложная фильтрация', 'Личный кабинет', 'Админ-панель'],
       cmsOptions: ['WordPress', 'OpenCart', 'PrestaShop', 'Laravel', 'Кастомная / Другое', 'Не знаю'],
       budgets: ['до $500', '$500 - $1000', '$1000 - $3000', '$3000+', 'Не определился (нужна оценка)'],
+      hoursOptions: ['до 10 часов', '10 - 40 часов (неделя)', '40 - 80 часов (2 недели)', '80+ часов (месяц и более)', 'Не знаю, нужна оценка'],
       
       // Placeholders
       urlPlaceholder: 'https://example.com',
+      projectPlaceholder: 'Например: Нужно доработать функционал корзины на Laravel...',
       namePlaceholder: 'Ваше имя',
       contactPlaceholder: 'Телефон или Telegram (@username)',
       emailPlaceholder: 'Ваш Email',
@@ -123,7 +135,8 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
   const getTotalSteps = () => {
     if (serviceCategory === currentT.categories[0]) return 6; // Разработка
     if (serviceCategory === currentT.categories[1]) return 4; // Поддержка
-    if (serviceCategory === currentT.categories[5]) return 3; // Другое
+    if (serviceCategory === currentT.categories[2]) return 4; // Нанять программиста
+    if (serviceCategory === currentT.categories[6]) return 3; // Другое
     return 4; // SEO, PageSpeed, Audit
   };
 
@@ -141,21 +154,30 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
       branchDetails = `
 <b>Тип сайту:</b> ${siteType || 'Не вказано'}
 <b>Дизайн:</b> ${design || 'Не вказано'}
-<b>Функції:</b> ${features.length > 0 ? features.join(', ') : 'Не обрано'}`;
+<b>Функції:</b> ${features.length > 0 ? features.join(', ') : 'Не обрано'}
+<b>Бюджет:</b> ${budget || 'Не вказано'}`;
     } else if (serviceCategory === currentT.categories[1]) {
       branchDetails = `
 <b>CMS:</b> ${cms || 'Не вказано'}
-<b>Сайт:</b> ${websiteUrl || 'Не вказано'}`;
-    } else if (serviceCategory !== currentT.categories[5]) {
+<b>Сайт:</b> ${websiteUrl || 'Не вказано'}
+<b>Бюджет:</b> ${budget || 'Не вказано'}`;
+    } else if (serviceCategory === currentT.categories[2]) {
       branchDetails = `
-<b>Сайт:</b> ${websiteUrl || 'Не вказано'}`;
+<b>Потрібно годин:</b> ${hours || 'Не вказано'}
+<b>Проєкт:</b> ${projectDesc || 'Не вказано'}`;
+    } else if (serviceCategory !== currentT.categories[6]) {
+      branchDetails = `
+<b>Сайт:</b> ${websiteUrl || 'Не вказано'}
+<b>Бюджет:</b> ${budget || 'Не вказано'}`;
+    } else {
+      branchDetails = `
+<b>Бюджет:</b> ${budget || 'Не вказано'}`;
     }
 
     const message = `
 🔔 <b>НОВИЙ ЛІД (Квіз)</b>
 Послуга: <b>${serviceCategory || serviceName}</b>
 ${branchDetails}
-<b>Бюджет:</b> ${budget || 'Не вказано'}
 
 👤 <b>Ім'я:</b> ${name}
 📞 <b>Контакт:</b> ${contact}
@@ -325,8 +347,52 @@ ${branchDetails}
       );
     }
 
-    // Branch C: SEO, PageSpeed, Audit
-    if (currentT.categories.slice(2, 5).includes(serviceCategory)) {
+    // Branch C: Hire Developer
+    if (serviceCategory === currentT.categories[2]) {
+      if (step === 2) return (
+        <div className="animate-fade-in">
+          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qHours}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {currentT.hoursOptions.map(opt => (
+              <button
+                key={opt}
+                onClick={() => { setHours(opt); setStep(3); }}
+                className={`p-6 rounded-xl border-2 text-center transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
+                  hours === opt ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
+                }`}
+              >
+                <span className="font-semibold text-lg text-gray-900">{opt}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      );
+      if (step === 3) return (
+        <div className="animate-fade-in max-w-lg mx-auto">
+          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qProject}</h3>
+          <textarea
+            value={projectDesc}
+            onChange={(e) => setProjectDesc(e.target.value)}
+            className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors mb-8 text-lg min-h-[150px] resize-y"
+            placeholder={currentT.projectPlaceholder}
+          />
+          <div className="flex justify-center">
+            <button 
+              onClick={() => {
+                if(projectDesc.length > 5) setStep(4);
+                else alert(lang === 'ua' ? 'Будь ласка, опишіть ваш проєкт' : 'Пожалуйста, опишите ваш проект');
+              }} 
+              className="btn-primary py-4 px-12 text-lg"
+            >
+              {currentT.next}
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    // Branch D: SEO, PageSpeed, Audit
+    if (currentT.categories.slice(3, 6).includes(serviceCategory)) {
       if (step === 2) return (
         <div className="animate-fade-in max-w-lg mx-auto">
           <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qUrl}</h3>
@@ -352,8 +418,8 @@ ${branchDetails}
       );
     }
 
-    // Universal Penultimate Step: Budget (Step 2 for 'Other', Step 3 for Branch B/C, Step 5 for Branch A)
-    if (step === totalSteps - 1) return (
+    // Universal Penultimate Step: Budget (Step 2 for 'Other', Step 3 for Branch B/D, Step 5 for Branch A)
+    if (step === totalSteps - 1 && serviceCategory !== currentT.categories[2]) return (
       <div className="animate-fade-in">
         <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qBudget}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
