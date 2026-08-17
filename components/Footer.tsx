@@ -157,6 +157,11 @@ export default function Footer({ lang, translations }: FooterProps) {
                   SEO.pp.ua
                 </a>
               </li>
+              <li>
+                <a href="https://hostpro.apartner.pro" target="_blank" rel="noopener" className="text-gray-400 hover:text-white transition-colors">
+                  HostPro Apartner
+                </a>
+              </li>
             </ul>
           </div>
         </div>

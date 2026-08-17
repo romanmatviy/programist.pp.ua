@@ -285,6 +285,27 @@ export default function AboutPage({ params }: { params: { lang: Language } }) {
                 </p>
               </div>
             </a>
+
+            <a
+              href="https://hostpro.apartner.pro"
+              target="_blank"
+              rel="noopener"
+              className="group flex items-center gap-5 bg-gray-50 hover:bg-primary-50 rounded-xl p-5 border border-gray-100 hover:border-primary-200 transition-all duration-300"
+            >
+              <div className="w-14 h-14 bg-gradient-to-br from-sky-400 to-blue-500 rounded-xl flex items-center justify-center text-white text-lg font-bold flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
+                HP
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary-600 transition-colors mb-1">
+                  HostPro Apartner
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {lang === 'ua'
+                    ? 'Надійний хостинг та серверні рішення. Швидкі VPS, SSL-сертифікати та технічна підтримка 24/7.'
+                    : 'Надежный хостинг и серверные решения. Быстрые VPS, SSL-сертификаты и техническая поддержка 24/7.'}
+                </p>
+              </div>
+            </a>
           </div>
         </div>
 
