@@ -116,7 +116,7 @@ export default function SitemapPage({ params }: { params: { lang: Language } }) 
               {hireIntents.map(intent => (
                 <li key={intent.slug[lang]}>
                   <Link href={`/${lang}/hire/${intent.slug[lang]}`} className="text-gray-700 hover:text-primary-600 transition-colors">
-                    {intent.title[lang]}
+                    {intent.label[lang]}
                   </Link>
                 </li>
               ))}
