@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Language, translations } from '@/data/translations';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { generateSEO } from '@/lib/seo';
+import { generateSEO, generateFAQSchema } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
@@ -24,7 +24,28 @@ export default function AboutPage({ params }: { params: { lang: Language } }) {
     { name: t.nav.about, url: `/${lang}/about` },
   ];
 
+  const faqs = lang === 'ua' ? [
+    { question: 'Які технології ви використовуєте?', answer: 'Ми працюємо з Laravel, Next.js, React, Vue.js, WordPress, PrestaShop, OpenCart та іншими сучасними технологіями. Вибір стеку залежить від потреб вашого проекту.' },
+    { question: 'Скільки коштує розробка сайту?', answer: 'Ціна залежить від складності проекту. Прості лендінги — від $300, інтернет-магазини — від $800, кастомні рішення на фреймворках — від $2000. Зверніться до нас для точного розрахунку.' },
+    { question: 'Який термін розробки сайту?', answer: 'Лендінг — 3-7 днів, корпоративний сайт — 2-4 тижні, інтернет-магазин — 3-6 тижнів. Складні кастомні проекти — від 1 місяця.' },
+    { question: 'Чи надаєте ви підтримку після запуску?', answer: 'Так, ми надаємо 1 місяць безкоштовної технічної підтримки після здачі проекту. Далі ви можете обрати тарифний план для постійної підтримки.' },
+    { question: 'Чи підписуєте ви NDA?', answer: 'Так, ми підписуємо договір NDA (Non-Disclosure Agreement) за вашим запитом для повної конфіденційності проекту.' },
+  ] : [
+    { question: 'Какие технологии вы используете?', answer: 'Мы работаем с Laravel, Next.js, React, Vue.js, WordPress, PrestaShop, OpenCart и другими современными технологиями. Выбор стека зависит от потребностей вашего проекта.' },
+    { question: 'Сколько стоит разработка сайта?', answer: 'Цена зависит от сложности проекта. Простые лендинги — от $300, интернет-магазины — от $800, кастомные решения на фреймворках — от $2000. Обратитесь к нам для точного расчета.' },
+    { question: 'Какой срок разработки сайта?', answer: 'Лендинг — 3-7 дней, корпоративный сайт — 2-4 недели, интернет-магазин — 3-6 недель. Сложные кастомные проекты — от 1 месяца.' },
+    { question: 'Предоставляете ли вы поддержку после запуска?', answer: 'Да, мы предоставляем 1 месяц бесплатной технической поддержки после сдачи проекта. Далее вы можете выбрать тарифный план для постоянной поддержки.' },
+    { question: 'Подписываете ли вы NDA?', answer: 'Да, мы подписываем договор NDA (Non-Disclosure Agreement) по вашему запросу для полной конфиденциальности проекта.' },
+  ];
+
+  const faqSchema = generateFAQSchema(faqs);
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
     <div className="section-padding bg-gray-50">
       <div className="container-custom">
         <Breadcrumbs items={breadcrumbs} lang={lang} />
@@ -128,6 +149,21 @@ export default function AboutPage({ params }: { params: { lang: Language } }) {
           </div>
         </div>
 
+        {/* FAQ Section */}
+        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 gradient-text text-center">
+            {lang === 'ua' ? 'Часті питання' : 'Часто задаваемые вопросы'}
+          </h2>
+          <div className="space-y-6 max-w-3xl mx-auto">
+            {faqs.map((faq, index) => (
+              <div key={index} className="border-b border-gray-200 pb-6 last:border-0">
+                <h3 className="text-lg font-bold mb-2 text-gray-900">{faq.question}</h3>
+                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* CTA */}
         <div className="bg-gradient-primary text-white rounded-2xl p-8 md:p-12 text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
@@ -135,7 +171,7 @@ export default function AboutPage({ params }: { params: { lang: Language } }) {
           </h2>
           <p className="text-lg mb-6 opacity-90">
             {lang === 'ua' 
-              ? 'Зв\'яжіться з нами для безкоштовної консультації'
+              ? "Зв'яжіться з нами для безкоштовної консультації"
               : 'Свяжитесь с нами для бесплатной консультации'}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -149,5 +185,6 @@ export default function AboutPage({ params }: { params: { lang: Language } }) {
         </div>
       </div>
     </div>
+    </>
   );
 }
