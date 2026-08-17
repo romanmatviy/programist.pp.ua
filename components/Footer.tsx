@@ -78,6 +78,26 @@ export default function Footer({ lang, translations }: FooterProps) {
                   {lang === 'ua' ? 'Області' : 'Области'}
                 </Link>
               </li>
+              <li>
+                <Link href={`/${lang}/faq`} className="text-gray-400 hover:text-white transition-colors">
+                  {lang === 'ua' ? 'FAQ' : 'FAQ'}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${lang}/cases`} className="text-gray-400 hover:text-white transition-colors">
+                  {lang === 'ua' ? 'Кейси' : 'Кейсы'}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${lang}/reviews`} className="text-gray-400 hover:text-white transition-colors">
+                  {lang === 'ua' ? 'Відгуки' : 'Отзывы'}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${lang}/sitemap`} className="text-gray-400 hover:text-white transition-colors">
+                  {lang === 'ua' ? 'Карта сайту' : 'Карта сайта'}
+                </Link>
+              </li>
             </ul>
           </div>
 

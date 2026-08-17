@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   // Static pages
-  const staticPages = ['about', 'services', 'portfolio', 'blog', 'contact', 'privacy', 'terms'];
+  const staticPages = ['about', 'services', 'portfolio', 'blog', 'contact', 'faq', 'cases', 'reviews', 'sitemap', 'privacy', 'terms'];
   languages.forEach(lang => {
     staticPages.forEach(page => {
       routes.push({ url: u(`${baseUrl}/${lang}/${page}`), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 });
