@@ -3,10 +3,15 @@ import { NextResponse } from 'next/server';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { email, source = 'Exit-Intent Popup' } = body;
+    const { email, source = 'Exit-Intent Popup', message: customMessage } = body;
 
-    if (!email) {
-      return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+    let message = customMessage;
+
+    if (!message) {
+      if (!email) {
+        return NextResponse.json({ error: 'Email or message is required' }, { status: 400 });
+      }
+      message = `🚀 <b>Новий лід з сайту!</b>\n\n📧 <b>Email:</b> ${email}\n📍 <b>Джерело:</b> ${source}`;
     }
 
     const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -16,8 +21,6 @@ export async function POST(req: Request) {
       console.error('Telegram credentials are not configured');
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
     }
-
-    const message = `🚀 <b>Новий лід з сайту!</b>\n\n📧 <b>Email:</b> ${email}\n📍 <b>Джерело:</b> ${source}`;
 
     const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
     

@@ -12,7 +12,7 @@ export default function Footer({ lang, translations }: FooterProps) {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container-custom py-12">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
             <Link href={`/${lang}`} className="flex items-center space-x-2 mb-4">
@@ -106,6 +106,18 @@ export default function Footer({ lang, translations }: FooterProps) {
                 </Link>
               </li>
               <li>
+                <Link href={`/${lang}/service/seo-services`} className="text-gray-400 hover:text-white transition-colors">
+                  SEO Services
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Developers */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">{lang === 'ua' ? 'Розробники' : 'Разработчики'}</h3>
+            <ul className="space-y-2">
+              <li>
                 <Link href={`/${lang}/service/hire-prestashop-developer`} className="text-gray-400 hover:text-white transition-colors">
                   {lang === 'ua' ? 'Найняти програміста PrestaShop' : 'Нанять программиста PrestaShop'}
                 </Link>
@@ -123,11 +135,6 @@ export default function Footer({ lang, translations }: FooterProps) {
               <li>
                 <Link href={`/${lang}/service/hire-laravel-developer`} className="text-gray-400 hover:text-white transition-colors">
                   {lang === 'ua' ? 'Найняти програміста Laravel' : 'Нанять программиста Laravel'}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${lang}/service/seo-services`} className="text-gray-400 hover:text-white transition-colors">
-                  SEO Services
                 </Link>
               </li>
               <li>
