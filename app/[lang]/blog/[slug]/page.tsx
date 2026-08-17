@@ -136,7 +136,7 @@ export default function BlogPostPage({
   ).slice(0, 3);
 
   return (
-    <>
+    <div className="blog-page-wrapper">
       <ReadingProgress />
       <div className="bg-white">
         <script
@@ -330,6 +330,6 @@ export default function BlogPostPage({
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
