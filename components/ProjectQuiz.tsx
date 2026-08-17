@@ -54,7 +54,7 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
       qContact: 'Куди надіслати розрахунок?',
 
       // Options
-      categories: ['Розробка сайту', 'Підтримка сайту', 'Найняти програміста', 'SEO оптимізація', 'PageSpeed оптимізація', 'Аудит сайту', '🦠 Лікування сайту від вірусів', '🛠 Виправлення помилок (Багфікс)', '📦 Перенесення сайту / Хостинг', 'Інше'],
+      categories: ['💻 Розробка сайту', '🔧 Підтримка сайту', '👨‍💻 Найняти програміста', '📈 SEO оптимізація', '⚡ PageSpeed оптимізація', '🔍 Аудит сайту', '🦠 Лікування сайту від вірусів', '🛠 Виправлення помилок (Багфікс)', '📦 Перенесення сайту / Хостинг', '❓ Інше'],
       types: ['Landing Page', 'Корпоративний сайт', 'Інтернет-магазин', 'Кастомний веб-додаток', 'Ще не знаю'],
       designs: ['Так, є макети', 'Є логотип/фірмовий стиль', 'Ні, потрібен дизайн з нуля', 'Потрібен редизайн існуючого'],
       featureOptions: ['Багатомовність', 'Інтеграція з CRM', 'Оплата онлайн', 'Складна фільтрація', 'Особистий кабінет', 'Адмін-панель'],
@@ -95,7 +95,7 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
       qContact: 'Куда отправить расчет?',
 
       // Options
-      categories: ['Разработка сайта', 'Поддержка сайта', 'Нанять программиста', 'SEO оптимизация', 'PageSpeed оптимизация', 'Аудит сайта', '🦠 Лечение сайта от вирусов', '🛠 Исправление ошибок (Багфикс)', '📦 Перенос сайта / Хостинг', 'Другое'],
+      categories: ['💻 Разработка сайта', '🔧 Поддержка сайта', '👨‍💻 Нанять программиста', '📈 SEO оптимизация', '⚡ PageSpeed оптимизация', '🔍 Аудит сайта', '🦠 Лечение сайта от вирусов', '🛠 Исправление ошибок (Багфикс)', '📦 Перенос сайта / Хостинг', '❓ Другое'],
       types: ['Landing Page', 'Корпоративный сайт', 'Интернет-магазин', 'Кастомное веб-приложение', 'Еще не знаю'],
       designs: ['Да, есть макеты', 'Есть логотип/фирменный стиль', 'Нет, нужен дизайн с нуля', 'Нужен редизайн существующего'],
       featureOptions: ['Мультиязычность', 'Интеграция с CRM', 'Оплата онлайн', 'Сложная фильтрация', 'Личный кабинет', 'Админ-панель'],
@@ -166,12 +166,16 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
       branchDetails = `
 <b>Потрібно годин:</b> ${hours || 'Не вказано'}
 <b>Проєкт:</b> ${projectDesc || 'Не вказано'}`;
-    } else if (serviceCategory !== currentT.categories[6]) {
+    } else if (currentT.categories.slice(6, 9).includes(serviceCategory)) {
       branchDetails = `
 <b>Сайт:</b> ${websiteUrl || 'Не вказано'}
+<b>Проблема:</b> ${projectDesc || 'Не вказано'}`;
+    } else if (serviceCategory === currentT.categories[9]) {
+      branchDetails = `
 <b>Бюджет:</b> ${budget || 'Не вказано'}`;
     } else {
       branchDetails = `
+<b>Сайт:</b> ${websiteUrl || 'Не вказано'}
 <b>Бюджет:</b> ${budget || 'Не вказано'}`;
     }
 
@@ -424,6 +428,15 @@ ${branchDetails}
       if (step === 2) return (
         <div className="animate-fade-in max-w-lg mx-auto">
           <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qProject}</h3>
+          
+          <input
+            type="url"
+            value={websiteUrl}
+            onChange={(e) => setWebsiteUrl(e.target.value)}
+            className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors mb-4 text-lg"
+            placeholder={currentT.urlPlaceholder}
+          />
+
           <textarea
             value={projectDesc}
             onChange={(e) => setProjectDesc(e.target.value)}
