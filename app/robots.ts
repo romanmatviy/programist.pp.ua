@@ -6,9 +6,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/_next/'],
+        disallow: ['/api/', '/_next/', '/static/'],
       },
     ],
     sitemap: 'https://programist.pp.ua/sitemap.xml',
+    host: 'https://programist.pp.ua',
   };
 }

@@ -7,82 +7,35 @@ import { getCitySlug, getRegionSlug } from '@/data/slug';
 import { hireIntents } from '@/data/hireIntents';
 import { getAllPosts } from '@/lib/mdx';
 
+const baseUrl = 'https://programist.pp.ua';
+const languages = ['ua', 'ru'] as const;
+
+function u(url: string): string {
+  return url.endsWith('/') ? url : `${url}/`;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://programist.pp.ua';
-  const languages = ['ua', 'ru'];
-  
   const routes: MetadataRoute.Sitemap = [];
 
   // Home pages
   languages.forEach(lang => {
-    routes.push({
-      url: `${baseUrl}/${lang}`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 1,
-    });
-  });
-
-  // Hire pages
-  languages.forEach(lang => {
-    // Hire index
-    routes.push({
-      url: `${baseUrl}/${lang}/hire`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    });
-
-    // Per-intent regions index
-    hireIntents.forEach(intent => {
-      routes.push({
-        url: `${baseUrl}/${lang}/hire/${intent.slug[lang as 'ua' | 'ru']}/regions`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      });
-
-      // Per-intent per-region
-      ukrainianRegions.forEach(region => {
-        routes.push({
-          url: `${baseUrl}/${lang}/hire/${intent.slug[lang as 'ua' | 'ru']}/region/${getRegionSlug(region, lang as 'ua' | 'ru')}`,
-          lastModified: new Date(),
-          changeFrequency: 'monthly',
-          priority: 0.6,
-        });
-      });
-
-      // Per-intent per-city
-      ukrainianCities.forEach(city => {
-        routes.push({
-          url: `${baseUrl}/${lang}/hire/${intent.slug[lang as 'ua' | 'ru']}/city/${getCitySlug(city.name, lang as 'ua' | 'ru')}`,
-          lastModified: new Date(),
-          changeFrequency: 'monthly',
-          priority: 0.6,
-        });
-      });
-    });
+    routes.push({ url: u(`${baseUrl}/${lang}`), lastModified: new Date(), changeFrequency: 'daily', priority: 1 });
   });
 
   // Static pages
   const staticPages = ['about', 'services', 'portfolio', 'blog', 'contact', 'privacy', 'terms'];
   languages.forEach(lang => {
     staticPages.forEach(page => {
-      routes.push({
-        url: `${baseUrl}/${lang}/${page}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.8,
-      });
+      routes.push({ url: u(`${baseUrl}/${lang}/${page}`), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 });
     });
   });
 
   // Blog pages
   languages.forEach(lang => {
-    const posts = getAllPosts(lang as 'ua' | 'ru');
+    const posts = getAllPosts(lang);
     posts.forEach(post => {
       routes.push({
-        url: `${baseUrl}/${lang}/blog/${post.slug}`,
+        url: u(`${baseUrl}/${lang}/blog/${post.slug}`),
         lastModified: post.updatedAt ? new Date(post.updatedAt) : new Date(post.date),
         changeFrequency: 'monthly',
         priority: 0.8,
@@ -93,59 +46,41 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Service pages
   languages.forEach(lang => {
     services.forEach(service => {
-      routes.push({
-        url: `${baseUrl}/${lang}/service/${service.slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.9,
-      });
+      routes.push({ url: u(`${baseUrl}/${lang}/service/${service.slug}`), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 });
     });
   });
 
   // Geo pages
   languages.forEach(lang => {
-    // Geo index and regions index
-    routes.push({
-      url: `${baseUrl}/${lang}/service/geo`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    });
-    routes.push({
-      url: `${baseUrl}/${lang}/service/geo/regions`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    });
+    routes.push({ url: u(`${baseUrl}/${lang}/service/geo`), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 });
+    routes.push({ url: u(`${baseUrl}/${lang}/service/geo/regions`), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 });
 
-    // Region pages (path-based, no query params)
     ukrainianRegions.forEach(region => {
-      routes.push({
-        url: `${baseUrl}/${lang}/service/geo/region/${getRegionSlug(region, lang as 'ua' | 'ru')}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.7,
-      });
+      routes.push({ url: u(`${baseUrl}/${lang}/service/geo/region/${getRegionSlug(region, lang)}`), lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 });
     });
 
     ukrainianCities.forEach(city => {
-      routes.push({
-        url: `${baseUrl}/${lang}/service/geo/${getCitySlug(city.name, lang as 'ua' | 'ru')}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.7,
-      });
-    });
-
-    // Geo city + service pages
-    ukrainianCities.forEach(city => {
+      routes.push({ url: u(`${baseUrl}/${lang}/service/geo/${getCitySlug(city.name, lang)}`), lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 });
       services.forEach(service => {
-        routes.push({
-          url: `${baseUrl}/${lang}/service/geo/${getCitySlug(city.name, lang as 'ua' | 'ru')}/${service.slug}`,
-          lastModified: new Date(),
-          changeFrequency: 'monthly',
-          priority: 0.7,
-        });
+        routes.push({ url: u(`${baseUrl}/${lang}/service/geo/${getCitySlug(city.name, lang)}/${service.slug}`), lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 });
+      });
+    });
+  });
+
+  // Hire pages
+  languages.forEach(lang => {
+    routes.push({ url: u(`${baseUrl}/${lang}/hire`), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 });
+
+    hireIntents.forEach(intent => {
+      const slug = intent.slug[lang];
+      routes.push({ url: u(`${baseUrl}/${lang}/hire/${slug}/regions`), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 });
+
+      ukrainianRegions.forEach(region => {
+        routes.push({ url: u(`${baseUrl}/${lang}/hire/${slug}/region/${getRegionSlug(region, lang)}`), lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 });
+      });
+
+      ukrainianCities.forEach(city => {
+        routes.push({ url: u(`${baseUrl}/${lang}/hire/${slug}/city/${getCitySlug(city.name, lang)}`), lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 });
       });
     });
   });
@@ -153,17 +88,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Technology pages
   languages.forEach(lang => {
     technologies.forEach(tech => {
-      routes.push({
-        url: `${baseUrl}/${lang}/tech/${tech.slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.6,
-      });
+      routes.push({ url: u(`${baseUrl}/${lang}/tech/${tech.slug}`), lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 });
     });
   });
 
-  return routes.map(route => ({
-    ...route,
-    url: route.url.endsWith('/') ? route.url : `${route.url}/`
-  }));
+  return routes;
 }
