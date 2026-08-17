@@ -54,7 +54,7 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
       qContact: 'Куди надіслати розрахунок?',
 
       // Options
-      categories: ['Розробка сайту', 'Підтримка сайту', 'Найняти програміста', 'SEO оптимізація', 'PageSpeed оптимізація', 'Аудит сайту', 'Інше'],
+      categories: ['Розробка сайту', 'Підтримка сайту', 'Найняти програміста', 'SEO оптимізація', 'PageSpeed оптимізація', 'Аудит сайту', '🦠 Лікування сайту від вірусів', '🛠 Виправлення помилок (Багфікс)', '📦 Перенесення сайту / Хостинг', 'Інше'],
       types: ['Landing Page', 'Корпоративний сайт', 'Інтернет-магазин', 'Кастомний веб-додаток', 'Ще не знаю'],
       designs: ['Так, є макети', 'Є логотип/фірмовий стиль', 'Ні, потрібен дизайн з нуля', 'Потрібен редизайн існуючого'],
       featureOptions: ['Багатомовність', 'Інтеграція з CRM', 'Оплата онлайн', 'Складна фільтрація', 'Особистий кабінет', 'Адмін-панель'],
@@ -95,7 +95,7 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
       qContact: 'Куда отправить расчет?',
 
       // Options
-      categories: ['Разработка сайта', 'Поддержка сайта', 'Нанять программиста', 'SEO оптимизация', 'PageSpeed оптимизация', 'Аудит сайта', 'Другое'],
+      categories: ['Разработка сайта', 'Поддержка сайта', 'Нанять программиста', 'SEO оптимизация', 'PageSpeed оптимизация', 'Аудит сайта', '🦠 Лечение сайта от вирусов', '🛠 Исправление ошибок (Багфикс)', '📦 Перенос сайта / Хостинг', 'Другое'],
       types: ['Landing Page', 'Корпоративный сайт', 'Интернет-магазин', 'Кастомное веб-приложение', 'Еще не знаю'],
       designs: ['Да, есть макеты', 'Есть логотип/фирменный стиль', 'Нет, нужен дизайн с нуля', 'Нужен редизайн существующего'],
       featureOptions: ['Мультиязычность', 'Интеграция с CRM', 'Оплата онлайн', 'Сложная фильтрация', 'Личный кабинет', 'Админ-панель'],
@@ -136,7 +136,8 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
     if (serviceCategory === currentT.categories[0]) return 6; // Разработка
     if (serviceCategory === currentT.categories[1]) return 4; // Поддержка
     if (serviceCategory === currentT.categories[2]) return 4; // Нанять программиста
-    if (serviceCategory === currentT.categories[6]) return 3; // Другое
+    if (currentT.categories.slice(6, 9).includes(serviceCategory)) return 3; // Вирусы, Багфикс, Перенос
+    if (serviceCategory === currentT.categories[9]) return 3; // Другое
     return 4; // SEO, PageSpeed, Audit
   };
 
@@ -418,8 +419,34 @@ ${branchDetails}
       );
     }
 
+    // Branch E: Virus, BugFix, Hosting
+    if (currentT.categories.slice(6, 9).includes(serviceCategory)) {
+      if (step === 2) return (
+        <div className="animate-fade-in max-w-lg mx-auto">
+          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qProject}</h3>
+          <textarea
+            value={projectDesc}
+            onChange={(e) => setProjectDesc(e.target.value)}
+            className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors mb-8 text-lg min-h-[150px] resize-y"
+            placeholder={currentT.projectPlaceholder}
+          />
+          <div className="flex justify-center">
+            <button 
+              onClick={() => {
+                if(projectDesc.length > 5) setStep(3);
+                else alert(lang === 'ua' ? 'Будь ласка, опишіть проблему' : 'Пожалуйста, опишите проблему');
+              }} 
+              className="btn-primary py-4 px-12 text-lg"
+            >
+              {currentT.next}
+            </button>
+          </div>
+        </div>
+      );
+    }
+
     // Universal Penultimate Step: Budget (Step 2 for 'Other', Step 3 for Branch B/D, Step 5 for Branch A)
-    if (step === totalSteps - 1 && serviceCategory !== currentT.categories[2]) return (
+    if (step === totalSteps - 1 && serviceCategory !== currentT.categories[2] && !currentT.categories.slice(6, 9).includes(serviceCategory)) return (
       <div className="animate-fade-in">
         <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qBudget}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
