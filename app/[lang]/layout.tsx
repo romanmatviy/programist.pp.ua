@@ -3,6 +3,9 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import MessengerWidget from '@/components/MessengerWidget';
+import { notFound } from 'next/navigation';
+
+const validLanguages: string[] = ['ua', 'ru'];
 
 export async function generateStaticParams() {
   return [
@@ -18,7 +21,11 @@ export default function LangLayout({
   children: React.ReactNode;
   params: { lang: Language };
 }) {
-  const lang = params.lang || 'ua';
+  if (!validLanguages.includes(params.lang)) {
+    notFound();
+  }
+
+  const lang = params.lang;
   const t = translations[lang];
 
   return (
