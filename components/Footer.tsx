@@ -159,7 +159,7 @@ export default function Footer({ lang, translations }: FooterProps) {
               </li>
               <li>
                 <a href="https://hostpro.apartner.pro" target="_blank" rel="noopener" className="text-gray-400 hover:text-white transition-colors">
-                  HostPro Apartner
+                  {lang === 'ua' ? 'Швидкий хостинг' : 'Быстрый хостинг'}
                 </a>
               </li>
             </ul>
