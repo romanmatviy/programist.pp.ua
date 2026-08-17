@@ -34,19 +34,34 @@ export default function ExitIntentPopup({ lang }: ExitIntentPopupProps) {
     };
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email || isSubmitting) return;
     
-    // Here you would typically send the email to your backend or CRM
-    console.log('Lead captured:', email);
+    setIsSubmitting(true);
     
-    setIsSubmitted(true);
-    
-    // Close popup automatically after 3 seconds
-    setTimeout(() => {
-      setIsOpen(false);
-    }, 3000);
+    try {
+      const response = await fetch('/api/telegram', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'Безкоштовний аудит (Exit Popup)' }),
+      });
+      
+      if (response.ok) {
+        setIsSubmitted(true);
+        setTimeout(() => {
+          setIsOpen(false);
+        }, 3000);
+      } else {
+        console.error('Failed to send lead');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const texts = {
@@ -115,9 +130,10 @@ export default function ExitIntentPopup({ lang }: ExitIntentPopupProps) {
                   />
                   <button
                     type="submit"
-                    className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-primary-200 hover:shadow-xl transition-all hover:-translate-y-0.5"
+                    disabled={isSubmitting}
+                    className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-primary-200 hover:shadow-xl transition-all hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                   >
-                    {t.button}
+                    {isSubmitting ? (lang === 'ua' ? 'Відправка...' : 'Отправка...') : t.button}
                   </button>
                 </form>
                 <p className="text-xs text-gray-400 mt-4">
