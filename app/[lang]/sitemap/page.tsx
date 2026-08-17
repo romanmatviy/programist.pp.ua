@@ -135,7 +135,7 @@ export default function SitemapPage({ params }: { params: { lang: Language } }) 
               {topCities.map(city => (
                 <li key={city.name}>
                   <Link href={`/${lang}/service/geo/${getCitySlug(city.name, lang)}`} className="text-gray-700 hover:text-primary-600 transition-colors">
-                    {lang === 'ua' ? city.name : (city.nameRu || city.name)}
+                    {lang === 'ua' ? city.name : ((city as any).nameRu || city.name)}
                   </Link>
                 </li>
               ))}
