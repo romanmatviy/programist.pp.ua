@@ -152,6 +152,11 @@ export default function Footer({ lang, translations }: FooterProps) {
                   Hire Web Developer
                 </a>
               </li>
+              <li>
+                <a href="https://seo.pp.ua" target="_blank" rel="noopener" className="text-gray-400 hover:text-white transition-colors">
+                  SEO.pp.ua
+                </a>
+              </li>
             </ul>
           </div>
         </div>

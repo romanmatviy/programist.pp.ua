@@ -149,6 +149,43 @@ export default function AboutPage({ params }: { params: { lang: Language } }) {
           </div>
         </div>
 
+        {/* Partners */}
+        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 gradient-text text-center">
+            {lang === 'ua' ? 'Наші партнери' : 'Наши партнеры'}
+          </h2>
+          <p className="text-gray-600 text-center max-w-2xl mx-auto mb-10">
+            {lang === 'ua'
+              ? 'Ми співпрацюємо з провідними експертами у суміжних сферах, щоб забезпечити нашим клієнтам комплексний результат.'
+              : 'Мы сотрудничаем с ведущими экспертами в смежных сферах, чтобы обеспечить нашим клиентам комплексный результат.'}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-2xl mx-auto">
+            <a
+              href="https://seo.pp.ua"
+              target="_blank"
+              rel="noopener"
+              className="group flex items-center gap-6 bg-gray-50 hover:bg-primary-50 rounded-xl p-6 border border-gray-100 hover:border-primary-200 transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-600 rounded-xl flex items-center justify-center text-white text-2xl font-bold flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
+                SEO
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors mb-1">
+                  seo.pp.ua
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {lang === 'ua'
+                    ? 'Професійне SEO-просування та аудит сайтів. Наш партнер забезпечує технічну оптимізацію, аналіз конкурентів та стратегію органічного зростання для проектів, які ми розробляємо.'
+                    : 'Профессиональное SEO-продвижение и аудит сайтов. Наш партнер обеспечивает техническую оптимизацию, анализ конкурентов и стратегию органического роста для проектов, которые мы разрабатываем.'}
+                </p>
+              </div>
+              <svg className="w-5 h-5 text-gray-400 group-hover:text-primary-600 flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
         {/* FAQ Section */}
         <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-12">
           <h2 className="text-2xl md:text-3xl font-bold mb-8 gradient-text text-center">
