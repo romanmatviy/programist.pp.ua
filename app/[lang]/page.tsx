@@ -4,6 +4,7 @@ import { services } from '@/data/services';
 import { technologies } from '@/data/technologies';
 import ServiceCard from '@/components/ServiceCard';
 import TechnologyCard from '@/components/TechnologyCard';
+import Testimonials from '@/components/Testimonials';
 import {
   generateSEO,
   generateOrganizationSchema,
@@ -136,6 +137,9 @@ export default function HomePage({ params }: { params: { lang: Language } }) {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <Testimonials lang={lang} />
 
       {/* Technologies Section */}
       <section className="section-padding bg-white">

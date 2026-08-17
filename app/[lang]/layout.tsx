@@ -2,6 +2,7 @@ import { Language, translations } from '@/data/translations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
+import MessengerWidget from '@/components/MessengerWidget';
 
 export async function generateStaticParams() {
   return [
@@ -28,6 +29,7 @@ export default function LangLayout({
       </main>
       <Footer lang={lang} translations={t} />
       <CookieBanner lang={lang} />
+      <MessengerWidget lang={lang} />
     </>
   );
 }

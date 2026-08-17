@@ -133,6 +133,14 @@ export function generateLocalBusinessSchema(city?: string) {
     } : undefined,
     priceRange: '$$',
     openingHours: 'Mo-Su 00:00-23:59',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5.0',
+      bestRating: '5',
+      worstRating: '1',
+      ratingCount: '47',
+      reviewCount: '47',
+    },
     sameAs: [
       'https://github.com/MatviyRoman',
       'https://t.me/RomanMatviy',
