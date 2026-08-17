@@ -16,6 +16,7 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
   const [siteType, setSiteType] = useState('');
   const [design, setDesign] = useState('');
   const [features, setFeatures] = useState<string[]>([]);
+  const [budget, setBudget] = useState('');
   const [name, setName] = useState('');
   const [contact, setContact] = useState('');
 
@@ -26,10 +27,12 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
       step1: 'Який тип сайту потрібен?',
       step2: 'Чи є у вас готовий дизайн?',
       step3: 'Який додатковий функціонал потрібен?',
-      step4: 'Куди надіслати розрахунок?',
-      types: ['Landing Page', 'Корпоративний сайт', 'Інтернет-магазин', 'Кастомний веб-додаток', 'Ще не знаю'],
+      step4: 'Який орієнтовний бюджет ви розглядаєте?',
+      step5: 'Куди надіслати розрахунок?',
+      types: ['Landing Page', 'Корпоративний сайт', 'Інтернет-магазин', 'Кастомний веб-додаток', 'SEO-оптимізація та аудит', 'Ще не знаю'],
       designs: ['Так, є макети', 'Є логотип/фірмовий стиль', 'Ні, потрібен дизайн з нуля', 'Потрібен редизайн існуючого'],
       featureOptions: ['Багатомовність', 'Інтеграція з CRM', 'Оплата онлайн', 'SEO-оптимізація базова', 'Складна фільтрація', 'Адмін-панель'],
+      budgets: ['до $500', '$500 - $1000', '$1000 - $3000', '$3000+', 'Не визначився (потрібна оцінка)'],
       namePlaceholder: "Ваше ім'я",
       contactPlaceholder: 'Телефон або Telegram (@username)',
       next: 'Далі',
@@ -46,10 +49,12 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
       step1: 'Какой тип сайта нужен?',
       step2: 'Есть ли у вас готовый дизайн?',
       step3: 'Какой дополнительный функционал нужен?',
-      step4: 'Куда отправить расчет?',
-      types: ['Landing Page', 'Корпоративный сайт', 'Интернет-магазин', 'Кастомное веб-приложение', 'Еще не знаю'],
+      step4: 'Какой ориентировочный бюджет вы рассматриваете?',
+      step5: 'Куда отправить расчет?',
+      types: ['Landing Page', 'Корпоративный сайт', 'Интернет-магазин', 'Кастомное веб-приложение', 'SEO-оптимизация и аудит', 'Еще не знаю'],
       designs: ['Да, есть макеты', 'Есть логотип/фирменный стиль', 'Нет, нужен дизайн с нуля', 'Нужен редизайн существующего'],
       featureOptions: ['Мультиязычность', 'Интеграция с CRM', 'Оплата онлайн', 'SEO-оптимизация базовая', 'Сложная фильтрация', 'Админ-панель'],
+      budgets: ['до $500', '$500 - $1000', '$1000 - $3000', '$3000+', 'Не определился (нужна оценка)'],
       namePlaceholder: 'Ваше имя',
       contactPlaceholder: 'Телефон или Telegram (@username)',
       next: 'Далее',
@@ -85,6 +90,7 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
 <b>Тип сайту:</b> ${siteType || 'Не вказано'}
 <b>Дизайн:</b> ${design || 'Не вказано'}
 <b>Функції:</b> ${features.length > 0 ? features.join(', ') : 'Не обрано'}
+<b>Бюджет:</b> ${budget || 'Не вказано'}
 
 👤 <b>Ім'я:</b> ${name}
 📞 <b>Контакт:</b> ${contact}
@@ -137,10 +143,10 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
           <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-gray-200 rounded-full z-0"></div>
           <div 
             className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-primary-600 rounded-full z-0 transition-all duration-500"
-            style={{ width: `${((step - 1) / 3) * 100}%` }}
+            style={{ width: `${((step - 1) / 4) * 100}%` }}
           ></div>
           
-          {[1, 2, 3, 4].map(num => (
+          {[1, 2, 3, 4, 5].map(num => (
             <div 
               key={num} 
               className={`w-10 h-10 rounded-full flex items-center justify-center font-bold relative z-10 transition-colors duration-300 ${
@@ -160,7 +166,14 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
               {currentT.types.map(type => (
                 <button
                   key={type}
-                  onClick={() => { setSiteType(type); setStep(2); }}
+                  onClick={() => { 
+                    setSiteType(type); 
+                    if (type.includes('SEO')) {
+                      setStep(4);
+                    } else {
+                      setStep(2); 
+                    }
+                  }}
                   className={`p-6 rounded-xl border-2 text-left transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
                     siteType === type ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
                   }`}
@@ -223,10 +236,30 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
           </div>
         )}
 
-        {/* Step 4: Contact */}
+        {/* Step 4: Budget */}
         {step === 4 && (
+          <div className="animate-fade-in">
+            <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.step4}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {currentT.budgets.map(b => (
+                <button
+                  key={b}
+                  onClick={() => { setBudget(b); setStep(5); }}
+                  className={`p-6 rounded-xl border-2 text-center transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
+                    budget === b ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
+                  }`}
+                >
+                  <span className="font-semibold text-lg text-gray-900">{b}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Step 5: Contact */}
+        {step === 5 && (
           <div className="animate-fade-in max-w-lg mx-auto">
-            <h3 className="text-2xl font-bold mb-8 text-gray-900 text-center">{currentT.step4}</h3>
+            <h3 className="text-2xl font-bold mb-8 text-gray-900 text-center">{currentT.step5}</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">{currentT.namePlaceholder}</label>
@@ -262,10 +295,16 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
         )}
 
         {/* Footer Navigation */}
-        {step > 1 && step < 4 && (
+        {step > 1 && step < 5 && (
           <div className="mt-8 flex justify-start">
             <button 
-              onClick={() => setStep(s => s - 1)}
+              onClick={() => {
+                if (step === 4 && siteType.includes('SEO')) {
+                  setStep(1);
+                } else {
+                  setStep(s => s - 1);
+                }
+              }}
               className="text-gray-500 hover:text-primary-600 font-medium flex items-center gap-2 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -275,10 +314,10 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
             </button>
           </div>
         )}
-        {step === 4 && (
+        {step === 5 && (
           <div className="mt-8 flex justify-center">
              <button 
-              onClick={() => setStep(s => s - 1)}
+              onClick={() => setStep(siteType.includes('SEO') ? 1 : 4)}
               className="text-gray-500 hover:text-primary-600 font-medium flex items-center gap-2 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
