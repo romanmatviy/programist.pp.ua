@@ -26,7 +26,7 @@ export const hireIntents: Array<{
   },
   {
     key: 'hire-prestashop',
-    label: { ua: 'Найняти PrestaShop розробника', ru: 'Нанять PrestaShop разработчика' },
+    label: { ua: 'Найняти PrestaShop розробника (програміста)', ru: 'Нанять PrestaShop разработчика (программиста)' },
     slug: { ua: 'nainiaty-prestashop-rozrobnyka', ru: 'naniat-prestashop-razrabotchika' },
     description: {
       ua: 'Експертна розробка, підтримка та оптимізація інтернет-магазинів на PrestaShop.',
@@ -35,7 +35,7 @@ export const hireIntents: Array<{
   },
   {
     key: 'hire-opencart',
-    label: { ua: 'Найняти OpenCart розробника', ru: 'Нанять OpenCart разработчика' },
+    label: { ua: 'Найняти OpenCart розробника (програміста)', ru: 'Нанять OpenCart разработчика (программиста)' },
     slug: { ua: 'nainiaty-opencart-rozrobnyka', ru: 'naniat-opencart-razrabotchika' },
     description: {
       ua: 'Професійна розробка модулів, шаблонів та комплексних магазинів на OpenCart.',
@@ -44,7 +44,7 @@ export const hireIntents: Array<{
   },
   {
     key: 'hire-wordpress',
-    label: { ua: 'Найняти WordPress розробника', ru: 'Нанять WordPress разработчика' },
+    label: { ua: 'Найняти WordPress розробника (програміста)', ru: 'Нанять WordPress разработчика (программиста)' },
     slug: { ua: 'nainiaty-wordpress-rozrobnyka', ru: 'naniat-wordpress-razrabotchika' },
     description: {
       ua: 'Розробка кастомних тем, плагінів та інтернет-магазинів WooCommerce.',
@@ -53,7 +53,7 @@ export const hireIntents: Array<{
   },
   {
     key: 'hire-laravel',
-    label: { ua: 'Найняти Laravel розробника', ru: 'Нанять Laravel разработчика' },
+    label: { ua: 'Найняти Laravel розробника (програміста)', ru: 'Нанять Laravel разработчика (программиста)' },
     slug: { ua: 'nainiaty-laravel-rozrobnyka', ru: 'naniat-laravel-razrabotchika' },
     description: {
       ua: 'Створення складних веб-додатків, CRM систем та RESTful API на фреймворку Laravel.',
@@ -62,7 +62,7 @@ export const hireIntents: Array<{
   },
   {
     key: 'hire-yii',
-    label: { ua: 'Найняти Yii розробника', ru: 'Нанять Yii разработчика' },
+    label: { ua: 'Найняти Yii розробника (програміста)', ru: 'Нанять Yii разработчика (программиста)' },
     slug: { ua: 'nainiaty-yii-rozrobnyka', ru: 'naniat-yii-razrabotchika' },
     description: {
       ua: 'Підтримка legacy проектів на Yii 1.1 та Yii2, рефакторинг та оптимізація.',
@@ -71,7 +71,7 @@ export const hireIntents: Array<{
   },
   {
     key: 'hire-cakephp',
-    label: { ua: 'Найняти CakePHP розробника', ru: 'Нанять CakePHP разработчика' },
+    label: { ua: 'Найняти CakePHP розробника (програміста)', ru: 'Нанять CakePHP разработчика (программиста)' },
     slug: { ua: 'nainiaty-cakephp-rozrobnyka', ru: 'naniat-cakephp-razrabotchika' },
     description: {
       ua: 'Оновлення застарілих CakePHP проектів, міграція та розробка нового функціоналу.',
