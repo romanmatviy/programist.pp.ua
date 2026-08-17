@@ -38,11 +38,11 @@ export default function Footer({ lang, translations }: FooterProps) {
           <div>
             <h3 className="text-lg font-semibold mb-4">{translations.footer.quickLinks}</h3>
             <ul className="space-y-2">
-              <li>
+              {/* <li>
                 <Link href={`/${lang}`} className="text-gray-400 hover:text-white transition-colors">
                   {translations.nav.home}
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href={`/${lang}/about`} className="text-gray-400 hover:text-white transition-colors">
                   {translations.nav.about}
