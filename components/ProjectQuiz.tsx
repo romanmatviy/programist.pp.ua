@@ -133,12 +133,8 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
 
   // Logic to determine total steps based on branch
   const getTotalSteps = () => {
-    if (serviceCategory === currentT.categories[0]) return 6; // Разработка
-    if (serviceCategory === currentT.categories[1]) return 4; // Поддержка
-    if (serviceCategory === currentT.categories[2]) return 4; // Нанять программиста
-    if (currentT.categories.slice(6, 9).includes(serviceCategory)) return 3; // Вирусы, Багфикс, Перенос
-    if (serviceCategory === currentT.categories[9]) return 3; // Другое
-    return 4; // SEO, PageSpeed, Audit
+    if (serviceCategory === currentT.categories[0]) return 4; // Разработка (4 шага)
+    return 3; // Все остальные ветки (3 шага)
   };
 
   const totalSteps = getTotalSteps();
@@ -253,45 +249,48 @@ ${branchDetails}
     // Branch A: Web Development
     if (serviceCategory === currentT.categories[0]) {
       if (step === 2) return (
-        <div className="animate-fade-in">
-          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qSiteType}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="animate-fade-in max-w-4xl mx-auto">
+          <h3 className="text-xl font-bold mb-4 text-gray-900 text-center">{currentT.qSiteType}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-8">
             {currentT.types.map(type => (
               <button
                 key={type}
-                onClick={() => { setSiteType(type); setStep(3); }}
-                className={`p-6 rounded-xl border-2 text-left transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
-                  siteType === type ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
+                onClick={() => setSiteType(type)}
+                className={`p-4 rounded-xl border-2 text-center transition-all duration-300 ${
+                  siteType === type ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200 hover:border-primary-400'
                 }`}
               >
-                <span className="font-semibold text-lg text-gray-900">{type}</span>
+                <span className="font-medium">{type}</span>
               </button>
             ))}
+          </div>
+
+          <h3 className="text-xl font-bold mb-4 text-gray-900 text-center">{currentT.qDesign}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+            {currentT.designs.map(d => (
+              <button
+                key={d}
+                onClick={() => setDesign(d)}
+                className={`p-4 rounded-xl border-2 text-center transition-all duration-300 ${
+                  design === d ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200 hover:border-primary-400'
+                }`}
+              >
+                <span className="font-medium">{d}</span>
+              </button>
+            ))}
+          </div>
+          
+          <div className="flex justify-center">
+            <button onClick={() => setStep(3)} className="btn-primary py-4 px-12 text-lg">
+              {currentT.next}
+            </button>
           </div>
         </div>
       );
       if (step === 3) return (
-        <div className="animate-fade-in">
-          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qDesign}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {currentT.designs.map(d => (
-              <button
-                key={d}
-                onClick={() => { setDesign(d); setStep(4); }}
-                className={`p-6 rounded-xl border-2 text-left transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
-                  design === d ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
-                }`}
-              >
-                <span className="font-semibold text-lg text-gray-900">{d}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-      if (step === 4) return (
-        <div className="animate-fade-in">
-          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qFeatures}</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+        <div className="animate-fade-in max-w-4xl mx-auto">
+          <h3 className="text-xl font-bold mb-4 text-gray-900 text-center">{currentT.qFeatures}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-8">
             {currentT.featureOptions.map(feature => (
               <button
                 key={feature}
@@ -306,8 +305,24 @@ ${branchDetails}
               </button>
             ))}
           </div>
+
+          <h3 className="text-xl font-bold mb-4 text-gray-900 text-center">{currentT.qBudget}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-8">
+            {currentT.budgets.map(b => (
+              <button
+                key={b}
+                onClick={() => setBudget(b)}
+                className={`p-4 rounded-xl border-2 text-center transition-all duration-300 ${
+                  budget === b ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200 hover:border-primary-400'
+                }`}
+              >
+                <span className="font-medium">{b}</span>
+              </button>
+            ))}
+          </div>
+          
           <div className="flex justify-center">
-            <button onClick={() => setStep(5)} className="btn-primary py-4 px-12 text-lg">
+            <button onClick={() => setStep(4)} className="btn-primary py-4 px-12 text-lg">
               {currentT.next}
             </button>
           </div>
@@ -319,13 +334,13 @@ ${branchDetails}
     if (serviceCategory === currentT.categories[1]) {
       if (step === 2) return (
         <div className="animate-fade-in max-w-2xl mx-auto">
-          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qCms}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <h3 className="text-xl font-bold mb-4 text-gray-900 text-center">{currentT.qCms}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
             {currentT.cmsOptions.map(opt => (
               <button
                 key={opt}
                 onClick={() => setCms(opt)}
-                className={`p-4 rounded-xl border-2 text-center transition-all duration-300 ${
+                className={`p-3 rounded-xl border-2 text-center transition-all duration-300 ${
                   cms === opt ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200 hover:border-primary-400'
                 }`}
               >
@@ -339,9 +354,24 @@ ${branchDetails}
             type="url"
             value={websiteUrl}
             onChange={(e) => setWebsiteUrl(e.target.value)}
-            className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors mb-8"
+            className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors mb-8 text-lg"
             placeholder={currentT.urlPlaceholder}
           />
+
+          <h3 className="text-xl font-bold mb-4 text-gray-900 text-center">{currentT.qBudget}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+            {currentT.budgets.map(b => (
+              <button
+                key={b}
+                onClick={() => setBudget(b)}
+                className={`p-3 rounded-xl border-2 text-center transition-all duration-300 ${
+                  budget === b ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200 hover:border-primary-400'
+                }`}
+              >
+                <span className="font-medium">{b}</span>
+              </button>
+            ))}
+          </div>
           
           <div className="flex justify-center">
             <button onClick={() => setStep(3)} className="btn-primary py-4 px-12 text-lg">
@@ -355,36 +385,34 @@ ${branchDetails}
     // Branch C: Hire Developer
     if (serviceCategory === currentT.categories[2]) {
       if (step === 2) return (
-        <div className="animate-fade-in">
-          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qHours}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="animate-fade-in max-w-2xl mx-auto">
+          <h3 className="text-xl font-bold mb-4 text-gray-900 text-center">{currentT.qHours}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
             {currentT.hoursOptions.map(opt => (
               <button
                 key={opt}
-                onClick={() => { setHours(opt); setStep(3); }}
-                className={`p-6 rounded-xl border-2 text-center transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
-                  hours === opt ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
+                onClick={() => setHours(opt)}
+                className={`p-4 rounded-xl border-2 text-center transition-all duration-300 ${
+                  hours === opt ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200 hover:border-primary-400'
                 }`}
               >
-                <span className="font-semibold text-lg text-gray-900">{opt}</span>
+                <span className="font-medium text-lg">{opt}</span>
               </button>
             ))}
           </div>
-        </div>
-      );
-      if (step === 3) return (
-        <div className="animate-fade-in max-w-lg mx-auto">
-          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qProject}</h3>
+          
+          <h3 className="text-xl font-bold mb-4 text-gray-900 text-center">{currentT.qProject}</h3>
           <textarea
             value={projectDesc}
             onChange={(e) => setProjectDesc(e.target.value)}
-            className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors mb-8 text-lg min-h-[150px] resize-y"
+            className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors mb-8 text-lg min-h-[120px] resize-y"
             placeholder={currentT.projectPlaceholder}
           />
+          
           <div className="flex justify-center">
             <button 
               onClick={() => {
-                if(projectDesc.length > 5) setStep(4);
+                if(projectDesc.length > 5) setStep(3);
                 else alert(lang === 'ua' ? 'Будь ласка, опишіть ваш проєкт' : 'Пожалуйста, опишите ваш проект');
               }} 
               className="btn-primary py-4 px-12 text-lg"
@@ -400,7 +428,7 @@ ${branchDetails}
     if (currentT.categories.slice(3, 6).includes(serviceCategory)) {
       if (step === 2) return (
         <div className="animate-fade-in max-w-lg mx-auto">
-          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qUrl}</h3>
+          <h3 className="text-xl font-bold mb-4 text-gray-900 text-center">{currentT.qUrl}</h3>
           <input
             type="url"
             value={websiteUrl}
@@ -408,6 +436,22 @@ ${branchDetails}
             className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors mb-8 text-lg"
             placeholder={currentT.urlPlaceholder}
           />
+
+          <h3 className="text-xl font-bold mb-4 text-gray-900 text-center">{currentT.qBudget}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+            {currentT.budgets.map(b => (
+              <button
+                key={b}
+                onClick={() => setBudget(b)}
+                className={`p-4 rounded-xl border-2 text-center transition-all duration-300 ${
+                  budget === b ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200 hover:border-primary-400'
+                }`}
+              >
+                <span className="font-medium">{b}</span>
+              </button>
+            ))}
+          </div>
+
           <div className="flex justify-center">
             <button 
               onClick={() => {
@@ -427,7 +471,7 @@ ${branchDetails}
     if (currentT.categories.slice(6, 9).includes(serviceCategory)) {
       if (step === 2) return (
         <div className="animate-fade-in max-w-lg mx-auto">
-          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qProject}</h3>
+          <h3 className="text-xl font-bold mb-4 text-gray-900 text-center">{currentT.qProject}</h3>
           
           <input
             type="url"
@@ -440,7 +484,7 @@ ${branchDetails}
           <textarea
             value={projectDesc}
             onChange={(e) => setProjectDesc(e.target.value)}
-            className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors mb-8 text-lg min-h-[150px] resize-y"
+            className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors mb-8 text-lg min-h-[120px] resize-y"
             placeholder={currentT.projectPlaceholder}
           />
           <div className="flex justify-center">
@@ -458,25 +502,32 @@ ${branchDetails}
       );
     }
 
-    // Universal Penultimate Step: Budget (Step 2 for 'Other', Step 3 for Branch B/D, Step 5 for Branch A)
-    if (step === totalSteps - 1 && serviceCategory !== currentT.categories[2] && !currentT.categories.slice(6, 9).includes(serviceCategory)) return (
-      <div className="animate-fade-in">
-        <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qBudget}</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {currentT.budgets.map(b => (
-            <button
-              key={b}
-              onClick={() => { setBudget(b); setStep(totalSteps); }}
-              className={`p-6 rounded-xl border-2 text-center transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
-                budget === b ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
-              }`}
-            >
-              <span className="font-semibold text-lg text-gray-900">{b}</span>
+    // Branch F: Other
+    if (serviceCategory === currentT.categories[9]) {
+      if (step === 2) return (
+        <div className="animate-fade-in max-w-lg mx-auto">
+          <h3 className="text-xl font-bold mb-6 text-gray-900 text-center">{currentT.qBudget}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            {currentT.budgets.map(b => (
+              <button
+                key={b}
+                onClick={() => setBudget(b)}
+                className={`p-6 rounded-xl border-2 text-center transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
+                  budget === b ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
+                }`}
+              >
+                <span className="font-semibold text-lg text-gray-900">{b}</span>
+              </button>
+            ))}
+          </div>
+          <div className="flex justify-center">
+            <button onClick={() => setStep(3)} className="btn-primary py-4 px-12 text-lg">
+              {currentT.next}
             </button>
-          ))}
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
 
     // Universal Final Step: Contact
     if (step === totalSteps) return (
