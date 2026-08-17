@@ -13,9 +13,20 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
   const [isSuccess, setIsSuccess] = useState(false);
   
   // State for user answers
+  const [serviceCategory, setServiceCategory] = useState('');
+  
+  // Branch A: Web Dev
   const [siteType, setSiteType] = useState('');
   const [design, setDesign] = useState('');
   const [features, setFeatures] = useState<string[]>([]);
+  
+  // Branch B: Maintenance
+  const [cms, setCms] = useState('');
+  
+  // Branch B & C: Maintenance / SEO / Audit / PageSpeed
+  const [websiteUrl, setWebsiteUrl] = useState('');
+
+  // Universal ending
   const [budget, setBudget] = useState('');
   const [name, setName] = useState('');
   const [contact, setContact] = useState('');
@@ -24,19 +35,33 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
   const t = {
     ua: {
       title: 'Розрахуйте вартість вашого проекту',
-      subtitle: 'Дайте відповідь на 3 коротких питання, і ми підготуємо точний кошторис',
-      step1: 'Який тип сайту потрібен?',
-      step2: 'Чи є у вас готовий дизайн?',
-      step3: 'Який додатковий функціонал потрібен?',
-      step4: 'Який орієнтовний бюджет ви розглядаєте?',
-      step5: 'Куди надіслати розрахунок?',
-      types: ['Landing Page', 'Корпоративний сайт', 'Інтернет-магазин', 'Кастомний веб-додаток', 'SEO-оптимізація та аудит', 'Ще не знаю'],
+      subtitle: 'Дайте відповідь на кілька коротких питань, і ми підготуємо точний кошторис',
+      
+      // Questions
+      qCategory: 'Що вас цікавить?',
+      qSiteType: 'Який тип сайту потрібен?',
+      qDesign: 'Чи є у вас готовий дизайн?',
+      qFeatures: 'Який додатковий функціонал потрібен?',
+      qCms: 'На якій системі (CMS) працює ваш сайт?',
+      qUrl: 'Вкажіть посилання на ваш сайт',
+      qBudget: 'Який орієнтовний бюджет ви розглядаєте?',
+      qContact: 'Куди надіслати розрахунок?',
+
+      // Options
+      categories: ['Розробка сайту', 'Підтримка сайту', 'SEO оптимізація', 'PageSpeed оптимізація', 'Аудит сайту', 'Інше'],
+      types: ['Landing Page', 'Корпоративний сайт', 'Інтернет-магазин', 'Кастомний веб-додаток', 'Ще не знаю'],
       designs: ['Так, є макети', 'Є логотип/фірмовий стиль', 'Ні, потрібен дизайн з нуля', 'Потрібен редизайн існуючого'],
-      featureOptions: ['Багатомовність', 'Інтеграція з CRM', 'Оплата онлайн', 'SEO-оптимізація базова', 'Складна фільтрація', 'Адмін-панель'],
+      featureOptions: ['Багатомовність', 'Інтеграція з CRM', 'Оплата онлайн', 'Складна фільтрація', 'Особистий кабінет', 'Адмін-панель'],
+      cmsOptions: ['WordPress', 'OpenCart', 'PrestaShop', 'Laravel', 'Кастомна / Інше', 'Не знаю'],
       budgets: ['до $500', '$500 - $1000', '$1000 - $3000', '$3000+', 'Не визначився (потрібна оцінка)'],
+      
+      // Placeholders
+      urlPlaceholder: 'https://example.com',
       namePlaceholder: "Ваше ім'я",
       contactPlaceholder: 'Телефон або Telegram (@username)',
       emailPlaceholder: 'Ваш Email',
+      
+      // Buttons
       next: 'Далі',
       prev: 'Назад',
       submit: 'Отримати розрахунок',
@@ -47,19 +72,33 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
     },
     ru: {
       title: 'Рассчитайте стоимость вашего проекта',
-      subtitle: 'Ответьте на 3 коротких вопроса, и мы подготовим точную смету',
-      step1: 'Какой тип сайта нужен?',
-      step2: 'Есть ли у вас готовый дизайн?',
-      step3: 'Какой дополнительный функционал нужен?',
-      step4: 'Какой ориентировочный бюджет вы рассматриваете?',
-      step5: 'Куда отправить расчет?',
-      types: ['Landing Page', 'Корпоративный сайт', 'Интернет-магазин', 'Кастомное веб-приложение', 'SEO-оптимизация и аудит', 'Еще не знаю'],
+      subtitle: 'Ответьте на несколько коротких вопросов, и мы подготовим точную смету',
+      
+      // Questions
+      qCategory: 'Что вас интересует?',
+      qSiteType: 'Какой тип сайта нужен?',
+      qDesign: 'Есть ли у вас готовый дизайн?',
+      qFeatures: 'Какой дополнительный функционал нужен?',
+      qCms: 'На какой системе (CMS) работает ваш сайт?',
+      qUrl: 'Укажите ссылку на ваш сайт',
+      qBudget: 'Какой ориентировочный бюджет вы рассматриваете?',
+      qContact: 'Куда отправить расчет?',
+
+      // Options
+      categories: ['Разработка сайта', 'Поддержка сайта', 'SEO оптимизация', 'PageSpeed оптимизация', 'Аудит сайта', 'Другое'],
+      types: ['Landing Page', 'Корпоративный сайт', 'Интернет-магазин', 'Кастомное веб-приложение', 'Еще не знаю'],
       designs: ['Да, есть макеты', 'Есть логотип/фирменный стиль', 'Нет, нужен дизайн с нуля', 'Нужен редизайн существующего'],
-      featureOptions: ['Мультиязычность', 'Интеграция с CRM', 'Оплата онлайн', 'SEO-оптимизация базовая', 'Сложная фильтрация', 'Админ-панель'],
+      featureOptions: ['Мультиязычность', 'Интеграция с CRM', 'Оплата онлайн', 'Сложная фильтрация', 'Личный кабинет', 'Админ-панель'],
+      cmsOptions: ['WordPress', 'OpenCart', 'PrestaShop', 'Laravel', 'Кастомная / Другое', 'Не знаю'],
       budgets: ['до $500', '$500 - $1000', '$1000 - $3000', '$3000+', 'Не определился (нужна оценка)'],
+      
+      // Placeholders
+      urlPlaceholder: 'https://example.com',
       namePlaceholder: 'Ваше имя',
       contactPlaceholder: 'Телефон или Telegram (@username)',
       emailPlaceholder: 'Ваш Email',
+      
+      // Buttons
       next: 'Далее',
       prev: 'Назад',
       submit: 'Получить расчет',
@@ -80,19 +119,42 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
     );
   };
 
+  // Logic to determine total steps based on branch
+  const getTotalSteps = () => {
+    if (serviceCategory === currentT.categories[0]) return 6; // Разработка
+    if (serviceCategory === currentT.categories[1]) return 4; // Поддержка
+    if (serviceCategory === currentT.categories[5]) return 3; // Другое
+    return 4; // SEO, PageSpeed, Audit
+  };
+
+  const totalSteps = getTotalSteps();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !contact) return;
 
     setIsSubmitting(true);
 
-    const message = `
-🔔 <b>НОВИЙ ЛІД (Квіз)</b>
-Послуга: <b>${serviceName}</b>
-
+    let branchDetails = '';
+    
+    if (serviceCategory === currentT.categories[0]) {
+      branchDetails = `
 <b>Тип сайту:</b> ${siteType || 'Не вказано'}
 <b>Дизайн:</b> ${design || 'Не вказано'}
-<b>Функції:</b> ${features.length > 0 ? features.join(', ') : 'Не обрано'}
+<b>Функції:</b> ${features.length > 0 ? features.join(', ') : 'Не обрано'}`;
+    } else if (serviceCategory === currentT.categories[1]) {
+      branchDetails = `
+<b>CMS:</b> ${cms || 'Не вказано'}
+<b>Сайт:</b> ${websiteUrl || 'Не вказано'}`;
+    } else if (serviceCategory !== currentT.categories[5]) {
+      branchDetails = `
+<b>Сайт:</b> ${websiteUrl || 'Не вказано'}`;
+    }
+
+    const message = `
+🔔 <b>НОВИЙ ЛІД (Квіз)</b>
+Послуга: <b>${serviceCategory || serviceName}</b>
+${branchDetails}
 <b>Бюджет:</b> ${budget || 'Не вказано'}
 
 👤 <b>Ім'я:</b> ${name}
@@ -134,6 +196,235 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
     );
   }
 
+  // Define views dynamically based on step and category
+  const renderStep = () => {
+    // Step 1: Category (Always the same)
+    if (step === 1) {
+      return (
+        <div className="animate-fade-in">
+          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qCategory}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {currentT.categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => { 
+                  setServiceCategory(cat); 
+                  setStep(2);
+                }}
+                className={`p-6 rounded-xl border-2 text-left transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
+                  serviceCategory === cat ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
+                }`}
+              >
+                <span className="font-semibold text-lg text-gray-900">{cat}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // Branch A: Web Development
+    if (serviceCategory === currentT.categories[0]) {
+      if (step === 2) return (
+        <div className="animate-fade-in">
+          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qSiteType}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {currentT.types.map(type => (
+              <button
+                key={type}
+                onClick={() => { setSiteType(type); setStep(3); }}
+                className={`p-6 rounded-xl border-2 text-left transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
+                  siteType === type ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
+                }`}
+              >
+                <span className="font-semibold text-lg text-gray-900">{type}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      );
+      if (step === 3) return (
+        <div className="animate-fade-in">
+          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qDesign}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {currentT.designs.map(d => (
+              <button
+                key={d}
+                onClick={() => { setDesign(d); setStep(4); }}
+                className={`p-6 rounded-xl border-2 text-left transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
+                  design === d ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
+                }`}
+              >
+                <span className="font-semibold text-lg text-gray-900">{d}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      );
+      if (step === 4) return (
+        <div className="animate-fade-in">
+          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qFeatures}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+            {currentT.featureOptions.map(feature => (
+              <button
+                key={feature}
+                onClick={() => handleFeatureToggle(feature)}
+                className={`p-4 rounded-xl border-2 text-center transition-all duration-300 ${
+                  features.includes(feature) 
+                    ? 'border-primary-600 bg-primary-600 text-white shadow-md' 
+                    : 'border-gray-200 text-gray-700 hover:border-primary-400 hover:bg-gray-50'
+                }`}
+              >
+                <span className="font-medium">{feature}</span>
+              </button>
+            ))}
+          </div>
+          <div className="flex justify-center">
+            <button onClick={() => setStep(5)} className="btn-primary py-4 px-12 text-lg">
+              {currentT.next}
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    // Branch B: Maintenance
+    if (serviceCategory === currentT.categories[1]) {
+      if (step === 2) return (
+        <div className="animate-fade-in max-w-2xl mx-auto">
+          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qCms}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            {currentT.cmsOptions.map(opt => (
+              <button
+                key={opt}
+                onClick={() => setCms(opt)}
+                className={`p-4 rounded-xl border-2 text-center transition-all duration-300 ${
+                  cms === opt ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200 hover:border-primary-400'
+                }`}
+              >
+                <span className="font-medium">{opt}</span>
+              </button>
+            ))}
+          </div>
+          
+          <h3 className="text-xl font-bold mb-4 text-gray-900 text-center">{currentT.qUrl}</h3>
+          <input
+            type="url"
+            value={websiteUrl}
+            onChange={(e) => setWebsiteUrl(e.target.value)}
+            className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors mb-8"
+            placeholder={currentT.urlPlaceholder}
+          />
+          
+          <div className="flex justify-center">
+            <button onClick={() => setStep(3)} className="btn-primary py-4 px-12 text-lg">
+              {currentT.next}
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    // Branch C: SEO, PageSpeed, Audit
+    if (currentT.categories.slice(2, 5).includes(serviceCategory)) {
+      if (step === 2) return (
+        <div className="animate-fade-in max-w-lg mx-auto">
+          <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qUrl}</h3>
+          <input
+            type="url"
+            value={websiteUrl}
+            onChange={(e) => setWebsiteUrl(e.target.value)}
+            className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors mb-8 text-lg"
+            placeholder={currentT.urlPlaceholder}
+          />
+          <div className="flex justify-center">
+            <button 
+              onClick={() => {
+                if(websiteUrl.length > 3) setStep(3);
+                else alert(lang === 'ua' ? 'Будь ласка, вкажіть посилання' : 'Пожалуйста, укажите ссылку');
+              }} 
+              className="btn-primary py-4 px-12 text-lg"
+            >
+              {currentT.next}
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    // Universal Penultimate Step: Budget (Step 2 for 'Other', Step 3 for Branch B/C, Step 5 for Branch A)
+    if (step === totalSteps - 1) return (
+      <div className="animate-fade-in">
+        <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.qBudget}</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {currentT.budgets.map(b => (
+            <button
+              key={b}
+              onClick={() => { setBudget(b); setStep(totalSteps); }}
+              className={`p-6 rounded-xl border-2 text-center transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
+                budget === b ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
+              }`}
+            >
+              <span className="font-semibold text-lg text-gray-900">{b}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+
+    // Universal Final Step: Contact
+    if (step === totalSteps) return (
+      <div className="animate-fade-in max-w-lg mx-auto">
+        <h3 className="text-2xl font-bold mb-8 text-gray-900 text-center">{currentT.qContact}</h3>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{currentT.namePlaceholder}</label>
+            <input
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors"
+              placeholder={lang === 'ua' ? 'Олександр' : 'Александр'}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{currentT.contactPlaceholder} *</label>
+            <input
+              type="text"
+              required
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
+              className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors"
+              placeholder="+380... або @username"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{currentT.emailPlaceholder}</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors"
+              placeholder="email@example.com"
+            />
+          </div>
+          <div className="pt-4">
+            <button 
+              type="submit" 
+              disabled={isSubmitting}
+              className="w-full btn-primary py-4 text-xl font-bold shadow-xl hover:shadow-primary-500/30"
+            >
+              {isSubmitting ? currentT.submitting : currentT.submit}
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+
+    return null;
+  };
+
   return (
     <div className="bg-white rounded-2xl shadow-xl overflow-hidden max-w-4xl mx-auto my-16 border border-gray-100">
       <div className="bg-gradient-primary p-8 md:p-10 text-center">
@@ -147,195 +438,32 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
           <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-gray-200 rounded-full z-0"></div>
           <div 
             className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-primary-600 rounded-full z-0 transition-all duration-500"
-            style={{ width: `${((step - 1) / 4) * 100}%` }}
+            style={{ width: `${((step - 1) / (totalSteps - 1 || 1)) * 100}%` }}
           ></div>
           
-          {[1, 2, 3, 4, 5].map(num => (
-            <div 
-              key={num} 
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold relative z-10 transition-colors duration-300 ${
-                step >= num ? 'bg-primary-600 text-white shadow-lg' : 'bg-gray-200 text-gray-500'
-              }`}
-            >
-              {num}
-            </div>
-          ))}
+          {Array.from({ length: totalSteps }).map((_, idx) => {
+            const num = idx + 1;
+            return (
+              <div 
+                key={num} 
+                className={`w-10 h-10 rounded-full flex items-center justify-center font-bold relative z-10 transition-colors duration-300 ${
+                  step >= num ? 'bg-primary-600 text-white shadow-lg' : 'bg-gray-200 text-gray-500'
+                }`}
+              >
+                {num}
+              </div>
+            );
+          })}
         </div>
 
-        {/* Step 1: Site Type */}
-        {step === 1 && (
-          <div className="animate-fade-in">
-            <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.step1}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {currentT.types.map(type => (
-                <button
-                  key={type}
-                  onClick={() => { 
-                    setSiteType(type); 
-                    if (type.includes('SEO')) {
-                      setStep(4);
-                    } else {
-                      setStep(2); 
-                    }
-                  }}
-                  className={`p-6 rounded-xl border-2 text-left transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
-                    siteType === type ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
-                  }`}
-                >
-                  <span className="font-semibold text-lg text-gray-900">{type}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Step 2: Design */}
-        {step === 2 && (
-          <div className="animate-fade-in">
-            <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.step2}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {currentT.designs.map(d => (
-                <button
-                  key={d}
-                  onClick={() => { setDesign(d); setStep(3); }}
-                  className={`p-6 rounded-xl border-2 text-left transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
-                    design === d ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
-                  }`}
-                >
-                  <span className="font-semibold text-lg text-gray-900">{d}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Step 3: Features */}
-        {step === 3 && (
-          <div className="animate-fade-in">
-            <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.step3}</h3>
-            <p className="text-center text-gray-500 mb-6">{lang === 'ua' ? '(Оберіть кілька варіантів)' : '(Выберите несколько вариантов)'}</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-              {currentT.featureOptions.map(feature => (
-                <button
-                  key={feature}
-                  onClick={() => handleFeatureToggle(feature)}
-                  className={`p-4 rounded-xl border-2 text-center transition-all duration-300 ${
-                    features.includes(feature) 
-                      ? 'border-primary-600 bg-primary-600 text-white shadow-md' 
-                      : 'border-gray-200 text-gray-700 hover:border-primary-400 hover:bg-gray-50'
-                  }`}
-                >
-                  <span className="font-medium">{feature}</span>
-                </button>
-              ))}
-            </div>
-            <div className="flex justify-center">
-              <button 
-                onClick={() => setStep(4)}
-                className="btn-primary py-4 px-12 text-lg"
-              >
-                {currentT.next}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 4: Budget */}
-        {step === 4 && (
-          <div className="animate-fade-in">
-            <h3 className="text-2xl font-bold mb-6 text-gray-900 text-center">{currentT.step4}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {currentT.budgets.map(b => (
-                <button
-                  key={b}
-                  onClick={() => { setBudget(b); setStep(5); }}
-                  className={`p-6 rounded-xl border-2 text-center transition-all duration-300 hover:border-primary-500 hover:bg-primary-50 ${
-                    budget === b ? 'border-primary-600 bg-primary-50 ring-2 ring-primary-200' : 'border-gray-200'
-                  }`}
-                >
-                  <span className="font-semibold text-lg text-gray-900">{b}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Step 5: Contact */}
-        {step === 5 && (
-          <div className="animate-fade-in max-w-lg mx-auto">
-            <h3 className="text-2xl font-bold mb-8 text-gray-900 text-center">{currentT.step5}</h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">{currentT.namePlaceholder}</label>
-                <input
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-shadow text-lg"
-                  placeholder="Олександр"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">{currentT.contactPlaceholder} *</label>
-                <input
-                  type="text"
-                  required
-                  value={contact}
-                  onChange={(e) => setContact(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors"
-                  placeholder="+380... або @username"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">{currentT.emailPlaceholder}</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors"
-                  placeholder="email@example.com"
-                />
-              </div>
-
-              <div className="pt-4">
-                <button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className="w-full btn-primary py-4 text-xl font-bold shadow-xl hover:shadow-primary-500/30"
-                >
-                  {isSubmitting ? currentT.submitting : currentT.submit}
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
+        {/* Dynamic Content */}
+        {renderStep()}
 
         {/* Footer Navigation */}
-        {step > 1 && step < 5 && (
-          <div className="mt-8 flex justify-start">
+        {step > 1 && step <= totalSteps && (
+          <div className={`mt-8 flex ${step === totalSteps ? 'justify-center' : 'justify-start'}`}>
             <button 
-              onClick={() => {
-                if (step === 4 && siteType.includes('SEO')) {
-                  setStep(1);
-                } else {
-                  setStep(s => s - 1);
-                }
-              }}
-              className="text-gray-500 hover:text-primary-600 font-medium flex items-center gap-2 transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              {currentT.prev}
-            </button>
-          </div>
-        )}
-        {step === 5 && (
-          <div className="mt-8 flex justify-center">
-             <button 
-              onClick={() => setStep(siteType.includes('SEO') ? 1 : 4)}
+              onClick={() => setStep(s => s - 1)}
               className="text-gray-500 hover:text-primary-600 font-medium flex items-center gap-2 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
