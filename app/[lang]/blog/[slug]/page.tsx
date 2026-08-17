@@ -3,6 +3,7 @@ import { Language, translations } from '@/data/translations';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import TableOfContents from '@/components/TableOfContents';
 import ShareButtons from '@/components/ShareButtons';
+import ReadingProgress from '@/components/ReadingProgress';
 import { generateSEO } from '@/lib/seo';
 import { getPostBySlug, getPostSlugs, getAllPosts, Post } from '@/lib/mdx';
 import { MDXRemote } from 'next-mdx-remote/rsc';
@@ -135,18 +136,20 @@ export default function BlogPostPage({
   ).slice(0, 3);
 
   return (
-    <div className="bg-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+    <>
+      <ReadingProgress />
+      <div className="bg-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
 
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 py-16">
-        <div className="container-custom">
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 py-16">
+          <div className="container-custom">
           <Breadcrumbs items={breadcrumbs} lang={lang} />
           <div className="max-w-3xl mx-auto mt-8">
             <div className="flex flex-wrap gap-2 mb-4">
@@ -327,6 +330,6 @@ export default function BlogPostPage({
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 }

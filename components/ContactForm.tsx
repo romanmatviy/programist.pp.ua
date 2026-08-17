@@ -22,13 +22,22 @@ export default function ContactForm({ lang, translations }: ContactFormProps) {
     setStatus('sending');
 
     try {
-      const response = await fetch('https://bot.programist.top/api/contact.php', {
+      const telegramMessage = `
+📩 <b>НОВЕ ПОВІДОМЛЕННЯ (Контактна форма)</b>
+
+👤 <b>Ім'я:</b> ${formData.name}
+📧 <b>Email:</b> ${formData.email}
+📞 <b>Телефон:</b> ${formData.phone || 'Не вказано'}
+📍 <b>Джерело:</b> ${window.location.href}
+
+💬 <b>Повідомлення:</b>
+${formData.message}
+      `;
+
+      const response = await fetch('/api/telegram', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          ...formData,
-          source: window.location.href
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: telegramMessage }),
       });
 
       if (!response.ok) {
