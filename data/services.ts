@@ -730,8 +730,8 @@ export const services: Service[] = [
     },
     technologies: ["PHP", "JavaScript", "Laravel", "React", "Vue"],
     price: {
-      ua: "від 500 грн/год",
-      ru: "от 500 грн/час"
+      ua: "від $15/год",
+      ru: "от $15/час"
     }
   },
   {
@@ -920,8 +920,8 @@ export const services: Service[] = [
     },
     technologies: ["PHP", "Laravel", "Symfony", "MySQL", "PostgreSQL"],
     price: {
-      ua: "від 600 грн/год",
-      ru: "от 600 грн/час"
+      ua: "від $15/год",
+      ru: "от $15/час"
     }
   },
   {
@@ -958,8 +958,8 @@ export const services: Service[] = [
     },
     technologies: ["Laravel", "WordPress", "React", "Next.js", "PrestaShop"],
     price: {
-      ua: "від 700 грн/год",
-      ru: "от 700 грн/час"
+      ua: "від $15/год",
+      ru: "от $15/час"
     }
   },
   {
@@ -996,8 +996,8 @@ export const services: Service[] = [
     },
     technologies: ["PHP", "Laravel", "WordPress", "React", "Next.js"],
     price: {
-      ua: "від 600 грн/год",
-      ru: "от 600 грн/час"
+      ua: "від $15/год",
+      ru: "от $15/час"
     }
   },
   {
@@ -1110,8 +1110,8 @@ export const services: Service[] = [
     },
     technologies: ["PrestaShop", "PHP", "MySQL", "Smarty", "JavaScript", "HTML/CSS"],
     price: {
-      ua: "від $20/год",
-      ru: "от $20/час"
+      ua: "від $15/год",
+      ru: "от $15/час"
     },
     faqs: {
       ua: [
@@ -1158,8 +1158,8 @@ export const services: Service[] = [
     },
     technologies: ["OpenCart", "PHP", "MySQL", "Twig", "JavaScript"],
     price: {
-      ua: "від $20/год",
-      ru: "от $20/час"
+      ua: "від $15/год",
+      ru: "от $15/час"
     },
     faqs: {
       ua: [
@@ -1206,8 +1206,8 @@ export const services: Service[] = [
     },
     technologies: ["WordPress", "WooCommerce", "PHP", "MySQL", "React", "ACF"],
     price: {
-      ua: "від $20/год",
-      ru: "от $20/час"
+      ua: "від $15/год",
+      ru: "от $15/час"
     },
     faqs: {
       ua: [
@@ -1254,8 +1254,8 @@ export const services: Service[] = [
     },
     technologies: ["Laravel", "PHP", "MySQL/PostgreSQL", "Redis", "Docker", "Vue/React"],
     price: {
-      ua: "від $25/год",
-      ru: "от $25/час"
+      ua: "від $15/год",
+      ru: "от $15/час"
     },
     faqs: {
       ua: [
@@ -1302,8 +1302,8 @@ export const services: Service[] = [
     },
     technologies: ["Yii2", "PHP", "MySQL", "JavaScript", "Bootstrap"],
     price: {
-      ua: "від $25/год",
-      ru: "от $25/час"
+      ua: "від $15/год",
+      ru: "от $15/час"
     },
     faqs: {
       ua: [
@@ -1348,8 +1348,8 @@ export const services: Service[] = [
     },
     technologies: ["CakePHP", "PHP", "MySQL", "JavaScript"],
     price: {
-      ua: "від $25/год",
-      ru: "от $25/час"
+      ua: "від $15/год",
+      ru: "от $15/час"
     },
     faqs: {
       ua: [
