@@ -6,7 +6,7 @@ import { getAllPosts } from '@/lib/mdx';
 
 export async function generateMetadata({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
-  const t = translations[lang];
+  const t = (translations[lang as keyof typeof translations] || translations['ua']);
 
   return generateSEO({
     title: t.blog.title,
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
 
 export default function BlogPage({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
-  const t = translations[lang];
+  const t = (translations[lang as keyof typeof translations] || translations['ua']);
 
   const breadcrumbs = [
     { name: t.nav.blog, url: `/${lang}/blog` },

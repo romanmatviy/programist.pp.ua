@@ -45,7 +45,7 @@ export async function generateStaticParams() {
 
 export default function HireIntentCityPage({ params }: { params: { lang: Language; intent: string; city: string } }) {
   const lang = params.lang || 'ua';
-  const trans = translations[lang];
+  const trans = (translations[lang as keyof typeof translations] || translations['ua']);
   const intent = resolveHireIntentBySlug(params.intent, lang);
   const city = resolveCityBySlug(params.city, lang);
 

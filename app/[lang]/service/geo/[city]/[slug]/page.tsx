@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: { params: { lang: Language; c
 
 export default function CityServicePage({ params }: { params: { lang: Language; city: string; slug: string } }) {
   const lang = params.lang || 'ua';
-  const trans = translations[lang];
+  const trans = (translations[lang as keyof typeof translations] || translations['ua']);
   const city = resolveCityBySlug(params.city, lang as 'ua' | 'ru');
   const service = getServiceBySlug(params.slug);
 

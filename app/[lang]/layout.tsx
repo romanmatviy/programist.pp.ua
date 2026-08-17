@@ -27,7 +27,7 @@ export default function LangLayout({
   }
 
   const lang = params.lang;
-  const t = translations[lang];
+  const t = (translations[lang as keyof typeof translations] || translations['ua']);
 
   return (
     <>

@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: { params: { lang: Language; c
 
 export default function GeoPage({ params }: { params: { lang: Language; city: string } }) {
   const lang = params.lang || 'ua';
-  const trans = translations[lang];
+  const trans = (translations[lang as keyof typeof translations] || translations['ua']);
   const city = resolveCityBySlug(params.city, lang as 'ua' | 'ru');
 
   if (!city) {

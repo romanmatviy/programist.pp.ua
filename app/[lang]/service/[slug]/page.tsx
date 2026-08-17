@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: { params: { lang: Language; s
 
 export default function ServicePage({ params }: { params: { lang: Language; slug: string } }) {
   const lang = params.lang || 'ua';
-  const t = translations[lang];
+  const t = (translations[lang as keyof typeof translations] || translations['ua']);
   const service = getServiceBySlug(params.slug);
 
   if (!service) {

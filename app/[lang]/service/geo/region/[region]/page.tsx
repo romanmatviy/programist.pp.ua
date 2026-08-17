@@ -19,7 +19,7 @@ export async function generateStaticParams() {
 
 export default function RegionCitiesPage({ params }: { params: { lang: Language; region: string } }) {
   const lang = params.lang || 'ua';
-  const trans = translations[lang];
+  const trans = (translations[lang as keyof typeof translations] || translations['ua']);
   const regionUa = resolveRegionUaBySlug(params.region, lang as 'ua' | 'ru');
   if (!regionUa) {
     return (

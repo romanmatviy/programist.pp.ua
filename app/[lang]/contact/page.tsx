@@ -5,7 +5,7 @@ import { generateSEO } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
-  const t = translations[lang];
+  const t = (translations[lang as keyof typeof translations] || translations['ua']);
 
   return generateSEO({
     title: t.contact.title,
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
 
 export default function ContactPage({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
-  const t = translations[lang];
+  const t = (translations[lang as keyof typeof translations] || translations['ua']);
 
   const breadcrumbs = [
     { name: t.nav.contact, url: `/${lang}/contact` },

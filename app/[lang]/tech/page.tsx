@@ -12,7 +12,7 @@ export async function generateStaticParams() {
 
 export default function TechnologiesIndexPage({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
-  const trans = translations[lang];
+  const trans = (translations[lang as keyof typeof translations] || translations['ua']);
 
   const breadcrumbs = [
     { name: trans.nav.services, url: `/${lang}/services` },

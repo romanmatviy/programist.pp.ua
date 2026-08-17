@@ -38,7 +38,7 @@ export async function generateStaticParams() {
 
 export default function HireIntentRegionsPage({ params }: { params: { lang: Language; intent: string } }) {
   const lang = params.lang || 'ua';
-  const trans = translations[lang];
+  const trans = (translations[lang as keyof typeof translations] || translations['ua']);
   const intent = resolveHireIntentBySlug(params.intent, lang);
   if (!intent) {
     return <div className="section-padding bg-gray-50"><div className="container-custom">Intent not found</div></div>;

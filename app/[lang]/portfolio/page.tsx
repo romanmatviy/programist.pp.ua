@@ -4,7 +4,7 @@ import { generateSEO, generatePortfolioSchema } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
-  const t = translations[lang];
+  const t = (translations[lang as keyof typeof translations] || translations['ua']);
 
   return generateSEO({
     title: t.portfolio.title,
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
 
 export default function PortfolioPage({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
-  const t = translations[lang];
+  const t = (translations[lang as keyof typeof translations] || translations['ua']);
 
   const breadcrumbs = [
     { name: t.nav.portfolio, url: `/${lang}/portfolio` },

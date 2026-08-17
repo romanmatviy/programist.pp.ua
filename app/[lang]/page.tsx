@@ -16,7 +16,7 @@ import {
 
 export async function generateMetadata({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
-  const t = translations[lang];
+  const t = (translations[lang as keyof typeof translations] || translations['ua']);
 
   return generateSEO({
     title: t.hero.title,
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
 
 export default function HomePage({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
-  const t = translations[lang];
+  const t = translations[lang as keyof typeof translations] || translations['ua'];
 
   const organizationSchema = generateOrganizationSchema();
   const localBusinessSchema = generateLocalBusinessSchema();

@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
 
 export default function PrivacyPage({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
-  const t = translations[lang];
+  const t = (translations[lang as keyof typeof translations] || translations['ua']);
 
   const breadcrumbs = [
     { name: 'Privacy Policy', url: `/${lang}/privacy` },

@@ -6,7 +6,7 @@ import { generateSEO, generateServicesListSchema } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
-  const t = translations[lang];
+  const t = (translations[lang as keyof typeof translations] || translations['ua']);
 
   return generateSEO({
     title: t.services.title,
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: { lang: Language } 
 
 export default function ServicesPage({ params }: { params: { lang: Language } }) {
   const lang = params.lang || 'ua';
-  const t = translations[lang];
+  const t = (translations[lang as keyof typeof translations] || translations['ua']);
   const listSchema = generateServicesListSchema(services, lang);
 
   const breadcrumbs = [
