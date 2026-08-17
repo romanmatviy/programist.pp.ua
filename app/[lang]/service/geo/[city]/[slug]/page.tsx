@@ -3,6 +3,7 @@ import { Language, translations } from '@/data/translations';
 import { services, getServiceBySlug, getRandomServices } from '@/data/services';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ServiceCard from '@/components/ServiceCard';
+import ProjectQuiz from '@/components/ProjectQuiz';
 import { generateSEO, generateServiceSchema, generateFAQSchema } from '@/lib/seo';
 import { displayCityName, displayRegionName } from '@/data/geoTranslations';
 import { ukrainianCities } from '@/data/cities';
@@ -118,6 +119,9 @@ export default function CityServicePage({ params }: { params: { lang: Language; 
               </div>
             </div>
           </div>
+
+          {/* Project Quiz Calculator */}
+          <ProjectQuiz lang={lang} serviceName={`${service.title[lang]} (${cityDisplay})`} />
 
           {related.length > 0 && (
             <div className="mb-12">
