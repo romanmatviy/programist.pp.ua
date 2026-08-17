@@ -91,7 +91,7 @@ export default function TechnologyPage({ params }: { params: { lang: Language; s
                 </Link>
                 {hireService && (
                   <Link href={`/${lang}/service/${hireService.slug}`} className="btn-secondary">
-                    {lang === 'ua' ? `Найняти ${tech.name} розробника` : `Нанять ${tech.name} разработчика`}
+                    {lang === 'ua' ? `Найняти ${tech.name} розробника (програміста)` : `Нанять ${tech.name} разработчика (программиста)`}
                   </Link>
                 )}
               </div>
@@ -220,7 +220,7 @@ export default function TechnologyPage({ params }: { params: { lang: Language; s
             </Link>
             {hireService && (
               <Link href={`/${lang}/service/${hireService.slug}`} className="bg-white/10 backdrop-blur-sm text-white border-2 border-white px-8 py-4 rounded-lg font-semibold hover:bg-white/20 transition-all duration-300 inline-block">
-                {lang === 'ua' ? `Найняти ${tech.name} розробника` : `Нанять ${tech.name} разработчика`}
+                {lang === 'ua' ? `Найняти ${tech.name} розробника (програміста)` : `Нанять ${tech.name} разработчика (программиста)`}
               </Link>
             )}
           </div>
