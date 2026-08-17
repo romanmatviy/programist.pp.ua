@@ -5,6 +5,7 @@ import { technologies } from '@/data/technologies';
 import ServiceCard from '@/components/ServiceCard';
 import TechnologyCard from '@/components/TechnologyCard';
 import Testimonials from '@/components/Testimonials';
+import TrustBadges from '@/components/TrustBadges';
 import {
   generateSEO,
   generateOrganizationSchema,
@@ -140,6 +141,9 @@ export default function HomePage({ params }: { params: { lang: Language } }) {
 
       {/* Testimonials Section */}
       <Testimonials lang={lang} />
+
+      {/* Trust Badges Section */}
+      <TrustBadges lang={lang} />
 
       {/* Technologies Section */}
       <section className="section-padding bg-white">
