@@ -19,6 +19,7 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
   const [budget, setBudget] = useState('');
   const [name, setName] = useState('');
   const [contact, setContact] = useState('');
+  const [email, setEmail] = useState('');
 
   const t = {
     ua: {
@@ -35,6 +36,7 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
       budgets: ['до $500', '$500 - $1000', '$1000 - $3000', '$3000+', 'Не визначився (потрібна оцінка)'],
       namePlaceholder: "Ваше ім'я",
       contactPlaceholder: 'Телефон або Telegram (@username)',
+      emailPlaceholder: 'Ваш Email',
       next: 'Далі',
       prev: 'Назад',
       submit: 'Отримати розрахунок',
@@ -57,6 +59,7 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
       budgets: ['до $500', '$500 - $1000', '$1000 - $3000', '$3000+', 'Не определился (нужна оценка)'],
       namePlaceholder: 'Ваше имя',
       contactPlaceholder: 'Телефон или Telegram (@username)',
+      emailPlaceholder: 'Ваш Email',
       next: 'Далее',
       prev: 'Назад',
       submit: 'Получить расчет',
@@ -94,6 +97,7 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
 
 👤 <b>Ім'я:</b> ${name}
 📞 <b>Контакт:</b> ${contact}
+📧 <b>Email:</b> ${email || 'Не вказано'}
     `;
 
     try {
@@ -273,23 +277,37 @@ export default function ProjectQuiz({ lang, serviceName }: ProjectQuizProps) {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">{currentT.contactPlaceholder}</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{currentT.contactPlaceholder} *</label>
                 <input
                   type="text"
                   required
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
-                  className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-shadow text-lg"
-                  placeholder="+380 99 000 00 00 / @username"
+                  className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors"
+                  placeholder="+380... або @username"
                 />
               </div>
-              <button 
-                type="submit" 
-                disabled={isSubmitting}
-                className="w-full btn-primary py-4 text-xl font-bold shadow-xl hover:shadow-primary-500/30"
-              >
-                {isSubmitting ? currentT.submitting : currentT.submit}
-              </button>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{currentT.emailPlaceholder}</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors"
+                  placeholder="email@example.com"
+                />
+              </div>
+
+              <div className="pt-4">
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="w-full btn-primary py-4 text-xl font-bold shadow-xl hover:shadow-primary-500/30"
+                >
+                  {isSubmitting ? currentT.submitting : currentT.submit}
+                </button>
+              </div>
             </form>
           </div>
         )}
