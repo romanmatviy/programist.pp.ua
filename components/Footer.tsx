@@ -101,6 +101,21 @@ export default function Footer({ lang, translations }: FooterProps) {
                 </Link>
               </li>
               <li>
+                <Link href={`/${lang}/service/web-applications`} className="text-gray-400 hover:text-white transition-colors">
+                  Web Applications
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${lang}/service/mobile-app-development`} className="text-gray-400 hover:text-white transition-colors">
+                  Mobile App Development
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${lang}/service/salesforce-solutions`} className="text-gray-400 hover:text-white transition-colors">
+                  Salesforce Solutions
+                </Link>
+              </li>
+              <li>
                 <Link href={`/${lang}/service/wordpress-development`} className="text-gray-400 hover:text-white transition-colors">
                   WordPress
                 </Link>
