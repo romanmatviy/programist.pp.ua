@@ -75,7 +75,7 @@ export const blogPosts = [
     author: 'Роман Матвій',
     authorRole: 'Full-Stack Розробник',
     authorBio: 'Експерт з e-commerce рішень з багаторічним досвідом розробки інтернет-магазинів на різних платформах.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=630&fit=crop',
+    image: '/images/blog/ecommerce_cost.png',
     tags: [
       { id: 'ecommerce', name: { ua: 'E-commerce', ru: 'E-commerce' }, slug: 'ecommerce' },
       { id: 'pricing', name: { ua: 'Ціни', ru: 'Цены' }, slug: 'pricing' },
@@ -163,7 +163,7 @@ export const blogPosts = [
     author: 'Роман Матвій',
     authorRole: 'Backend Архітектор',
     authorBio: 'Спеціаліст з розробки складних API та архітектури баз даних з використанням Laravel та PHP.',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop',
+    image: '/images/blog/laravel_hiring.png',
     tags: [
       { id: 'laravel', name: { ua: 'Laravel', ru: 'Laravel' }, slug: 'laravel' },
       { id: 'hiring', name: { ua: 'Найм', ru: 'Найм' }, slug: 'hiring' },
