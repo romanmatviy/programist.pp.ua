@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { Language, translations } from '@/data/translations';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import TableOfContents from '@/components/TableOfContents';
+import ShareButtons from '@/components/ShareButtons';
 import { generateSEO } from '@/lib/seo';
 import { getPostBySlug, getPostSlugs, getAllPosts, Post } from '@/lib/mdx';
 import { MDXRemote } from 'next-mdx-remote/rsc';
@@ -209,6 +210,12 @@ export default function BlogPostPage({
           <div className="prose prose-lg max-w-none">
             <TableOfContents lang={lang} />
             <MDXRemote source={post.content} />
+            
+            <ShareButtons 
+              url={currentUrl} 
+              title={post.title} 
+              lang={lang} 
+            />
           </div>
 
           <div className="mt-12 p-6 bg-blue-50 rounded-xl">
