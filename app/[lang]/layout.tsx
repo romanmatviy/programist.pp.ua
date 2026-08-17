@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import MessengerWidget from '@/components/MessengerWidget';
+import ExitIntentPopup from '@/components/ExitIntentPopup';
 import { notFound } from 'next/navigation';
 
 const validLanguages: string[] = ['ua', 'ru'];
@@ -37,6 +38,7 @@ export default function LangLayout({
       <Footer lang={lang} translations={t} />
       <CookieBanner lang={lang} />
       <MessengerWidget lang={lang} />
+      <ExitIntentPopup lang={lang} />
     </>
   );
 }
