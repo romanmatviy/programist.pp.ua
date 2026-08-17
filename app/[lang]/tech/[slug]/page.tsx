@@ -62,6 +62,8 @@ export default function TechnologyPage({ params }: { params: { lang: Language; s
     { name: tech.name, url: `/${lang}/tech/${params.slug}` },
   ];
 
+  const hireService = services.find(s => s.slug === `hire-${tech.slug.toLowerCase()}-developer` || s.slug === `hire-${tech.name.toLowerCase()}-developer`);
+
   return (
     <div className="section-padding bg-gray-50">
       <script
@@ -83,9 +85,16 @@ export default function TechnologyPage({ params }: { params: { lang: Language; s
               <p className="text-gray-700 mb-6">
                 {tech.description[lang]}
               </p>
-              <Link href={`/${lang}/contact`} className="btn-primary">
-                {t.hero.cta}
-              </Link>
+              <div className="flex flex-wrap gap-4">
+                <Link href={`/${lang}/contact`} className="btn-primary">
+                  {t.hero.cta}
+                </Link>
+                {hireService && (
+                  <Link href={`/${lang}/service/${hireService.slug}`} className="btn-secondary">
+                    {lang === 'ua' ? `Найняти ${tech.name} розробника` : `Нанять ${tech.name} разработчика`}
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -202,12 +211,19 @@ export default function TechnologyPage({ params }: { params: { lang: Language; s
           </h2>
           <p className="text-lg mb-6 opacity-90">
             {lang === 'ua' 
-              ? 'Зв\'яжіться з нами для безкоштовної консультації'
-              : 'Свяжитесь с нами для бесплатной консультации'}
+              ? 'Зв\'яжіться з нами для безкоштовної консультації або найміть нашого фахівця.'
+              : 'Свяжитесь с нами для бесплатной консультации или наймите нашего специалиста.'}
           </p>
-          <Link href={`/${lang}/contact`} className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 inline-block">
-            {t.hero.cta}
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href={`/${lang}/contact`} className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 inline-block">
+              {t.hero.cta}
+            </Link>
+            {hireService && (
+              <Link href={`/${lang}/service/${hireService.slug}`} className="bg-white/10 backdrop-blur-sm text-white border-2 border-white px-8 py-4 rounded-lg font-semibold hover:bg-white/20 transition-all duration-300 inline-block">
+                {lang === 'ua' ? `Найняти ${tech.name} розробника` : `Нанять ${tech.name} разработчика`}
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-export type HireIntentKey = 'programmer-hour' | 'hire-programmer';
+export type HireIntentKey = 'programmer-hour' | 'hire-programmer' | 'hire-prestashop' | 'hire-opencart' | 'hire-wordpress' | 'hire-laravel' | 'hire-yii' | 'hire-cakephp';
 
 export const hireIntents: Array<{
   key: HireIntentKey;
@@ -22,6 +22,60 @@ export const hireIntents: Array<{
     description: {
       ua: 'Візьміть розробника під проект або на довгострокову співпрацю.',
       ru: 'Возьмите разработчика под проект или на долгосрочное сотрудничество.'
+    }
+  },
+  {
+    key: 'hire-prestashop',
+    label: { ua: 'Найняти PrestaShop розробника', ru: 'Нанять PrestaShop разработчика' },
+    slug: { ua: 'nainiaty-prestashop-rozrobnyka', ru: 'naniat-prestashop-razrabotchika' },
+    description: {
+      ua: 'Експертна розробка, підтримка та оптимізація інтернет-магазинів на PrestaShop.',
+      ru: 'Экспертная разработка, поддержка и оптимизация интернет-магазинов на PrestaShop.'
+    }
+  },
+  {
+    key: 'hire-opencart',
+    label: { ua: 'Найняти OpenCart розробника', ru: 'Нанять OpenCart разработчика' },
+    slug: { ua: 'nainiaty-opencart-rozrobnyka', ru: 'naniat-opencart-razrabotchika' },
+    description: {
+      ua: 'Професійна розробка модулів, шаблонів та комплексних магазинів на OpenCart.',
+      ru: 'Профессиональная разработка модулей, шаблонов и комплексных магазинов на OpenCart.'
+    }
+  },
+  {
+    key: 'hire-wordpress',
+    label: { ua: 'Найняти WordPress розробника', ru: 'Нанять WordPress разработчика' },
+    slug: { ua: 'nainiaty-wordpress-rozrobnyka', ru: 'naniat-wordpress-razrabotchika' },
+    description: {
+      ua: 'Розробка кастомних тем, плагінів та інтернет-магазинів WooCommerce.',
+      ru: 'Разработка кастомных тем, плагинов и интернет-магазинов WooCommerce.'
+    }
+  },
+  {
+    key: 'hire-laravel',
+    label: { ua: 'Найняти Laravel розробника', ru: 'Нанять Laravel разработчика' },
+    slug: { ua: 'nainiaty-laravel-rozrobnyka', ru: 'naniat-laravel-razrabotchika' },
+    description: {
+      ua: 'Створення складних веб-додатків, CRM систем та RESTful API на фреймворку Laravel.',
+      ru: 'Создание сложных веб-приложений, CRM систем и RESTful API на фреймворке Laravel.'
+    }
+  },
+  {
+    key: 'hire-yii',
+    label: { ua: 'Найняти Yii розробника', ru: 'Нанять Yii разработчика' },
+    slug: { ua: 'nainiaty-yii-rozrobnyka', ru: 'naniat-yii-razrabotchika' },
+    description: {
+      ua: 'Підтримка legacy проектів на Yii 1.1 та Yii2, рефакторинг та оптимізація.',
+      ru: 'Поддержка legacy проектов на Yii 1.1 и Yii2, рефакторинг и оптимизация.'
+    }
+  },
+  {
+    key: 'hire-cakephp',
+    label: { ua: 'Найняти CakePHP розробника', ru: 'Нанять CakePHP разработчика' },
+    slug: { ua: 'nainiaty-cakephp-rozrobnyka', ru: 'naniat-cakephp-razrabotchika' },
+    description: {
+      ua: 'Оновлення застарілих CakePHP проектів, міграція та розробка нового функціоналу.',
+      ru: 'Обновление устаревших CakePHP проектов, миграция и разработка нового функционала.'
     }
   }
 ];

@@ -7,6 +7,7 @@ import TechnologyCard from '@/components/TechnologyCard';
 import {
   generateSEO,
   generateOrganizationSchema,
+  generateLocalBusinessSchema,
   generateWebSiteSchema,
   generatePersonSchema
 } from '@/lib/seo';
@@ -33,6 +34,7 @@ export default function HomePage({ params }: { params: { lang: Language } }) {
   const t = translations[lang];
 
   const organizationSchema = generateOrganizationSchema();
+  const localBusinessSchema = generateLocalBusinessSchema();
   const websiteSchema = generateWebSiteSchema(lang as 'ua' | 'ru');
   const personSchema = generatePersonSchema();
 
@@ -42,6 +44,10 @@ export default function HomePage({ params }: { params: { lang: Language } }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
       <script
         type="application/ld+json"
