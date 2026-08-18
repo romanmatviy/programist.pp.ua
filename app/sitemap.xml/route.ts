@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { escapeXml } from '@/lib/sitemap-utils';
 
 export async function GET() {
   const baseUrl = 'https://programist.pp.ua';
@@ -14,7 +15,7 @@ export async function GET() {
 ${sitemaps
   .map(
     url => `  <sitemap>
-    <loc>${url}</loc>
+    <loc>${escapeXml(url)}</loc>
   </sitemap>`
   )
   .join('\n')}

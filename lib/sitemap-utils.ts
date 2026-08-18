@@ -6,10 +6,23 @@ export type SitemapRoute = {
   images?: string[];
 };
 
+export function escapeXml(unsafe: string): string {
+  return unsafe.replace(/[<>&'"]/g, c => {
+    switch (c) {
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '&': return '&amp;';
+      case '\\'': return '&apos;';
+      case '"': return '&quot;';
+      default: return c;
+    }
+  });
+}
+
 export function generateSitemapXML(routes: SitemapRoute[]): string {
   const urlElements = routes
     .map(route => {
-      let xml = `  <url>\n    <loc>${route.url}</loc>`;
+      let xml = `  <url>\n    <loc>${escapeXml(route.url)}</loc>`;
       if (route.lastModified) {
         const dateStr =
           route.lastModified instanceof Date
@@ -25,9 +38,7 @@ export function generateSitemapXML(routes: SitemapRoute[]): string {
       }
       if (route.images && route.images.length > 0) {
         route.images.forEach(imgUrl => {
-          // ensure valid XML entities for ampersands etc.
-          const cleanImgUrl = imgUrl.replace(/&/g, '&amp;');
-          xml += `\n    <image:image>\n      <image:loc>${cleanImgUrl}</image:loc>\n    </image:image>`;
+          xml += `\n    <image:image>\n      <image:loc>${escapeXml(imgUrl)}</image:loc>\n    </image:image>`;
         });
       }
       xml += `\n  </url>`;
