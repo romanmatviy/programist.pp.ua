@@ -57,6 +57,7 @@ export async function GET() {
         lastModified: post.updatedAt ? new Date(post.updatedAt) : new Date(post.date),
         changeFrequency: 'monthly',
         priority: 0.8,
+        images: post.image ? [post.image.startsWith('http') ? post.image : `${baseUrl}${post.image.startsWith('/') ? '' : '/'}${post.image}`] : undefined,
       });
     });
   });
