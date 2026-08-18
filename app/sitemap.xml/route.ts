@@ -1,0 +1,31 @@
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  const baseUrl = 'https://programist.pp.ua';
+  const sitemaps = [
+    `${baseUrl}/sitemap-core.xml`,
+    `${baseUrl}/sitemap-geo.xml`,
+    `${baseUrl}/sitemap-geo-services.xml`,
+    `${baseUrl}/sitemap-hire.xml`,
+  ];
+
+  const sitemapIndexXML = `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  ${sitemaps
+    .map(
+      url => `
+  <sitemap>
+    <loc>${url}</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+  </sitemap>`
+    )
+    .join('')}
+</sitemapindex>`;
+
+  return new NextResponse(sitemapIndexXML, {
+    headers: {
+      'Content-Type': 'text/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+    },
+  });
+}
